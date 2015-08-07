@@ -1,0 +1,42 @@
+<div class="wrapper-md">
+<toaster-container toaster-options="{'position-class': 'toast-top-right', 'close-button':true}"></toaster-container>
+	<div class="panel panel-default">
+		<nav class="navbar navbar-default" role="navigation">
+		    <div class="navbar-header">
+		        <a class="navbar-brand">活动名称</a>
+		    </div>
+		    <div>
+		        <form class="navbar-form navbar-left" role="search">
+		            <div class="form-group">
+		                <input type="text" class="form-control" placeholder="搜索活动名称" ng-model="query.keyword">
+		            </div>
+		            <button type="submit" class="btn btn-default" ng-click="search()">搜索</button>
+		        </form>
+		    </div>
+		</nav>
+	</div>
+	<div class="panel panel-default">
+		<table st-table="ActivityCtrl" class="table table-bordered table-striped">
+		  <thead>
+		  <tr>
+		    <th>活动名称</th>
+		    <th>活动时间</th>
+		    <th>活动内容</th>
+		    <th>参加人员</th>
+		    <th>操作</th>
+		  </tr>
+		  </thead>
+		  <tbody>
+		  <tr ng-repeat="activity in model.finalReviewList" st-select-row="row">
+		    <td>{{activity.name}}</td>
+		    <td>{{activity.startTime}} - {{activity.endTime}}</td>
+		    <td>{{activity.content}}</td>
+		    <td>{{activity.attendees}}</td>
+		    <td>				  
+		        <a ng-href="" ng-click="openFinalReview(activity)" style="display:block;">【终审】</a>
+		    </td>
+		  </tr>
+		  </tbody>
+		</table>
+	</div>
+</div>

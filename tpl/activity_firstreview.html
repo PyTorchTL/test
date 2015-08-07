@@ -1,0 +1,51 @@
+<div class="wrapper-md">
+
+<toaster-container toaster-options="{'position-class': 'toast-top-right', 'close-button':true}"></toaster-container>
+
+	<div class="panel panel-default">
+		<nav class="navbar navbar-default" role="navigation">
+		    <div class="navbar-header">
+		        <a class="navbar-brand">活动名称</a>
+		    </div>
+		    <div>
+		        <form class="navbar-form navbar-left" role="search">
+		            <div class="form-group">
+		                <input type="text" class="form-control" ng-model="query.keyword" placeholder="搜索活动名称" >
+		            </div>
+		            <button type="submit" class="btn btn-default" ng-click="search()">搜索</button>
+		        </form>
+		    </div>
+		</nav>
+	</div>
+	<div class="panel panel-default">
+		<table st-table="ActivityCtrl" class="table table-bordered table-striped">
+		  <thead>
+		  <tr>
+		    <th>活动名称</th>
+		    <th>活动时间</th>
+		    <th>活动内容</th>
+		    <th>参加人员</th>
+		    <th>添加时间</th>
+		    <th>操作</th>
+		  </tr>
+		  </thead>
+		  <tbody>
+		  <tr ng-repeat="activity in model.firstReviewList" st-select-row="row">
+		    <td>{{activity.name}}</td>
+		    <td>{{activity.startTime}} - {{activity.endTime}}</td>
+		    <td>{{activity.content}}</td>
+		    <td>{{activity.attendees}}</td>
+		    <td>{{activity.createTime}}</td>
+		    <td>
+		      <div>
+		        <a ng-href="" ng-click="open(activity)" style="display:block;">【初审】</a>
+		      </div>
+		    </td>
+		  </tr>
+		  </tbody>
+		</table>
+	</div>
+
+	<pagination ng-change="pageChanged()" total-items="totalItems" items-per-page="query.size" ng-model="query.page" max-size="maxSize" class="pagination-sm m-t-none m-b" boundary-links="true" rotate="false" num-pages="numPages"></pagination>
+
+</div>

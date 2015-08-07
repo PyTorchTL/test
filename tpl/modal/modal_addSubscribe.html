@@ -1,0 +1,62 @@
+<form name="addSubscribeForm" class="bs-example form-horizontal" style="padding-top:20px;">
+    <div class="form-group">
+        <label class="col-sm-2 control-label">所属活动</label>
+        <div class="col-sm-5">
+            <p>{{item.name}}</p>
+        </div>
+    </div>
+    <fieldset disabled>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">活动内容</label>
+            <div class="col-sm-9">
+                <p>{{item.content}}</p>
+            </div>
+        </div>
+    </fieldset>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">邀请客户</label>
+        <div class="col-sm-5">
+            <select class="form-control" ng-model="item.userId">
+                <option value="">默认选择</option>
+                <option value="">1</option>
+                <option value="">2</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">随行人数</label>
+        <div class="col-sm-5">
+            <input type="text" class="form-control" placeholder="随行人数" ng-model="item.numEntourage" ng-required="true">
+        </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label">客户意向</label>
+      <div class="col-sm-10">
+        <div class="col-sm-4">
+        <div class="radio">
+          <label class="i-checks">
+            <input type="radio" name="result" value="1" ng-model="item.finalReviewDecision" checked ng-required="true" checked>
+            <i></i>
+            明确
+          </label>
+        </div>
+        </div>
+        <div class="col-sm-4">
+        <div class="radio">
+          <label class="i-checks">
+            <input type="radio" name="result" value="2" ng-model="item.finalReviewDecision" ng-required="true">
+            <i></i>
+            待定
+          </label>
+        </div>
+        </div>
+      </div>
+    </div>    
+    <div class="form-group">
+       <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit"  class="btn m-b-xs m-r-md w-xs btn-primary" ng-click="submit()" value="保存" ng-disabled="!addSubscribeForm.$valid">保存
+            </button>
+            <button type="submit" class="btn m-b-xs w-xs btn-default" value="取消" tabindex="0" ng-click="cancel()">取消</button>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,274 @@
+<!-- list -->
+<ul class="nav">
+    <li>
+        <a ui-sref="app.home">
+          <i class="glyphicon glyphicon-home"></i>
+          <span class="font-bold">首页</span>
+        </a>
+    </li>
+
+    <li>
+        <a href class="auto">
+      <span class="pull-right text-muted">
+        <i class="fa fa-fw fa-angle-right text"></i>
+        <i class="fa fa-fw fa-angle-down text-active"></i>
+      </span>
+            <i class="glyphicon glyphicon-briefcase"></i>
+            <span class="font-bold">产品管理</span>
+        </a>
+        <ul class="nav nav-sub dk">
+            <li class="nav-sub-header">
+                <a href>
+                    <span>产品管理</span>
+                </a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="app.product.new">
+                    <span>产品录入</span>
+                </a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="app.product.discuss">
+                    <span>产品过会审批</span>
+                </a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="app.product.open">
+                    <span>产品上线审批</span>
+                </a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="app.product.establish">
+                    <span>产品成立审批</span>
+                </a>
+            </li>
+            <!-- <li ui-sref-active="active">
+                <a ui-sref="app.product.setting">
+                    <span>申购赎回设置</span>
+                </a>
+            </li> -->
+            <li ui-sref-active="active">
+                <a ui-sref="app.product.networth">
+                    <span>净值设置</span>
+                </a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="app.product.distribution">
+                    <span>收益分配</span>
+                </a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="app.product.list">
+                    <span>产品列表</span>
+                </a>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <a href class="auto">
+      <span class="pull-right text-muted">
+        <i class="fa fa-fw fa-angle-right text"></i>
+        <i class="fa fa-fw fa-angle-down text-active"></i>
+      </span>
+            <i class="glyphicon glyphicon-shopping-cart"></i>
+            <span class="font-bold">客户投资管理</span>
+        </a>
+        <ul class="nav nav-sub dk">
+            <li class="nav-sub-header">
+                <a href>
+                    <span>客户投资管理</span>
+                </a>
+            </li>
+             <li ui-sref-active="active">
+                <a ui-sref="app.invest.subscribelist">
+                    <span>预约项目</span>
+                </a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="app.invest.subscriberecord">
+                    <span>预约记录</span>
+                </a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="app.invest.purchaserecord">
+                    <span>购买记录</span>
+                </a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="app.invest.purchaseapprove">
+                    <span>购买审核</span>
+                </a>
+        </ul>
+    </li>
+    <li>
+        <a href class="auto">
+      <span class="pull-right text-muted">
+        <i class="fa fa-fw fa-angle-right text"></i>
+        <i class="fa fa-fw fa-angle-down text-active"></i>
+      </span>
+            <i class="glyphicon glyphicon-user"></i>
+            <span class="font-bold">客户管理</span>
+        </a>
+        <ul class="nav nav-sub dk">
+            <li class="nav-sub-header">
+                <a href>
+                    <span>客户管理</span>
+                </a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="app.customer.list">
+                    <span>客户列表</span>
+                </a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="app.customer.contact">
+                    <span>联系记录列表</span>
+                </a>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <a href class="auto">
+      <span class="pull-right text-muted">
+        <i class="fa fa-fw fa-angle-right text"></i>
+        <i class="fa fa-fw fa-angle-down text-active"></i>
+      </span>
+            <i class="glyphicon glyphicon-th-large"></i>
+            <span class="font-bold">活动沙龙管理</span>
+        </a>
+        <ul class="nav nav-sub dk">
+            <li class="nav-sub-header">
+                <a href>
+                    <span>活动沙龙管理</span>
+                </a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="app.activity.new">
+                    <span>添加活动</span>
+                </a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="app.activity.firstreview">
+                    <span>活动初审</span>
+                </a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="app.activity.sign">
+                    <span>活动会签</span>
+                </a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="app.activity.finalreview">
+                    <span>活动终审</span>
+                </a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="app.activity.list">
+                    <span>我发起的活动</span>
+                </a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="app.activity.subscribe">
+                    <span>活动预约</span>
+                </a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="app.activity.feedback">
+                    <span>活动反馈</span>
+                </a>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <a href class="auto">
+      <span class="pull-right text-muted">
+        <i class="fa fa-fw fa-angle-right text"></i>
+        <i class="fa fa-fw fa-angle-down text-active"></i>
+      </span>
+            <i class="glyphicon glyphicon-envelope"></i>
+            <span class="font-bold">消息管理</span>
+        </a>
+        <ul class="nav nav-sub dk">
+            <li class="nav-sub-header">
+                <a href>
+                    <span>消息管理</span>
+                </a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="app.message.notification">
+                    <span>通知公告</span>
+                </a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="app.message.list">
+                    <span>我的消息</span>
+                </a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="app.message.send">
+                    <span>发送消息</span>
+                </a>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <a href class="auto">
+      <span class="pull-right text-muted">
+        <i class="fa fa-fw fa-angle-right text"></i>
+        <i class="fa fa-fw fa-angle-down text-active"></i>
+      </span>
+            <i class="glyphicon glyphicon-stats "></i>
+            <span class="font-bold">报表管理</span>
+        </a>
+        <ul class="nav nav-sub dk">
+            <li class="nav-sub-header">
+                <a href>
+                    <span>报表管理</span>
+                </a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="app.report.sale">
+                    <span>销售明细表</span>
+                </a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="app.report.subscribe">
+                    <span>预约认购汇总表</span>
+                </a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="app.report.statement">
+                    <span>客户对账函</span>
+                </a>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <a href class="auto">
+      <span class="pull-right text-muted">
+        <i class="fa fa-fw fa-angle-right text"></i>
+        <i class="fa fa-fw fa-angle-down text-active"></i>
+      </span>
+            <i class="glyphicon glyphicon-cog"></i>
+            <span class="font-bold">个人设置</span>
+        </a>
+        <ul class="nav nav-sub dk">
+            <li class="nav-sub-header">
+                <a href>
+                    <span>个人设置</span>
+                </a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="app.setting.profile">
+                    <span>个人资料管理</span>
+                </a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="app.setting.password">
+                    <span>密码管理</span>
+                </a>
+            </li>
+        </ul>
+    </li>
+</ul>
+<!-- / list -->

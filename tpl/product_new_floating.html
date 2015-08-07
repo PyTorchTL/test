@@ -1,0 +1,328 @@
+<div class="wrapper-md">
+<toaster-container toaster-options="{'position-class': 'toast-top-right', 'close-button':true}"></toaster-container>
+<div class="panel panel-default">
+    <div class="panel-body">
+    <form name="newFloatingForm" class="bs-example form-horizontal">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <label class="col-lg-4 control-label">产品名称</label>
+                    <div class="col-lg-8">
+                        <input type="text" class="form-control" ng-model="products.name" ng-required="true">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-4 control-label">管理机构</label>
+                    <div class="col-lg-8">
+                        <input type="text" class="form-control" ng-model="products.orgnization" ng-required="true">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-4 control-label">起购金额</label>
+                    <div class="col-lg-8">
+                        <input type="text" class="form-control" ng-model="products.minPurchaseAmount" ng-required="true">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-4 control-label">杠杆比例</label>
+                    <div class="col-lg-8">
+                        <select class="form-control" ng-model="products.leverageRatio" ng-required="true">
+                            <option value="0">无杠杆</option>
+                            <option value="1">0.5:1</option>
+                            <option value="2">1:1</option>
+                            <option value="3">1.5:1</option>
+                            <option value="4">2：1</option>
+                            <option value="5">2.5：1</option>
+                            <option value="6">3：1</option>
+                            <option value="7">3.5：1</option>
+                            <option value="8">4：1</option>
+                            <option value="9">4.5：1</option>
+                            <option value="10">5：1</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-4 control-label">预期收益</label>
+                    <div class="col-lg-8">
+                        <input type="text" class="form-control" ng-model="products.estimateIncome" ng-required="true">
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <label class="col-lg-4 control-label">产品简称</label>
+                    <div class="col-lg-8">
+                        <input type="text" class="form-control" ng-model="products.shortName" ng-required="true">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-4 control-label">机构类型</label>
+                    <div class="col-lg-8">
+                        <select class="form-control"  ng-model="products.orgnizationType" ng-required="true">
+                            <option value="0">信托</option>
+                            <option value="1">证券公司</option>
+                            <option value="2">证券子公司</option>
+                            <option value="3">公募基金</option>
+                            <option value="4">基金子公司</option>
+                            <option value="5">私募管理人</option>
+                            <option value="6">有限合伙</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-4 control-label">运作方式</label>
+                    <div class="col-lg-8">
+                        <select class="form-control" ng-model="prosucts.operationType" ng-required="true">
+                            <option value="1">开放式</option>
+                            <option value="0">封闭式</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-4 control-label">封闭期</label>
+                    <div class="col-lg-8">
+                        <input type="text" class="form-control" ng-model="products.closePeriod" ng-required="true">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-4 control-label">风险回撤</label>
+                    <div class="col-lg-8">
+                        <input type="text" class="form-control" ng-model="products.riskWithdraw" ng-required="true">
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <label class="col-lg-4 control-label">产品规模</label>
+                    <div class="col-lg-8">
+                        <input type="text" class="form-control" ng-model="products.amount" ng-required="true">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-4 control-label">托管银行</label>
+                    <div class="col-lg-8">
+                        <input type="text" class="form-control" ng-model="products.hostBank" ng-required="true">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-4 control-label">投资领域</label>
+                    <div class="col-lg-8">
+                        <input type="text" class="form-control" ng-model="products.investArea" ng-required="true">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-4 control-label">开放期</label>
+                    <div class="col-lg-8">
+                        <input type="text" class="form-control" ng-model="products.openPeriod" ng-required="true">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-4 control-label">风险等级</label>
+                    <div class="col-lg-8">
+                        <select class="form-control" ng-model="products.riskLevel" ng-required="true">
+                            <option value="0">保守</option>
+                            <option value="1">稳健</option>
+                            <option value="2">进取</option>
+                            <option value="3">极度进取</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <label class="col-lg-4 control-label">产品类型</label>
+                    <label class="col-lg-4 control-label">浮动类</label>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-4 control-label">产品期限</label>
+                    <div class="col-lg-4">
+                        <input type="text" class="form-control" ng-model="products.period" ng-required="true">
+                    </div>
+                    <p class="m-t-sm">月</p>
+                </div>
+                <fieldset disabled>
+                    <div class="form-group">
+                        <label class="col-lg-4 control-label">展期</label>
+                        <div class="col-lg-4">
+                            <input type="text" class="form-control" ng-model="products.period" ng-required="true">
+                        </div>
+                        <p class="m-t-sm">月</p>
+                    </div>
+                </fieldset>
+                <fieldset disabled>
+                    <div class="form-group">
+                        <label class="col-lg-4 control-label">成立日期</label>
+                        <div class="col-lg-8">
+                            <input type="text" class="form-control" ng-model="products.establishDate" ng-required="true">
+                        </div>
+                    </div>
+                </fieldset>
+                <div class="form-group">
+                    <label class="col-lg-4 control-label">可打款金额</label>
+                    <div class="col-lg-8">
+                        <input type="text" class="form-control" ng-model="products.availablePurchaseAmount" ng-required="true">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <label class="col-lg-4 control-label">管理费</label>
+                    <div class="col-lg-6">
+                        <input type="text" class="form-control" ng-model="products.manageFee" ng-required="true">
+                    </div>
+                    <p class="m-t-sm">%</p>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-4 control-label">申购费</label>
+                    <div class="col-lg-6">
+                        <input type="text" class="form-control" ng-model="products.purchaseFee" ng-required="true">
+                    </div>
+                    <p class="m-t-sm">%</p>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-4 control-label">业绩报酬费率</label>
+                    <div class="col-lg-6">
+                        <input type="text" class="form-control" ng-model="products.rewardFee" ng-required="true">
+                    </div>
+                    <p class="m-t-sm">%</p>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <label class="col-lg-4 control-label">托管费</label>
+                    <div class="col-lg-6">
+                        <input type="text" class="form-control" ng-model="products.hostFee" ng-required="true">
+                    </div>
+                    <p class="m-t-sm">%</p>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-4 control-label">其他费率</label>
+                    <div class="col-lg-6">
+                        <input type="text" class="form-control" ng-model="products.otherFee" ng-required="true">
+                    </div>
+                    <p class="m-t-sm">%</p>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-4 control-label">佣金费率</label>
+                    <div class="col-lg-6">
+                        <input type="text" class="form-control" ng-model="products.commissionFee" ng-required="true">
+                    </div>
+                    <p class="m-t-sm">%</p>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <label class="col-lg-4 control-label">认购费</label>
+                    <div class="col-lg-6">
+                        <input type="text" class="form-control" ng-model="products.subscribeFee" ng-required="true">
+                    </div>
+                    <p class="m-t-sm">%</p>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-4 control-label">赎回费</label>
+                    <div class="col-lg-6">
+                        <input type="text" class="form-control" ng-model="products.redeemFee" ng-required="true">
+                    </div>
+                    <p class="m-t-sm">%</p>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-4 control-label">销售费率</label>
+                    <div class="col-lg-6">
+                        <input type="text" class="form-control" ng-model="products.saleFee" ng-required="true">
+                    </div>
+                    <p class="m-t-sm">%</p>
+                </div>
+            </div>            
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <div class="col col-lg-5">
+                        <label class="control-label">基金经理照片</label>
+                        <button type="submit" class="btn m-b-xs m-r-md w-xs btn-default" ng-click="" value="上传">上传
+                    </div>               
+                    <div class="thumb-xl m-l-md">
+                        <img src="img/a0.jpg" alt="基金经理照片">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">收益描述</label>
+                    <div class="col-lg-10">
+                        <textarea class="form-control" rows="4" ng-model="products.incomeDescription" ng-required="true"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">基金经理介绍</label>
+                    <div class="col-lg-10">
+                        <textarea class="form-control" rows="4" ng-model="products.managerIntro" ng-required="true"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">投资理念</label>
+                    <div class="col-lg-10">
+                        <textarea class="form-control" rows="4" ng-model="products.investStrategy" ng-required="true"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">基金公司介绍</label>
+                    <div class="col-lg-10">
+                        <textarea class="form-control" rows="4" ng-model="products.companyIntro" ng-required="true"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">投研团队</label>
+                    <div class="col-lg-10">
+                        <textarea class="form-control" rows="4" ng-model="products.teamIntro" ng-required="true"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">产品亮点</label>
+                    <div class="col-lg-10">
+                        <textarea class="form-control" rows="4" ng-model="products.highlight" ng-required="true"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">产品附件</label>
+                    <div class="col-sm-7">
+                        <input ui-jq="filestyle" type="file" data-icon="false" data-classButton="btn btn-default"
+                               data-classInput="form-control inline v-middle input-s">
+                    </div>
+                    <div class="col-sm-2">
+                        <button class="btn btn-default w-xs">上传</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">推荐材料</label>
+                    <div class="col-sm-7">
+                        <input ui-jq="filestyle" type="file" data-icon="false" data-classButton="btn btn-default"
+                               data-classInput="form-control inline v-middle input-s">
+                    </div>
+                    <div class="col-sm-2">
+                        <button class="btn btn-default w-xs">上传</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-lg-offset-10 col-lg-12">
+                <button type="submit" class="btn m-b-xs m-r-md w-xs btn-primary" ng-click="onAdd()" value="保存" ng-disabled="!newFloatingForm.$valid">保存
+                </button>
+                <!-- <button type="submit" class="btn m-b-xs w-xs btn-default" value="取消" tabindex="0" ng-click="cancel()">取消</button> -->
+            </div>
+        </div>
+    </form>
+</div>
+</div>
+</div>

@@ -1,0 +1,45 @@
+<form name="addSubscribeForm" class="bs-example form-horizontal" style="padding-top:20px;">
+    <div class="form-group">
+      <label class="col-sm-2 control-label">所属活动</label>
+      <div class="col-sm-10">
+        <p>{{item.name}}</p>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label">活动时间</label>
+      <div class="col-sm-10">
+        <p>{{item.startTime}} - {{item.endTime}}</p>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label">反馈客户</label>
+      <div class="col-sm-10">
+        <p>{{item.userRealName}}</p>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label">是否会到</label>
+      <div class="col-sm-10">
+        <p ng-if="item.attendStatus===1">到会</p>
+        <p ng-if="item.attendStatus===2">未到</p>
+      </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">随行人数</label>
+        <div class="col-sm-5">
+            <p>{{item.numEntourage}}</p>
+        </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label">反馈意见</label>
+      <div class="col-sm-10">
+        <p>{{ item.feedbackRemark }}</p>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label">反馈时间</label>
+      <div class="col-sm-10">
+        <p>{{ item.feedbackTime }}</p>
+      </div>
+    </div>
+</form>

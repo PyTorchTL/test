@@ -1,0 +1,30 @@
+html, body {
+  /*overflow: hidden;*/
+  /*height: 100%*/
+}
+
+/* nav */
+.nav-sub > li.active {
+  background-color: #f6f8f8;
+  color: #141719;
+  text-decoration: none;
+}
+
+/* add vertical offset to toaster */
+.toast-top-right {
+  top: 60px;
+}
+
+/* hide start time in fullcalendar */
+.fc-time {
+   display: none;
+}
+
+.fc-title {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.control-label {
+  white-space: nowrap;
+}

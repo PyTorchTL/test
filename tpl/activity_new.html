@@ -1,0 +1,103 @@
+<div class="wrapper-md">
+<!-- toaster directive -->
+<toaster-container toaster-options="{'position-class': 'toast-top-right', 'close-button':true}"></toaster-container>
+<!-- / toaster directive -->
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <form name="addActivityForm" class="bs-example form-horizontal">
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">活动名称</label>
+                    <div class="col-lg-3">
+                        <input type="text" class="form-control" ng-model="activity.name">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">活动内容</label>
+                    <div class="col-lg-7">
+                        <textarea class="form-control" rows="4" ng-model="activity.content"></textarea>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div ng-controller="DatepickerDemoCtrl" class="m-b-lg">
+                        <!-- <div class="m-b-lg"> -->
+                            <div class="form-group">
+                                <label class="col-lg-4 control-label">时间</label>
+                                <div class="col-lg-6">
+                                    <p class="input-group">
+                                        <input type="text" class="form-control" datepicker-popup="{{format}}"
+                                               ng-model="activity.startTime"
+                                               is-open="opened" datepicker-options="dateOptions"
+                                               ng-required="true" close-text="Close"/>
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-default" ng-click="open($event)">
+                                                <i class="glyphicon glyphicon-calendar"></i>
+                                            </button>
+                                        </span>
+                                    </p>
+                                </div>
+                                <span class="col-lg-2 control-label">至</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div ng-controller="DatepickerDemoCtrl" class="m-b-lg">
+                        <!-- <div class="m-b-lg"> -->
+                            <div class="form-group">
+                                <label class="col-lg-0 control-label"></label>
+
+                                <div class="col-lg-6">
+                                    <p class="input-group">
+                                        <input type="text" class="form-control" datepicker-popup="{{format}}"
+                                               ng-model="activity.endTime"
+                                               is-open="opened" datepicker-options="dateOptions"
+                                               ng-required="true" close-text="Close"/>
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-default" ng-click="open($event)">
+                                                <i class="glyphicon glyphicon-calendar"></i>
+                                            </button>
+                                        </span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <fieldset disabled>
+                    <div class="form-group">
+                        <label for="disabledTextInput" class="col-lg-2 control-label">初审人员</label>
+
+                        <div class="col-lg-3">
+                            <input type="text" id="disabledTextInput" class="form-control" placeholder="初审人员" ng-model="activity.firstReviewEmployeeRealName">
+                        </div>
+                    </div>
+                </fieldset>
+
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">参加人数</label>
+
+                    <div class="col-lg-3">
+                        <input type="text" class="form-control" placeholder="参加人数" ng-model="activity.numAttendees">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">参与人员</label>
+
+                    <div class="col-lg-7">
+                        <textarea class="form-control" rows="4" ng-model="activity.attendees"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-lg-offset-4 col-lg-10">
+                        <button type="submit" class="btn m-b-xs m-r-md w-xs btn-primary" ng-disabled='!addActivityForm.$valid' ng-click="onAdd()" value="保存">保存</button>
+                        <!-- <button type="submit" class="btn m-b-xs w-xs btn-default" value="取消" tabindex="0" ng-click="cancel()">取消</button> -->
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
