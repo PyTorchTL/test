@@ -1,0 +1,42 @@
+<div class="wrapper-md">
+  <button type="submit" ng-click="exportReportBtn()" class="btn m-b-xs m-r-md w-xs btn-primary" value="报表导出">
+      报表导出
+  </button>
+  <div class="panel panel-default">
+    <div class="panel-heading">{{item.name}}</div>
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>所属部门</th>
+          <th>理财师</th>
+          <th>客户姓名</th>
+          <th>预约时间</th>
+          <th>预约金额</th>
+          <th>认购时间</th>
+          <th>认购金额</th>
+          <th>期限</th><!-- <th>认购期限</th> -->
+          <th>层级/利率</th><!-- <th>认购层级</th> -->
+          <th>已收收益</th>
+        </tr>
+      </thead>
+      <tbody>
+       <tr ng-repeat="report in model.subscribeReportList" st-select-row="row">
+        <td>{{report.departName}}</td>
+        <td>{{report.employeeRealName}}</td>
+        <td>{{report.userRealName}}</td>
+        <td>{{report.subscribeTime}}</td>
+        <td>{{report.subscribeAmount}}</td>
+        <td>{{report.purchaseTime}}</td>
+        <td>{{report.purchaseAmount}}</td>
+        <td>{{getAnualRatePeriod(report)}}</td>  <!-- {{getPeriodTypeShow(report)}} -->
+        <td>
+          <!-- <p ng-if="report.subscribeLevel==1">优先级</p>
+          <p ng-if="report.subscribeLevel==2">劣后级</p> -->
+          {{getLevelOrRate(report)}}
+        </td>
+        <td>{{report.repayInterest}}</td>
+       </tr>
+      </tbody>
+    </table>
+    </div>
+</div>

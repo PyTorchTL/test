@@ -1,0 +1,88 @@
+<form name="floatingProductEstablishForm" class="bs-example form-horizontal"s style="padding-top:20px;">
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="form-group">
+                <label class="col-sm-6 control-label">打款情况</label>
+                <div class="col-sm-6 padding-sm">
+                    <!-- <p>总计 {{product.establishAmount | rmbTT}}(万元)</p> -->
+                    <p>总计 {{product.purchaseAmount | rmbTT}}万元</p>
+                </div>
+                <div class="col-sm-offset-6 col-sm-6 padding-sm">
+                    <!-- <p>份数 {{product.establishAmount | rmbTT}}万份</p> -->
+                    <p>份数 {{product.purchaseAmount | rmbTT}}万份</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-6 control-label">项目期限</label>
+                <div class="col-sm-6 padding-sm">
+                    <p>{{getPeriodShow(product.period)}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-8">
+            <div class="form-group">
+              <label class="col-sm-3 control-label">是否成立</label>
+              <div class="col-sm-9">
+                <div class="col-sm-4">
+                <div class="radio">
+                  <label class="i-checks">
+                    <input type="radio" name="result" value="1" ng-required="true" ng-model="submitData.establishDecision" checked>
+                    <i></i>
+                    成立
+                  </label>
+                </div>
+                </div>
+                <div class="col-sm-4">
+                <div class="radio">
+                  <label class="i-checks">
+                    <input type="radio" name="result" value="2" ng-required="true" ng-model="submitData.establishDecision">
+                    <i></i>
+                    不成立
+                  </label>
+                </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">成立时间</label>
+                <div class="col-sm-5">
+                    <my-date-picker date="submitData.establishDate"></my-date-picker>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-10 control-label col-sm-offset-1">
+                    <table class="table table-bordered table-striped">
+                      <thead>
+                      <tr>
+                        <!-- <th>序号</th> -->
+                        <th>分配日期</th>
+                        <th>方式</th>
+                        <th>兑付(万)</th>
+                        <th></th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr ng-repeat="repayDate in submitData.repayDateList" st-select-row="row">
+                        <!-- <td>{{product.repayId}}</td> -->
+                        <!-- <td><input type="text" class="form-control" ng-required="true" ng-model="submitData.repayDateList[$index].repayDate" /></td> -->
+                        <td><my-date-picker date="submitData.repayDateList[$index].repayDate"></my-date-picker></td>
+                        <td>{{repayDate.typeShow}}</td>
+                        <td>{{repayDate.amount | rmbTT}}</td>
+                        <td>
+                          <button ng-if="repayDate.typeShow !== '兑付' " uib-popover="删除" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs btn-icon btn-icon-sm" ng-click="deleteRepayDate($index)"><i class="fa fa-times"></i></button>
+                        </td>
+                      </tr>
+                      </tbody>
+                    </table>
+                    <button type="button" uib-popover="添加" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs btn-icon btn-icon-sm" ng-click="addRepayDate()"><i class="fa fa-plus"></i></button>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-10 col-sm-offset-1">
+                    <button type="submit" class="btn m-b-xs m-r-md w-xs btn-primary" ng-disabled='!floatingProductEstablishForm.$valid' ng-click="submit()" value="提交">提交</button>
+                    <button type="button" class="btn m-b-xs w-xs btn-default" value="取消" tabindex="0" ng-click="cancel()">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

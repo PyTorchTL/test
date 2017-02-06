@@ -1,0 +1,49 @@
+<div class="wrapper-md">
+    <div class="panel panel-default bg-light lter">
+        <div class="panel-body">
+            <form class="bs-example form-horizontal">
+            	<div class="row">
+	                <div class="col-lg-3">
+	                    <div class="form-group">
+	                        <label class="col-lg-3 control-label">产品名称</label>
+	                        <div class="col-lg-8">
+	                            <input type="text" class="form-control" ng-model="query.keyword">
+	                        </div>
+	                    </div>
+	                </div>
+	                <div class="col-lg-3">
+	                    <div class="form-group">
+	                        <button class="btn btn-default w-xs" ng-click="subscribeDetailReportSearch()">搜索</button>
+	                    </div>
+	                </div>
+	            </div>
+            </form>
+        </div>
+    </div>
+    <div class="panel panel-default">
+    	<table class="table table-bordered table-striped">
+		  <thead>
+		  <tr>
+		    <th>产品名称</th>
+		    <th>管理机构</th>
+		    <th>机构类型</th>
+		    <th>产品类型</th>
+		    <th>募集金额</th>
+		    <th>操作</th>
+		  </tr>
+		  </thead>
+		  <tbody>
+		   <tr ng-repeat="subscribe in model.productSubscribeList" st-select-row="row">
+		    <td>{{subscribe.name}}</td>
+		    <td>{{subscribe.orgnization}}</td>
+		    <td>{{subscribe.orgnizationType}}</td>
+		    <td>{{subscribe.productTypeShow}}</td>
+		    <td>{{subscribe.subscribeAmount}}</td>
+		    <td>
+          <button uib-popover="查看" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs btn-icon btn-icon-sm" ng-click="openViewSubscribeReport(subscribe, 'lg')"><i class="fa fa-eye"></i></button>
+        </td>
+		   </tr>
+		  </tbody>
+		</table>
+    </div>
+</div>

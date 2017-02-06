@@ -1,1 +1,101 @@
-<h1>首页</h1>
+<div class="wrapper-md">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">我的消息</div>
+                        <table st-table="" class="table table-striped b-b b-light">
+                            <tbody>
+                            <tr class="cursor-p" ng-click="openViewMsgRec(message)" ng-repeat="message in model.homeMessage" st-select-row="row">
+                                <td>{{message.title}}</td>
+                                <td class="text-center">{{message.fromRealName}}</td>
+                                <td class="text-right">{{message.createTime}}</td>
+                                <td class="text-right" ng-if="message.status===0">未读</td>
+                                <td class="text-right" ng-if="message.status===1">&nbsp;</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <div class="pannel-footer">
+                            <div class="row">
+                                <div class="col-lg-12 text-right text-center-xs">
+                                    <uib-pagination ng-change="pageChangedMessage()" total-items="totalItemsMessage"
+                                                items-per-page="queryMessage.size" ng-model="queryMessage.page"
+                                                max-size="maxSize" class="pagination-sm m-t-xs m-b-xs m-r-sm"
+                                                boundary-links="true" rotate="false"
+                                                num-pages="numPages"></uib-pagination>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">通知公告</div>
+                        <table st-table="" class="table table-striped b-b b-light">
+                            <tbody>
+                            <tr class="cursor-p" ng-click="openViewNotification(notice)" ng-repeat="notice in model.homeNotice" st-select-row="row">
+                                <td>{{notice.title}}</td>
+                                <!-- <td>{{notice.adminId}}</td> -->
+                                <td class="text-right">{{notice.createTime}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <div class="pannel-footer">
+                            <div class="row">
+                                <div class="col-lg-12 text-right text-center-xs">
+                                    <uib-pagination ng-change="pageChangedNotice()" total-items="totalItemsNotice"
+                                                items-per-page="queryNotice.size" ng-model="queryNotice.page"
+                                                max-size="maxSize" class="pagination-sm m-t-xs m-b-xs m-r-sm"
+                                                boundary-links="true"
+                                                rotate="false"
+                                                num-pages="numPages"></uib-pagination>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row padder-md">
+                <div class="panel panel-default">
+                    <div class="panel-heading">在线产品预约签约数据</div>
+                    <!-- <table st-table="" class="table table-bordered table-striped"> -->
+                    <table st-table="" class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>产品名称</th>
+                            <th>已预约（万）</th>
+                            <th>已打款（万）</th>
+                            <th>昨日新增预约（万）</th>
+                            <th>昨日新增打款（万）</th>
+                            <th>可打款（万）</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="product in model.products" st-select-row="row" ng-class="{'depart': product.departName}">
+                            <td>{{product.name || product.departName}}</td>
+                            <td>{{product.subscribeAmount | rmbTT}}</td>
+                            <td>{{product.establishAmount | rmbTT}}</td> <!-- <td>{{product.purchaseAmount | rmbTT}}</td> -->
+                            <td>{{product.lastDaySubscribeAmount | rmbTT}}</td>
+                            <td>{{product.lastDayPurchaseAmount | rmbTT}}</td>
+                            <td>{{product.availablePurchaseAmount | rmbTT}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div class="pannel-footer">
+                            <div class="row">
+                                <div class="col-lg-12 text-right text-center-xs">
+                                    <uib-pagination ng-change="pageChangedProduct()" total-items="totalItemsProduct"
+                                                items-per-page="queryProduct.size" ng-model="queryProduct.page"
+                                                max-size="maxSize" class="pagination-sm m-t-xs m-b-xs m-r-sm"
+                                                boundary-links="true"
+                                                rotate="false"
+                                                num-pages="numPages"></uib-pagination>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

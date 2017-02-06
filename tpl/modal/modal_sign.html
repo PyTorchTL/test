@@ -1,35 +1,35 @@
 <form name="activitySignForm" class="form-horizontal" method="post" style="padding-top:20px;">
   <div class="form-group">
     <label class="col-sm-2 control-label">初审人</label>
-    <div class="col-sm-10">
+    <div class="col-sm-10 padding-sm">
     <p>{{item.firstReviewEmployeeRealName}}</p>
     </div>
   </div>
   <div class="form-group">
     <label class="col-sm-2 control-label">初审时间</label>
-    <div class="col-sm-10">
+    <div class="col-sm-10 padding-sm">
     <p>{{item.firstReviewTime}}</p>
     </div>
   </div>
   <div class="form-group">
     <label class="col-sm-2 control-label">初审意见</label>
-    <div class="col-sm-9">
+    <div class="col-sm-9 padding-sm">
       <p>{{item.firstReviewRemark}}</p>
     </div>
   </div>
   <div class="form-group">
     <label class="col-sm-2 control-label">会签意见</label>
     <div class="col-sm-9">
-      <textarea class="form-control" rows="6" ng-model="item.mySignRemark" ng-required="true"></textarea>
+      <textarea class="form-control" rows="6" ng-model="submitData.signRemark" ng-required="true"></textarea>
     </div>
-  </div>         
+  </div>
   <div class="form-group">
     <label class="col-sm-2 control-label">会签结果</label>
     <div class="col-sm-10">
     	<div class="col-sm-4">
       <div class="radio">
         <label class="i-checks">
-          <input type="radio" name="result" value="1" ng-model="item.mySignStatus" ng-required="true">
+          <input type="radio" name="result" value="1" ng-model="submitData.status" ng-required="true">
           <i></i>
           通过
         </label>
@@ -38,19 +38,19 @@
       <div class="col-sm-4">
       <div class="radio">
         <label class="i-checks">
-          <input type="radio" name="result" value="2" ng-model="item.mySignStatus" ng-required="true">
+          <input type="radio" name="result" value="2" ng-model="submitData.status" ng-required="true">
           <i></i>
           不通过
         </label>
       </div>
       </div>
     </div>
-  </div> 
+  </div>
   <div class="form-group">
     <div class="col-sm-10 col-sm-offset-2">
         <button type="submit" ng-click="submit()" class="btn m-b-xs m-r-md w-xs btn-primary"ng-disabled='!activitySignForm.$valid' value="提交">提交
         </button>
-        <button type="submit" class="btn m-b-xs w-xs btn-default" value="取消" tabindex="0" ng-click="cancel()">取消</button>
+        <button type="button" class="btn m-b-xs w-xs btn-default" value="取消" tabindex="0" ng-click="cancel()">取消</button>
     </div>
   </div>
 </form>

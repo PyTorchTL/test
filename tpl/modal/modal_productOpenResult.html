@@ -1,0 +1,23 @@
+<!---弹出框-->
+<form class="bs-example form-horizontal" style="padding-top:20px;">
+    <div class="form-group">
+        <label class="col-lg-2 control-label">上线意见</label>
+        <div class="col-lg-8 padding-sm">
+            <p>{{item.openRemark}}</p>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-lg-2 control-label">上线结果</label>
+        <div class="col-lg-8">
+            <p ng-if="item.openDecision === 1">通过</p>
+            <p ng-if="item.openDecision === 2">不通过</p>
+        </div>
+    </div>
+    <!-- <div class="form-group">
+        <label class="col-lg-2 control-label">审核时间</label>
+        <div class="col-lg-8">
+            <p>{{}}</p>
+        </div>
+    </div> -->
+</form>

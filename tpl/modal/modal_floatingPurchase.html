@@ -1,0 +1,90 @@
+<form name="addFloatingPurchaseForm" class="bs-example form-horizontal form-validation" style="padding-top:20px;">
+    <div class="form-group">
+        <label class="col-sm-5 col-sm-offset-2 control-label">浮动类产品购买</label>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 col-sm-offset-1 control-label">产品名称</label>
+        <div class="col-sm-7 padding-sm">
+            <p>{{item.name}}</p>
+        </div>
+    </div>
+     <div class="form-group">
+        <label class="col-sm-2 col-sm-offset-1 control-label">客户姓名</label>
+        <div class="col-sm-4 padding-sm">
+            <p>{{item.userRealName}}</p>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 col-sm-offset-1 control-label">身份证号</label>
+        <div class="col-sm-6 padding-sm">
+            <input type="text" class="form-control" ng-model="submitData.identityId" placeholder="必须输入身份证号" ng-required="true">
+        </div>
+        <div class="col-sm-2 padding-sm">
+            <!-- <p class="not-verified">身份证号码未验证，无法购买</p> -->
+            <p ng-if="::!item.verified" class="not-verified">未认证</p>
+            <p ng-if="::item.verified" class="verified">已认证</p>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 col-sm-offset-1 control-label">可投金额</label>
+        <div class="col-sm-6 padding-sm">
+            <p>{{item.availablePurchaseAmount | rmbTT}}</p>
+        </div>
+        <div class="col-sm-1 control-label text-left"><p>万元</p></div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 col-sm-offset-1 control-label">预约金额</label>
+        <div class="col-sm-6 padding-sm">
+            <p>{{item.mySubscribeAmount | rmbTT}}</p>
+        </div>
+         <div class="col-sm-1 control-label text-left"><p>万元</p></div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 col-sm-offset-1 control-label">购买金额</label>
+        <div class="col-sm-6">
+            <input type="number" class="form-control" ng-model="submitData.myPurchaseAmount" ui-validate="{a:'$value >= 0', b: '$value * 10000 - 1 <= {{item.mySubscribeAmount}}' }"  placeholder="不可超过预约金额" ng-required="true">
+        </div>
+        <div class="col-sm-1 control-label text-left"><p>万元</p></div>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-2 col-sm-offset-1 control-label">购买份额</label>
+        <div class="col-lg-6">
+            <label class="control-label">{{submitData.myPurchaseAmount/(item.networth*1.0) }}</label>
+        </div>
+        <div class="col-sm-1 control-label text-left"><p>万份</p></div>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-2 col-sm-offset-1 control-label">购买层级</label>
+        <div class="col-lg-7 padding-sm">
+            <!-- <p>{{item.subscribeLevel}}</p> -->
+            <p ng-if="item.subscribeLevel==1">优先级</p>
+            <p ng-if="item.subscribeLevel==2">劣后级</p>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-2 col-sm-offset-1 control-label">购买时间</label>
+        <div class="col-lg-7">
+            <my-datetime-picker date="submitData.purchaseTime" dropdown-id="'dropdown1'"></my-datetime-picker>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-2 col-sm-offset-1 control-label">凭证</label>
+        <div class="col-lg-7">
+            <my-file-upload files="submitData.proof"></my-file-upload>
+            <!-- <my-img-upload ng-model="submitData.proof"></my-img-upload> -->
+        </div>
+        <!-- <button class="btn btn-default w-xs inline">上传</button> -->
+    </div>
+    <!-- <div class="form-group">
+        <label class="col-lg-6 col-sm-offset-1 control-label">
+            (注：打印凭证只能上传一个文件)
+        </div>
+    </div> -->
+    <div class="form-group">
+       <div class="col-sm-offset-3 col-sm-10">
+            <button type="submit"  class="btn m-b-xs m-r-md w-xs btn-primary" ng-click="submit()" value="提交" ng-disabled="!addFloatingPurchaseForm.$valid">提交
+            </button>
+            <button type="button" class="btn m-b-xs w-xs btn-default" value="取消" tabindex="0" ng-click="cancel()">取消</button>
+        </div>
+    </div>
+</form>

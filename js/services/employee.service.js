@@ -1,7 +1,7 @@
 'use strict';
 
   app
-    .factory('Employee', ['$http', function ($http) {
+    .factory('Employee', ['$http', '$q', function ($http, $q) {
 
       var service = {};
 
@@ -10,11 +10,17 @@
       };
 
       service.all = function () {
-        $http.get('/api/v1/employee').then(function(response){
-          data.employees = response.data;
-        });
+        if (data.employees.length === 0) {
+          return $http.get('/api/v1/employee?page=-1').then(function(response){
+            response.data.data.forEach(function(employee){
+              data.employees.push(employee);
+            });
 
-        return data;
+            return data;
+          });
+        } else {
+          return $q.when(data);
+        }
       };
 
       return service;

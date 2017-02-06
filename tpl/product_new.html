@@ -1,44 +1,83 @@
 <div class="wrapper-md">
-    <div class="panel panel-default">
+    <!-- <toaster-container toaster-options="{'position-class': 'toast-top-right', 'close-button':true}"></toaster-container> -->
+
+    <div class="top-buttons">
+      <button type="submit" ui-sref="app.product.newFixed" class="btn m-b-xs m-r-md w-s btn-primary" value="固定类产品录入">
+          固定类产品录入
+      </button>
+      <button type="submit" ui-sref="app.product.newFloating" class="btn m-b-xs m-r-md w-s btn-primary" value="浮动类产品录入">
+          浮动类产品录入
+      </button>
+      <button type="submit" ui-sref="app.product.newBadAsset" class="btn m-b-xs m-r-md w-s btn-primary" value="不良资产产品录入">
+          不良资产产品录入
+      </button>
+    </div>
+
+    <div class="panel panel-default bg-light lter">
         <div class="panel-body">
-            <h3 class="m-md">金融类产品</h3>
-            <div class="row">
-                <div class="col-lg-2 col-lg-offset-1">
-                    <div class="thumbnail w">
-                        <div class="text-center">
-                            <p class="text-lg font-bold">浮动类产品</p>
-                            <img src="img/a0.jpg" alt="浮动类产品"><br>
-                            <a ui-sref="app.product.newFloating">
-                            <button class="btn m-t-xs m-b-xs w-xs btn-default btn-rounded">添加</button>
-                            </a>
+            <!--页眉框-->
+
+            <form class="bs-example form-horizontal">
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        <label class="col-lg-4 control-label">产品名称</label>
+
+                        <div class="col-lg-8">
+                            <input type="text" class="form-control" ng-model="query.keyword">
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-2 col-lg-offset-1">
-                    <div class="thumbnail w">
-                        <div class="text-center">
-                            <p class="text-lg font-bold">固定类产品</p>
-                            <img src="img/a0.jpg" alt="浮动类产品"><br>
-                            <a ui-sref="app.product.newFixed">
-                             <button class="btn m-t-xs m-b-xs w-xs btn-default btn-rounded">添加</button>
-                            </a>
+
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        <label class="col-lg-4 control-label">产品类型</label>
+
+                        <div class="col-lg-8 col-md-8">
+                            <select class="form-control" ng-model="query.productTypes">
+                                <option value="'0,1,2'">全部</option>
+                                <option value="0">固定类</option>
+                                <option value="1">浮动类</option>
+                                <option value="2">金融不良资产</option>
+                            </select>
                         </div>
                     </div>
+
                 </div>
-            </div>
-            <h3 class="m-md">金融不良资产类产品</h3>
-            <div class="row">
-                <div class="col-lg-2 col-lg-offset-1">
-                    <div class="thumbnail w">
-                        <div class="text-center">
-                            <p class="text-lg font-bold">金融不良资产</p>
-                            <img src="img/a0.jpg" alt="浮动类产品"><br>
-                            <a ui-sref="app.product.newBadAsset">
-                              <button class="btn m-t-xs m-b-xs w-xs btn-default btn-rounded">添加</button>
-                            </a>
-                        </div>
+
+                <div class="col-lg-3">
+                    <div class="col-lg-2">
+                        <button class="btn btn-default w-xs" ng-click="productListSearch()">查询</button>
                     </div>
                 </div>
-            </div>
+
+            </form>
         </div>
     </div>
+
+    <div class="panel panel-default">
+        <table st-table="" class="table table-bordered table-striped">
+            <thead>
+            <tr>
+                <th>产品名称</th>
+                <th>产品类型</th>
+                <th>管理机构</th>
+                <th>产品状态</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="product in model.productList" st-select-row="row">
+                <td>{{product.name}}</td>
+                <td>{{product.productTypeShow}}</td>
+                <td>{{product.orgnization}}</td>
+                <td>{{product.statusShow}}</td>
+                <td class="nowrap">
+                    <button uib-popover="查看产品" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs btn-icon btn-icon-sm" ng-click="openProductView(product)"><i class="fa fa-eye"></i></button>
+                    <button uib-popover="复制" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs btn-icon btn-icon-sm" ng-click="openProductCopy(product)" ><i class="fa fa-copy"></i></button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <uib-pagination ng-change="pageChanged()" total-items="totalItems" items-per-page="query.size" ng-model="query.page" max-size="maxSize" class="pagination-sm m-t-none m-b" boundary-links="true" rotate="false" num-pages="numPages"></uib-pagination>
+</div>

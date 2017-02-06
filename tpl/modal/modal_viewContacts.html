@@ -1,0 +1,48 @@
+<div class="wrapper-md">
+    <div class="panel panel-default">
+        <table st-table="" class="table table-bordered table-striped">
+            <thead>
+            <tr>
+                <th>客户名称</th>
+                <th ng-if="getOperationMenuType()===1">客户类型</th>
+                <th ng-if="getOperationMenuType()!==1">理财师</th>
+                <th ng-if="getOperationMenuType()!==1">所属部门</th>
+                <th>联系方式</th>
+                <th>跟进情况</th>
+                <th>联系时间</th>
+                <!-- <th>下次联系时间</th> -->
+                <th>联系内容</th>
+                <!-- <th>操作</th> -->
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="user in model.userContact" st-select-row="row">
+                <td>{{user.realName}}</td>
+                <td ng-if="getOperationMenuType()===1">{{user.customTypeShow}}</td>
+                <td ng-if="getOperationMenuType()!==1">{{user.employeeRealName}}</td>
+                <td ng-if="getOperationMenuType()!==1">{{user.departName}}</td>
+                <td>{{user.contractTypeShow}}</td>
+                <td>
+                    <span ng-if="user.followUp=== 1">有效跟进</span>
+                    <span ng-if="user.followUp=== 2">一般跟进</span>
+                    <span ng-if="user.followUp=== 3">约见</span>
+                    <span ng-if="user.followUp=== 4">无效跟进</span>
+                </td>
+                <td>{{user.contractDate}}</td>
+                <!-- <td>{{user.warnDate}}</td> -->
+                <td>{{user.content}}</td>
+                <!-- <td>
+                    <div>
+                        <button uib-popover="查看" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs btn-icon btn-icon-sm" ng-click="openViewContactCrt(user)"><i class="fa fa-eye"></i></button>
+                        <button ng-if="getOperationMenuType()===1" uib-popover="修改" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs btn-icon btn-icon-sm" ng-click="openChangeContactCrt(user)"><i class="fa fa-pencil"></i></button>
+                        <button ng-if="getOperationMenuType()===1" uib-popover="删除" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs btn-icon btn-icon-sm" ng-click="openDeleteContactCtr(user)"><i class="fa fa-times"></i></button>
+                    </div>
+                </td> -->
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <uib-pagination ng-change="pageChanged()" total-items="totalItems" items-per-page="query.size" ng-model="query.page"
+                max-size="maxSize" class="pagination-sm m-t-none m-b" boundary-links="true" rotate="false"
+                num-pages="numPages"></uib-pagination>
+</div>

@@ -1,0 +1,67 @@
+<div class="wrapper-md">
+    <!-- <toaster-container toaster-options="{'position-class': 'toast-top-right', 'close-button':true}"></toaster-container> -->
+
+    <div class="top-buttons">
+        <div nv-file-drop="" uploader="uploader" filters="queueLimit, customFilter">
+
+            <div class="form-group">
+                <div class="col-sm-2">
+                    <input ui-jq="filestyle" type="file" nv-file-select uploader="uploader" data-icon="false" data-classButton="btn btn-default"
+                           data-classInput="form-control inline v-middle input-s" ui-options="{ buttonText: '' }">
+                </div>
+
+                <div class="col-sm-2">
+                    <button type="submit" ng-click="uploader.uploadAll()" ng-disabled="!uploader.getNotUploadedItems().length" class="btn m-b-xs m-r-md w-s btn-primary" value="客户导入">
+                      客户导入
+                    </button>
+                </div>
+            </div>
+        </div>
+
+      <button type="submit" ng-click="download()" class="btn m-b-xs m-r-md w-s btn-primary" value="下载模板">
+          下载模板
+      </button>
+    </div>
+
+    <div ng-if="model.fails && model.fails.length > 0" class="panel panel-default">
+        <div class="error-line" ng-repeat="fail in model.fails">
+            <i class="fa fa-warning"></i>
+            <span>第{{fail.line}}行</span>
+            <span>{{getErrorMessage(fail.error)}}</span>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <table st-table="" class="table table-bordered table-striped">
+            <thead>
+            <tr>
+                <th>客户名称</th>
+                <th>客户类型</th>
+                <th>生日</th>
+                <th>理财师</th>
+                <th>所属部门</th>
+                <th>跟进情况</th>
+                <th>联系时间</th>
+                <th>下次联系时间</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="user in model.users" st-select-row="row">
+                <td>{{user.realName}}</td>
+                <td>{{user.customTypeShow}}</td>
+                <td>{{user.birthday | getDate}}</td>
+                <td>{{user.employeeRealName}}</td>
+                <td>{{user.departName}}</td>
+                <td>
+                    <span ng-if="user.followUp=== 1">有效跟进</span>
+                    <span ng-if="user.followUp=== 2">一般跟进</span>
+                    <span ng-if="user.followUp=== 3">约见</span>
+                    <span ng-if="user.followUp=== 4">无效跟进</span>
+                </td>
+                <td>{{user.contactTime}}</td>
+                <td>{{user.nextContactTime}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

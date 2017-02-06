@@ -3,8 +3,10 @@
 /* Controllers */
 
 angular.module('app')
-  .controller('AppCtrl', ['$scope', '$http', '$translate', '$localStorage', '$window',
-    function(              $scope,   $http,   $translate,   $localStorage,   $window ) {
+  // .controller('AppCtrl', ['$scope', '$http', '$translate', '$localStorage', '$window', '$state', 'Util',
+  //   function(              $scope,   $http,   $translate,   $localStorage,   $window ,  $state,   Util) {
+  .controller('AppCtrl', ['$scope', '$rootScope', '$http', '$localStorage', '$window', 'toaster', '$timeout', '$state', 'Message', 'Util',
+    function(              $scope,   $rootScope,   $http,   $localStorage,   $window ,  toaster,   $timeout,   $state,   Message,   Util) {
       // add 'ie' classes to html
       var isIE = !!navigator.userAgent.match(/MSIE/i);
       isIE && angular.element($window.document.body).addClass('ie');
@@ -53,17 +55,17 @@ angular.module('app')
         $localStorage.settings = $scope.app.settings;
       }, true);
 
-      // angular translate
-      $scope.lang = { isopen: false };
-      $scope.langs = {en:'English', de_DE:'German', it_IT:'Italian'};
-      $scope.selectLang = $scope.langs[$translate.proposedLanguage()] || "English";
-      $scope.setLang = function(langKey, $event) {
-        // set the current lang
-        $scope.selectLang = $scope.langs[langKey];
-        // You can change the language during runtime
-        $translate.use(langKey);
-        $scope.lang.isopen = !$scope.lang.isopen;
-      };
+      // // angular translate
+      // $scope.lang = { isopen: false };
+      // $scope.langs = {en:'English', de_DE:'German', it_IT:'Italian'};
+      // $scope.selectLang = $scope.langs[$translate.proposedLanguage()] || "English";
+      // $scope.setLang = function(langKey, $event) {
+      //   // set the current lang
+      //   $scope.selectLang = $scope.langs[langKey];
+      //   // You can change the language during runtime
+      //   $translate.use(langKey);
+      //   $scope.lang.isopen = !$scope.lang.isopen;
+      // };
 
       function isSmartDevice( $window )
       {
@@ -73,21 +75,155 @@ angular.module('app')
           return (/iPhone|iPod|iPad|Silk|Android|BlackBerry|Opera Mini|IEMobile/).test(ua);
       }
 
-      // YW: 配置列表
-      var listing = [];
-      $http.get('/api/v1/listing', { params: {
-        sign: 'user_marry,user_gender,user_custom_type,user_risk_level,user_source,user_link_type,product_type,orgnization_type,operation_type,distribution_type,mortage_type,operate_status,product_risk_level,lever_rate'
-      }})
-      .then(function(response){
-        listing = response.data;
+
+      // for pagination
+      $scope.maxSize = 5;
+
+      if ($localStorage.user) {
+        $scope.currentUser = $localStorage.user;
+      } else {
+        $scope.currentUser = { username: ''};
+      }
+
+
+      $scope.logout = function () {
+        $http.post('/api/v1/logout')
+          .then(function() {
+              $state.go('access.signin');
+          });
+      };
+
+
+      // Theming
+      $scope.app.settings.navbarHeaderColor='bg-info dker';
+      $scope.app.settings.navbarCollapseColor='bg-info dk';
+      $scope.app.settings.asideColor='bg-dark';
+
+      $scope.isMenuAuthorized = {
+        'app.home': false,
+        'app.product': false,
+        'app.product.new': false,
+        'app.product.discuss': false,
+        'app.product.open': false,
+        'app.product.establish': false,
+        'app.product.networth': false,
+        'app.product.distribution': false,
+        'app.product.list': false,
+        'app.product.badassetlist': false,
+        'app.invest': false,
+        'app.invest.subscribelist': false,
+        'app.invest.subscriberecord': false,
+        'app.invest.purchaserecord': false,
+        'app.invest.purchaseapprove': false,
+        'app.invest.redeemlist': false,
+        'app.invest.redeemapprove': false,
+        'app.invest.redeemresultlist': false,
+        'app.invest.redeemresultlistall': false,
+        'app.customer': false,
+        'app.customer.list': false,
+        'app.customer.contact': false,
+        'app.customer.listteam': false,
+        'app.customer.contactteam': false,
+        'app.customer.listall': false,
+        'app.customer.listpublic': false,
+        'app.customer.contactall': false,
+        'app.customer.assign': false,
+        'app.customer.import':false,
+        'app.activity': false,
+        'app.activity.new': false,
+        'app.activity.firstreview': false,
+        'app.activity.sign': false,
+        'app.activity.finalreview': false,
+        'app.activity.list': false,
+        'app.activity.subscribe': false,
+        'app.activity.feedback': false,
+        'app.message': false,
+        'app.message.notification': false,
+        'app.message.list': false,
+        'app.message.send': false,
+        'app.report': false,
+        'app.report.mydestribution': false,
+        'app.report.sale': false,
+        'app.report.sale.depart': false,
+        'app.report.commission': false,
+        'app.report.subscribe': false,
+        'app.report.subscribe.depart': false,
+        'app.report.subscribedetail': false,
+        'app.report.statement': false,
+        'app.report.productincomesum': false,
+        'app.report.productamountsum': false,
+        'app.setting': false,
+        'app.setting.profile': false,
+        'app.setting.password': false
+      };
+
+      var checkMenuAuthorized = function () {
+        Util.checkMenuAuthorized($scope);
+      };
+
+      checkMenuAuthorized();
+
+      $rootScope.$on('menu-keys-updated', function (event, data) {
+        _.forEach($scope.isMenuAuthorized, function(n, key) {
+          if (data.indexOf(key) > -1) {
+            $scope.isMenuAuthorized[key] = true;
+          }
+          else {
+            $scope.isMenuAuthorized[key] = false;
+          }
+        });
+
       });
 
-      $scope.getShow = function(sign, keyValue) {
-        keyValue.toString
-        var options = _.find(listing, {sign: sign}).options;
-        var item = _.find(options, {keyValue: keyValue});
+      // $scope.isMenuAuthorized = function (key) {
+      //   return true;
+      //   // return Util.isMenuAuthorized(key);
+      //   // return Util.isMenuAuthorized(key)
+      //   //         .then(function(result){
+      //   //           return result;
+      //   //         });
+      // };
 
-        return !item ? undefined : item.name;
-      };
+
+      // $scope.settings = {
+      //   'apiRootUrl': 'http://demo.iqiaorong.com/rest',
+      //   // 'apiRootURL': 'http://121.40.72.110/oa',
+      //   'serverRootUrl': 'http://demo.iqiaorong.com/'
+      // };
+      //
+
+      function getMessage() {
+        var query = {
+            keyword: '',
+            from: '',
+            status:      '',
+            startTime:   '',
+            endTime:     '',
+            page:        1,
+            size:        10
+        };
+
+        Message.messageReceived(query)
+          .then(function (response) {
+            if (response && response.data.data.length > 0) {
+              var message = response.data.data[0];
+              if (!Message.latestMessage) {
+                Message.latestMessage = message;
+              } else if (Message.latestMessage.id !== message.id) {
+                Message.latestMessage = message;
+                toaster.pop('success', '收到新消息');
+              }
+            }
+
+            $timeout(getMessage, 15000);
+          })
+          .catch(function() {
+            $timeout(getMessage, 15000);
+          })
+      }
+
+      getMessage();
+
+      moment.locale('zh-cn');
 
   }]);

@@ -1,0 +1,70 @@
+<div class="wrapper-md">
+	<div class="panel panel-default bg-light lter">
+	    <div class="panel-body">
+	        <form class="bs-example form-horizontal">
+	            <div class="col-lg-4">
+	                <div class="form-group">
+	                    <label class="col-lg-3 control-label">公告标题</label>
+	                    <div class="col-lg-9">
+	                        <input type="text" class="form-control" >
+	                    </div>
+	                </div>
+	                <div class="form-group">
+	                    <label class="col-lg-3 control-label">公告时间</label>
+	                    <div class="col-lg-4">
+	                        <input type="text" class="form-control" >
+	                    </div>
+	                    <label class="col-lg-1 control-label">至</label>
+	                    <div class="col-lg-4">
+	                        <input type="text" class="form-control" >
+	                    </div>
+	                </div>
+	            </div>
+	            <div class="col-lg-4">
+	                <div class="row">
+	                <div class="form-group">
+	                    <label class="col-lg-3 control-label">状态</label>
+	                    <div class="col-lg-3">
+	                        <select class="form-control" >
+	                            <option value="0">全部</option>
+	                            <option value="1">未读</option>
+	                            <option value="2">已读</option>
+	                        </select>
+	                    </div>
+	                </div>
+	                </div>
+	                <div class="row">
+	                <div class="col-lg-2 col-lg-offset-2">
+	                    <div class="form-group">
+	                        <button class="btn btn-default w-xs" ng-click="search()">搜索</button>
+	                    </div>
+	                </div>
+	                </div>
+	            </div>
+	        </form>
+	    </div>
+	</div>
+	<div class="panel panel-default">
+		<table class="table table-bordered table-striped">
+		  <thead>
+		  <tr>
+		    <th>标题</th>
+		    <th>发送时间</th>
+		    <th>操作</th>
+		  </tr>
+		  </thead>
+		  <tbody>
+		  <tr ng-repeat="notice in model.employeeNotice" st-select-row="row">
+		    <td>{{notice.title}}</td>
+		    <td>{{notice.createTime}}</td>
+		    <td>
+		      <div>
+		        <a ng-href="" ng-click="" style="display:block;">【查看】</a>
+		      </div>
+		    </td>
+		  </tr>
+		  </tbody>
+		</table>
+	</div>
+
+</div>

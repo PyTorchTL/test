@@ -1,1 +1,85 @@
-<h1>预约认购汇总表</h1>
+<div class="wrapper-md">
+    <div class="panel panel-default bg-light lter">
+        <div class="panel-body">
+            <form class="bs-example form-horizontal">
+            	<div class="row">
+	                <div class="col-lg-3">
+	                    <div class="form-group">
+	                        <label class="col-lg-3 control-label">产品名称</label>
+	                        <div class="col-lg-8">
+	                            <input type="text" class="form-control" ng-model="query.keyword">
+	                        </div>
+	                    </div>
+	                </div>
+	                <div class="col-lg-3">
+	                    <div class="form-group">
+	                        <label class="col-lg-3 control-label">产品类型</label>
+	                        <div class="col-lg-8">
+	                            <select class="form-control" ng-model="query.productType">
+	                                <option value="-1">全部</option>
+	                                <option value="0">固定类</option>
+	                                <option value="1">浮动类</option>
+	                                <option value="2">金融不良资产</option>
+	                            </select>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+                <div class="row">
+	                <div class="col-lg-3">
+	                    <div>
+	                        <div class="form-group">
+	                            <label class="col-lg-3 control-label">购买时间</label>
+	                            <div class="col-lg-9">
+	                                <my-date-picker date="query.startDate"></my-date-picker>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+	                <div class="col-lg-3">
+	                    <div class="form-group">
+	                        <span class="col-lg-2 control-label">至</span>
+	                        <div class="col-lg-9">
+	                            <my-date-picker date="query.endDate"></my-date-picker>
+	                        </div>
+	                    </div>
+	                </div>
+	                <div class="col-lg-3">
+	                    <div class="form-group">
+	                        <button class="btn btn-default w-xs" ng-click="subscribeSumReportSearch()">搜索</button>
+	                    </div>
+	                </div>
+	            </div>
+            </form>
+        </div>
+    </div>
+    <button type="submit" ng-click="exportReportBtn()" class="btn m-b-xs m-r-md w-xs btn-primary" value="报表导出">
+        报表导出
+    </button>
+    <div class="panel panel-default">
+    	<table class="table table-bordered table-striped">
+		  <thead>
+		  <tr>
+		    <th>产品名称</th>
+		    <th>累计预约</th>
+		    <th>累计认购</th>
+		    <th>新增预约</th>
+		    <th>新增认购</th>
+		    <th>操作</th>
+		  </tr>
+		  </thead>
+		  <tbody>
+		   <tr ng-repeat="report in model.subscribeSumList" st-select-row="row">
+		    <td>{{report.name}}</td>
+		    <td>{{report.cumSubscribeAmount}}</td>
+		    <td>{{report.cumEstablishAmount}}</td>
+		    <td>{{report.incSubscribeAmount}}</td>
+		    <td>{{report.incPurchaseAmount}}</td>
+		    <td>
+          <button uib-popover="查看" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs btn-icon btn-icon-sm" ng-click="openViewSubscribeReport(report, 'lg')"><i class="fa fa-eye"></i></button>
+        </td>
+		   </tr>
+		  </tbody>
+		</table>
+    </div>
+</div>

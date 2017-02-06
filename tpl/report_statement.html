@@ -1,1 +1,102 @@
-<h1>客户对账函</h1>
+<div class="wrapper-md">
+    <div class="panel panel-default bg-light lter">
+        <div class="panel-body">
+            <form class="bs-example form-horizontal">
+            	<div class="row">
+                  <div class="col-lg-3">
+                      <div class="form-group">
+                          <label class="col-lg-3 control-label">客户姓名</label>
+                          <div class="col-lg-8">
+                            <input type="text" class="form-control" ng-model="query.name">
+                          </div>
+                      </div>
+                  </div>
+	                <div class="col-lg-3">
+	                    <div class="form-group">
+	                        <label class="col-lg-3 control-label">所属部门</label>
+	                        <div class="col-lg-8">
+	                            <input type="text" class="form-control" ng-model="query.departName">
+	                        </div>
+	                    </div>
+	                </div>
+	                <div class="col-lg-3">
+	                    <div class="form-group">
+	                        <label class="col-lg-3 control-label">理财师</label>
+	                        <div class="col-lg-8">
+	                            <input type="text" class="form-control" ng-model="query.employeeRealName">
+	                        </div>
+	                        <!-- <div class="col-lg-8">
+	                            <select class="form-control" ng-model="query.productType">
+	                                <option value="-1">全部</option>
+	                                <option value="0">固定类</option>
+	                                <option value="1">浮动类</option>
+	                                <option value="2">金融不良资产</option>
+	                            </select>
+	                        </div> -->
+	                    </div>
+	                </div>
+	            </div>
+                <div class="row">
+                	<div class="col-lg-3 col-md-6">
+                    <div class="form-group">
+                        <label class="col-lg-3 col-md-3 control-label">产品状态</label>
+
+                        <div class="col-lg-8 col-md-8">
+                            <select class="form-control" ng-model="query.status">
+                                <option value="-1">全部</option>
+                                <option value="4">存续期</option>
+                                <option value="5">展期中</option>
+                                <option value="6">已兑付</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">截止日期</label>
+                            <div class="col-lg-8">
+                                <my-date-picker date="query.endDate"></my-date-picker>
+                            </div>
+                        </div>
+                  </div>
+	                <!-- <div class="col-lg-3">
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">截止日期</label>
+                            <div class="col-lg-8">
+                                <my-date-picker date="query.purchaseStartTime"></my-date-picker>
+                            </div>
+                        </div>
+	                </div> -->
+	                <div class="col-lg-3">
+	                    <div class="form-group">
+	                        <button class="btn btn-default w-xs" ng-click="statementReportSearch()">搜索</button>
+	                    </div>
+	                </div>
+	            </div>
+            </form>
+        </div>
+    </div>
+    <div class="panel panel-default">
+    	<table class="table table-bordered table-striped">
+		  <thead>
+		  <tr>
+		    <th>客户姓名</th>
+		    <th>理财师</th>
+		    <th>所属部门</th>
+		    <th>操作</th>
+		  </tr>
+		  </thead>
+		  <tbody>
+		   <tr ng-repeat="user in model.userList" st-select-row="row">
+		    <td>{{user.realName}}</td>
+		    <td>{{user.employeeRealName}}</td>
+		    <td>{{user.departName}}</td>
+		    <td>
+          <button uib-popover="查看" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs btn-icon btn-icon-sm" ng-click="openViewBillReport(user, 'lg')"><i class="fa fa-eye"></i></button>
+        </td>
+		   </tr>
+		  </tbody>
+		</table>
+    </div>
+    <uib-pagination ng-change="pageChanged()" total-items="totalItems" items-per-page="query.size" ng-model="query.page" max-size="maxSize" class="pagination-sm m-t-none m-b" boundary-links="true" rotate="false" num-pages="numPages"></uib-pagination>
+</div>

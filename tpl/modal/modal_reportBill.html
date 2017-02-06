@@ -1,0 +1,94 @@
+<div class="wrapper-md">
+  <!-- <div class="row">
+    <div class="col-lg-6">
+          <div class="form-group">
+              <label class="col-lg-3 control-label">截止日期</label>
+              <div class="col-lg-8">
+                  <my-date-picker date="query.endDate"></my-date-picker>
+              </div>
+          </div>
+          </div>
+          <div class="col-lg-4">
+          <button type="submit" ng-click="setBtn()" class="btn m-b-xs m-r-md w-xs btn-primary" value="设置">
+              设置
+          </button>
+    </div>
+  </div> -->
+
+  <button type="submit" ng-click="exportReportBtn()" class="btn m-b-xs m-r-md w-xs btn-primary" value="报表导出">
+      报表导出
+  </button>
+  <div class="panel panel-default">
+    <div class="panel-heading">般若财富客户对账函</div>
+    <p>客户姓名: {{item.user.realName}}</p>
+    <p>理财师姓名: {{item.user.employeeRealName}}</p>
+    <h4>固定类</h4>
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>序号</th>
+          <th>项目名称</th>
+          <th>管理机构</th>
+          <th>认购金额(万)</th>
+          <th>项目期限</th>
+          <th>项目收益（%）</th>
+          <th>付息方式</th>
+          <th>成立日期</th>
+          <th>到期日期</th>
+          <!-- <th>理财经理</th> -->
+          <th>产品状态</th>
+          <th>已赎回</th>
+        </tr>
+      </thead>
+      <tbody>
+       <tr ng-repeat="bill in model.billReportList | filter:{type: 1}" st-select-row="row">
+        <td>{{$index+1}}</td>
+        <td>{{bill.name}}</td>
+        <td>{{bill.orgnization}}</td>
+        <td>{{bill.subscribeAmount/10000}}</td>
+        <td>{{bill.anualRatePeriod}}</td>
+        <td>{{bill.rate}}</td>
+        <td>{{bill.distributionTypeShow}}</td>
+        <td>{{bill.establishDate}}</td>
+        <td>{{bill.endDate}}</td>
+        <!-- <td>{{bill.employeeRealName}}</td> -->
+        <td>{{bill.productStatusShow}}</td>
+        <td>{{bill.redeemAmount}}</td>
+       </tr>
+      </tbody>
+    </table>
+    <h4>浮动类</h4>
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>序号</th>
+          <th>项目名称</th>
+          <th>管理机构</th>
+          <th>认购金额(万)</th>
+          <th>项目期限</th>
+          <th>参考市值</th>
+          <th>持有份额</th>
+          <th>最新净值</th>
+          <th>净值日期</th>
+          <th>当前盈亏</th>
+          <th>已赎回份额</th>
+        </tr>
+      </thead>
+      <tbody>
+       <tr ng-repeat="bill in model.billReportList | filter:{type: 2}" st-select-row="row">
+        <td>{{$index+1}}</td>
+        <td>{{bill.name}}</td>
+        <td>{{bill.orgnization}}</td>
+        <td>{{bill.subscribeAmount/10000}}</td>
+        <td>{{bill.anualRatePeriod}}</td>
+        <td>{{getTotalAmount(bill)}}</td><!-- <td>{{bill.totalAmount}}</td> -->
+        <td>{{bill.share}}</td>
+        <td>{{bill.networth}}</td>
+        <td>{{bill.networthDate}}</td>
+        <td>{{getProfit(bill)}}</td><!-- <td>{{bill.profit}}</td> -->
+        <td>{{bill.redeemShare}}</td>
+       </tr>
+      </tbody>
+    </table>
+    </div>
+</div>

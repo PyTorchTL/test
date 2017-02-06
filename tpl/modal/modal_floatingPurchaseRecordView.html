@@ -1,0 +1,74 @@
+<form name="addFloatingPurchaseApproveForm" class="bs-example form-horizontal" style="padding-top:20px;">
+    <div class="form-group">
+        <label class="col-sm-5 col-sm-offset-2 control-label">浮动类产品购买</label>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 col-sm-offset-1 control-label">产品名称</label>
+        <div class="col-sm-7 padding-sm">
+            <p>{{item.name}}</p>
+        </div>
+    </div>
+     <div class="form-group">
+        <label class="col-sm-2 col-sm-offset-1 control-label">客户姓名</label>
+        <div class="col-sm-7 padding-sm">
+            <p>{{item.userRealName}}</p>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 col-sm-offset-1 control-label">可投金额</label>
+        <div class="col-sm-6 padding-sm">
+            <p>{{item.availablePurchaseAmount | rmbTT}}</p>
+        </div>
+        <div class="col-sm-1 control-label text-left"><p>万元</p></div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 col-sm-offset-1 control-label">购买金额</label>
+        <div class="col-sm-6 padding-sm">
+            <p>{{item.myPurchaseAmount | rmbTT}}</p>
+        </div>
+        <div class="col-sm-1 control-label text-left"><p>万元</p></div>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-2 col-sm-offset-1 control-label">购买份额</label>
+        <div class="col-lg-6">
+            <label class="control-label">{{item.mySubscribeAmount/item.networth*1.0 | rmbTT}}</label>
+        </div>
+        <div class="col-sm-1 control-label text-left"><p>万份</p></div>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-2 col-sm-offset-1 control-label">购买层级</label>
+        <div class="col-lg-7 padding-sm">
+            <!-- <p>{{item.subscribeLevel}}</p> -->
+            <p ng-if="item.subscribeLevel==1">优先级</p>
+            <p ng-if="item.subscribeLevel==2">劣后级</p>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-2 col-sm-offset-1 control-label">购买时间</label>
+        <div class="col-lg-7 padding-sm">
+            <p>{{item.purchaseTime}}</p>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-2 col-sm-offset-1 control-label">凭证</label>
+        <my-file-viewer class="col-lg-9 text-left" files="item.proof"></my-file-viewer>
+        <!-- <div class="col-lg-7 padding-sm"> -->
+            <!-- <my-file-upload files="item.proof"></my-file-upload> -->
+            <!-- <my-img-upload ng-model="item.proof"></my-img-upload> -->
+        <!-- </div> -->
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 col-sm-offset-1 control-label">购买结果</label>
+      <div class="col-sm-8">
+        <span ng-if="item.purchaseApproveDecision===1">通过</span>
+        <span ng-if="item.purchaseApproveDecision===2">不通过</span>
+      </div>
+    </div>
+    <!-- <div class="form-group">
+       <div class="col-sm-offset-3 col-sm-10">
+            <button type="submit"  class="btn m-b-xs m-r-md w-xs btn-primary" ng-click="submit()" value="提交" ng-disabled="!addFloatingPurchaseApproveForm.$valid">提交
+            </button>
+            <button type="button" class="btn m-b-xs w-xs btn-default" value="取消" tabindex="0" ng-click="cancel()">取消</button>
+        </div>
+    </div> -->
+</form>

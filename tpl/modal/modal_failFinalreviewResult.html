@@ -13,21 +13,21 @@
       <tr st-select-row="row">
         <td>{{item.firstReviewEmployeeRealName}}</td>
         <td>{{item.firstReviewTime}}</td>
-        <td ng-if="show()===2">不通过</td>
-        <td ng-if="show()!=2">通过</td>
+        <td ng-if="show()===2">初审不通过</td>
+        <td ng-if="show()!=2">初审通过</td>
         <td>{{item.firstReviewRemark}}</td>
       </tr st-select-row="row">
       <tr ng-repeat="activity in model.activitySignListOne" st-select-row="row" ng-if="show()!=2">
         <td>{{activity.employeeRealName}}</td>
         <td>{{activity.signTime}}</td>
-        <td ng-if="activity.status===1">通过</td>
-        <td ng-if="activity.status===2">不通过</td>
+        <td ng-if="activity.status===1">会签通过</td>
+        <td ng-if="activity.status===2">会签不通过</td>
         <td>{{activity.signRemark}}</td>
       </tr>
       <tr st-select-row="row" ng-if="show()!=2">
         <td>{{item.finalReviewEmployeeRealName}}</td>
         <td>{{item.finalReviewTime}}</td>
-        <td ng-if="show()===4">不通过</td>
+        <td ng-if="show()===4">终审不通过</td>
         <td>{{}}</td>
       </tr>
       </tbody>

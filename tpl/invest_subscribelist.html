@@ -1,1 +1,82 @@
-<h1>预约项目</h1>
+<div class="wrapper-md">
+<!-- <toaster-container toaster-options="{'position-class': 'toast-top-right', 'close-button':true}"></toaster-container> -->
+    <div class="panel panel-default">
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="navbar-header">
+                <a class="navbar-brand">产品名称</a>
+            </div>
+            <div>
+                <form class="navbar-form navbar-left" role="search">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="搜索产品名称" ng-model="query.keyword">
+                    </div>
+                    <button type="submit" class="btn btn-default" ng-click="investSubscribeSearch()">搜索</button>
+                </form>
+            </div>
+        </nav>
+    </div>
+    <!-- <tabset class="tab-container">
+      <tab heading="金融产品"> -->
+        <div class="panel panel-default">
+            <table st-table="" class="table table-bordered table-striped">
+              <thead>
+              <tr>
+                <th>产品名称</th>
+                <th>产品类型</th>
+                <th>成立日期</th>
+                <th>产品规模(万)</th>
+                <th>已预约(万)</th>
+                <th>已打款(万)</th>
+                <th>操作</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr ng-repeat="invest in model.productSubscribeList" st-select-row="row">
+                <td>{{invest.name}}</td>
+                <td>{{invest.productTypeShow}}</td>
+                <td>{{invest.establishDate}}</td>
+                <td>{{invest.amount | rmbTT}}</td>
+                <td>{{invest.subscribeAmount | rmbTT}}</td>
+                <td>{{invest.establishAmount | rmbTT}}</td><!-- <td>{{invest.purchaseAmount}}</td> -->
+                <td>
+                    <button uib-popover="预约" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs btn-icon btn-icon-sm" ng-click="openSubscribe(invest)"><i class="icon icon-clock"></i></button>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+        </div>
+      </tab>
+      <!-- <tab heading="金融不良产品">
+        <div class="panel panel-default">
+            <table st-table="ActivityCtrl" class="table table-bordered table-striped">
+              <thead>
+              <tr>
+                <th>产品名称</th>
+                <th>产品类型</th>
+                <th>成立日期</th>
+                <th>产品规模</th>
+                <th>已预约</th>
+                <th>已打款</th>
+                <th>操作</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr ng-repeat="activity in model.activityList" st-select-row="row">
+                <td>{{invest.name}}</td>
+                <td>{{invest.productType}}</td>
+                <td>{{invest.establishDate}}</td>
+                <td>{{invest.amount}}</td>
+                <td>{{invest.subscribeAmount}}</td>
+                <td>{{invest.purchaseAmount}}</td>
+                <td>
+                    <button uib-popover="预约" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs btn-icon btn-icon-sm" ng-click="openSubscribe(invest)"><i class="icon icon-clock"></i></button>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+      </tab> -->
+    <!-- </tabset> -->
+
+    <uib-pagination ng-change="pageChanged()" total-items="totalItems" items-per-page="query.size" ng-model="query.page" max-size="maxSize" class="pagination-sm m-t-none m-b" boundary-links="true" rotate="false" num-pages="numPages"></uib-pagination>
+</div>

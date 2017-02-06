@@ -1,23 +1,18 @@
-<!---弹出框-->
-<toaster-container toaster-options="{'position-class': 'toast-top-right', 'close-button':true}"></toaster-container>
-
-<form class="form-horizontal" method="post" style="padding-top:20px;">
-  <div class="form-group">
-    <label class="col-sm-2 col-sm-offset-1 control-label">净值</label>
-    <div class="col-sm-7">
-      <p>{{item.networth}}</p>
-    </div>
-  </div>
-  <div class="form-group">
-    <label class="col-sm-2 col-sm-offset-1 control-label">复权净值</label>
-    <div class="col-sm-7">
-      <p>{{item.adjustedNetworth}}</p>
-    </div>
-  </div> 
-  <div class="form-group">
-    <label class="col-sm-2 col-sm-offset-1 control-label">净值日期</label>
-    <div class="col-sm-7">
-      <p>{{item.networthDate}}</p>
-    </div>
-  </div>
-</form>
+<div  style="padding:20px;">
+<table st-table="" class="table table-bordered table-striped">
+  <thead>
+  <tr>
+    <th>净值日期</th>
+    <th>净值(元)</th>
+    <th>复权净值(元)</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr ng-repeat="networthHistory in model.productNetworthHistoryListOne" st-select-row="row">
+    <td>{{networthHistory.networthDate}}</td>
+    <td>{{networthHistory.networth}}</td>
+    <td>{{networthHistory.adjustedNetworth}}</td>
+  </tr>
+  </tbody>
+</table>
+</div>

@@ -1,97 +1,105 @@
 <div class="wrapper-md">
-	<div class="panel panel-default">
-		<nav class="navbar navbar-default" role="navigation">
-		    <div class="navbar-header">
-		        <a class="navbar-brand">活动名称</a>
-		    </div>
-		    <div>
-		        <form class="navbar-form navbar-left" role="search">
-		            <div class="form-group">
-		                <input type="text" class="form-control" placeholder="搜索活动名称" ng-model="query.keyword">
-		            </div>
-		            <button type="submit" class="btn btn-default" ng-click="search()">搜索</button>
-		        </form>
-		    </div>
-		</nav>
-	</div>
-  <!-- tab -->
-    <tabset class="tab-container">
-      <tab heading="未结束的活动" select="switchTab(3)">
-      	<div class="panel panel-default">
-		    <table st-table="" class="table table-bordered table-striped">
-		      <thead>
-		      <tr>
-		        <th>活动名称</th>
-		        <th>活动时间</th>
-		        <th>活动内容</th>
-		        <th>操作</th>
-		      </tr>
-		      </thead>
-		      <tbody>
-		      <tr ng-repeat="activity in model.activityList" st-select-row="row">
-		        <td>{{activity.name}}</td>
-		        <td>{{activity.startTime}} - {{activity.endTime}}</td>
-		        <td>{{activity.content}}</td>
-			    <td>
-		          <a ng-href="" ng-click="openSubscribeResult(activity)" style="display:block;">【查看预约】</a>
-		          <a ng-href="" ng-click="openReviewResult(activity)" style="display:block;">【查看审核结果】</a>
-		          <a ng-href="" style="display:block;">【活动结束】</a>
-		        </td>
-		      </tr>
-		      </tbody>
-		    </table>
-		</div>
-      </tab>
-      <tab heading="活动结束" select="switchTab(5)">
-      	<div class="panel panel-default">
-		    <table st-table="ActivityCtrl" class="table table-bordered table-striped">
-		      <thead>
-		      <tr>
-		        <th>活动名称</th>
-		        <th>活动时间</th>
-		        <th>活动内容</th>
-		        <th>操作</th>
-		      </tr>
-		      </thead>
-		      <tbody>
-		      <tr ng-repeat="activity in model.activityList" st-select-row="row">
-		        <td>{{activity.name}}</td>
-		        <td>{{activity.startTime}} - {{activity.endTime}}</td>
-		        <td>{{activity.content}}</td>
-			    <td>
-		            <a ng-href="" style="display:block;">【查看反馈】</a>
-		        </td>
-		      </tr>
-		      </tbody>
-		    </table>
-		  </div>
-      </tab>
-      <tab heading="审核失败" select="switchTab(7)">
-      	<div class="panel panel-default">
-		    <table st-table="ActivityCtrl" class="table table-bordered table-striped">
-		      <thead>
-		      <tr>
-		        <th>活动名称</th>
-		        <th>活动时间</th>
-		        <th>活动内容</th>
-		        <th>操作</th>
-		      </tr>
-		      </thead>
-		      <tbody>
-		      <tr ng-repeat="activity in model.activityList" st-select-row="row">
-		       <!-- ng-if="activity.status===6 ||activity.status===7" -->
-		        <td>{{activity.name}}</td>
-		        <td>{{activity.startTime}} - {{activity.endTime}}</td>
-		        <td>{{activity.content}}</td>
-			    <td>
-		            <a ng-href="" ng-click="openFailReviewResult(activity)" style="display:block;">【查看审核结果】</a>
-		        </td>
-		      </tr>
-		      </tbody>
-		    </table>
-		  </div>
-      </tab>
-    </tabset>
-  <!--  tab -->
+<!-- <toaster-container toaster-options="{'position-class': 'toast-top-right', 'close-button':true}"></toaster-container> -->
+    <div class="panel panel-default">
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="navbar-header">
+                <a class="navbar-brand">活动名称</a>
+            </div>
+            <div>
+                <form class="navbar-form navbar-left" role="search">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="搜索活动名称" ng-model="query.keyword">
+                    </div>
+                    <button type="submit" class="btn btn-default" ng-click="listSearch()">搜索</button>
+                </form>
+            </div>
+        </nav>
+    </div>
+    <!-- tab -->
+    <uib-tabset class="tab-container">
+        <uib-tab heading="未结束的活动" select="switchTab(-1)">
+            <div class="panel panel-default">
+                <table st-table="" class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                        <th>活动名称</th>
+                        <th>活动时间</th>
+                        <th>活动内容</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="activity in model.activityList" st-select-row="row">
+                        <td>{{activity.name}}</td>
+                        <td>{{activity.startTime}} - {{activity.endTime}}</td>
+                        <td>{{activity.content}}</td>
+                        <td class="wrapper nowrap">
+                            <button uib-popover="查看预约" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs btn-icon btn-icon-sm" ng-click="openSubscribeResult(activity)"><i class="fa fa-eye"></i></button>
+                            <button uib-popover="添加预约" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs btn-icon btn-icon-sm" ng-click="openAddSubscribe(activity)"><i class="fa fa-plus"></i></button>
+                            <button uib-popover="查看审核结果" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs btn-icon btn-icon-sm" ng-click="openReviewResult(activity)"><i class="fa fa-check"></i></button>
+                            <button uib-popover="活动结束" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs btn-icon btn-icon-sm" ng-click="endActivity(activity)"><i class="fa fa-power-off"></i></button>
+                            <button uib-popover="修改" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs btn-icon btn-icon-sm" ng-click="openChangeActivity(activity)"><i class="fa fa-pencil"></i></button>
+                            <button uib-popover="删除" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs btn-icon btn-icon-sm" ng-click="openDeleteActivity(activity)"><i class="fa fa-times"></i></button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </uib-tab>
+        <uib-tab heading="活动结束" select="switchTab(5)">
+            <div class="panel panel-default">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                        <th>活动名称</th>
+                        <th>活动时间</th>
+                        <th>活动内容</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="activity in model.activityList" st-select-row="row">
+                        <td>{{activity.name}}</td>
+                        <td>{{activity.startTime}} - {{activity.endTime}}</td>
+                        <td>{{activity.content}}</td>
+                        <td class="nowrap">
+                            <button uib-popover="查看反馈" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs btn-icon btn-icon-sm" ng-click=""><i class="fa fa-eye"></i></button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </uib-tab>
+        <uib-tab heading="审核失败" select="switchTab(7)">
+            <div class="panel panel-default">
+                <table st-table="ActivityCtrl" class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                        <th>活动名称</th>
+                        <th>活动时间</th>
+                        <th>活动内容</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="activity in model.activityList" st-select-row="row">
+                        <!-- ng-if="activity.status===6 ||activity.status===7" -->
+                        <td>{{activity.name}}</td>
+                        <td>{{activity.startTime}} - {{activity.endTime}}</td>
+                        <td>{{activity.content}}</td>
+                        <td>
+                            <button uib-popover="查看审核结果" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs btn-icon btn-icon-sm" ng-click="openFailReviewResult(activity)"><i class="fa fa-check"></i></button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </uib-tab>
+    </uib-tabset>
+    <!--  tab -->
+
+    <uib-pagination ng-change="pageChanged()" total-items="totalItems" items-per-page="query.size" ng-model="query.page"
+                max-size="maxSize" class="pagination-sm m-t-none m-b" boundary-links="true" rotate="false"
+                num-pages="numPages"></uib-pagination>
 
 </div>

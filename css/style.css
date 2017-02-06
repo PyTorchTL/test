@@ -3,7 +3,40 @@ html, body {
   /*height: 100%*/
 }
 
+td {
+  max-width:450px;
+  word-wrap: break-word;
+}
+
+/*@media (min-width: 768px) {
+  .modal-dialog {
+      width: 700px;
+      margin: 30px auto;
+  }
+}*/
+
+/* side bar*/
+.app-aside-container {
+  position: fixed;
+  height: 100%;
+  overflow-y: scroll;
+  top: 0;
+  bottom: 0;
+  padding-top: 60px;
+  width: 200px;
+  overflow-x: scroll;
+}
+
 /* nav */
+.app-aside {
+  position: fixed;
+  height: 100%;
+}
+
+/*.app-content-body {
+  overflow: scroll;
+}
+*/
 .nav-sub > li.active {
   background-color: #f6f8f8;
   color: #141719;
@@ -27,4 +60,97 @@ html, body {
 
 .control-label {
   white-space: nowrap;
+}
+
+.nowrap {
+  white-space: nowrap;
+}
+
+/* input */
+.yw-w-xxxs {
+  width: 52px;
+}
+
+/* icon button */
+.btn-icon-sm {
+  width: 24px;
+  height: 24px;
+}
+
+.btn-icon-sm i {
+  line-height: 24px;
+}
+
+.thumbnail-img {
+  height: 190px;
+  width:  190px;
+}
+
+.cursor-p {
+  cursor:pointer;
+}
+
+.my-photo {
+  display: block;
+  max-width:100px;
+  max-height:100px;
+  width: auto;
+  height: auto;
+}
+
+.form-group span {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.form-group input[type="number"] {
+  padding: 6px 5px;
+}
+
+.form-group .compact {
+  padding-right: 5px;
+}
+
+.form-group .padding-sm{
+  padding-top: 7px;
+  padding-left: 15px;
+}
+
+.myform-label{
+  font-weight: bold;
+}
+
+.mydang{
+  padding-top: 7px;
+}
+
+.datetimepicker {
+  width: 380px; /* original 340px, 中文notOK*/
+}
+
+
+.rate-list label {
+  padding-left: 0px;
+}
+
+.top-buttons {
+  margin-bottom: 16px;
+}
+
+.verified {
+  color: green;
+}
+
+.not-verified {
+  color: red;
+}
+
+.error-line {
+  margin: 6px 12px;
+
+}
+
+/* home */
+.depart {
+  border-left: 2px solid #337ab7;
 }

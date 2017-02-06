@@ -1,65 +1,80 @@
 <div class="wrapper-md">
- <toaster-container toaster-options="{'position-class': 'toast-top-right', 'close-button':true}"></toaster-container>
-	<div class="panel panel-default">
-		<nav class="navbar navbar-default" role="navigation">
-		    <div>
-		        <form class="navbar-form navbar-left" role="search">
-		            <div class="form-group">
-		            	<label class="col-lg-5 control-label">活动名称</label>
-		            	<div class="col-lg-6">
-		                	<input type="text" class="form-control" placeholder="搜索活动名称" ng-model="query.keyword">
-		                </div>
-		            </div>
-		            <div class="form-group">
-			        	<label class="col-lg-6 control-label">反馈状态</label>
-			            <div class="col-lg-6">
-			                <select class="form-control" ng-model="query.feedbackStatus">
-			                    <option value="0">未反馈</option>
-			                    <option value="1">已反馈</option>
-			                </select>
-			            </div>
-				    </div>
-		            <button type="submit" class="btn btn-default" ng-click="search()">搜索</button>
-		        </form>
-		    </div>
-		</nav>
-	</div>
-	<div class="panel panel-default">
-		<table st-table="" class="table table-bordered table-striped">
-		  <thead>
-		  <tr>
-		    <th>所属活动</th>
-		    <th>活动时间</th>
-		    <th>邀请客户</th>
-		    <th>反馈状态</th>
-		    <th>操作</th>
-		  </tr>
-		  </thead>
-		  <tbody>
-		  <tr ng-repeat="subscribe in model.subscribeList" st-select-row="row">
-		    <td>{{subscribe.name}}</td>
-		    <td>{{subscribe.startTime}} - {{subscribe.endTime}}</td>
-		    <td>{{subscribe.userRealName}}</td>
-		    <td>
-		      <div ng-if="subscribe.feedbackStatus===0" style="color:red;">
-		        未反馈
-		      </div>
-		      <div ng-if="subscribe.feedbackStatus===1">
-		        已反馈
-		      </div>
-		    </td>
-		    <td>
-		      <div ng-if="subscribe.feedbackStatus === 0">
-		        <a ng-href="" ng-click="">【删除】</a>
-		        <a ng-href="" ng-click="openAddFeedback(subscribe)">【添加反馈】</a>
-		      </div>
-		      <div ng-if="subscribe.feedbackStatus !== 0">
-		        <a ng-href="" ng-click="">【编辑】</a>
-		        <a ng-href="" ng-click="openFeedbackResult(subscribe)">【查看反馈】</a>
-		      </div>
-		    </td>
-		  </tr>
-		  </tbody>
-		</table>
-	</div>
+    <!-- <toaster-container toaster-options="{'position-class': 'toast-top-right', 'close-button':true}"></toaster-container> -->
+        <div class="panel panel-default bg-light lter">
+            <div class="panel-body">
+                <form class="bs-example form-horizontal">
+                    <div class="row">
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label class="col-lg-4 control-label">活动名称</label>
+
+                            <div class="col-lg-8">
+                                <input type="text" class="form-control" placeholder="搜索活动名称" ng-model="query.keyword">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">反馈状态</label>
+
+                            <div class="col-lg-5">
+                                <select class="form-control" ng-model="query.feedbackStatus">
+                                    <option value="0">未反馈</option>
+                                    <option value="1">已反馈</option>
+                                </select>
+                            </div>
+                        <div class="col-lg-4">
+                    <button type="submit" class="btn btn-default w-xs" ng-click="feedbackSearch()">搜索</button>
+                    </div>
+                        </div>
+                    </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    <div class="panel panel-default">
+        <table st-table="" class="table table-bordered table-striped">
+            <thead>
+            <tr>
+                <th>所属活动</th>
+                <th>活动时间</th>
+                <th>邀请客户</th>
+                <th>反馈状态</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="feedback in model.feedbackList" st-select-row="row" ng-if="feedback.status !== 9">
+                <td>{{feedback.name}}</td>
+                <td>{{feedback.startTime}} - {{feedback.endTime}}</td>
+                <td class="nowrap">{{feedback.userRealName}}</td>
+                <td class="nowrap">
+                    <div ng-if="feedback.feedbackStatus===0" style="color:red;">
+                        未反馈
+                    </div>
+                    <div ng-if="feedback.feedbackStatus===1">
+                        已反馈
+                    </div>
+                </td>
+                <td class="nowrap">
+                    <div ng-if="feedback.feedbackStatus === 0">
+                        <button uib-popover="删除" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs"
+                                ng-click="openDeleteButton(feedback)"><i class="fa fa-times"></i></button>
+                        <button uib-popover="添加反馈" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs"
+                                ng-click="openAddFeedback(feedback)"><i class="fa fa-plus"></i></button>
+                    </div>
+                    <div ng-if="feedback.feedbackStatus !== 0">
+                        <button uib-popover="编辑" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs"
+                                ng-click="openEditFeedback(feedback)"><i class="fa fa-pencil"></i></button>
+                        <button uib-popover="查看反馈" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs"
+                                ng-click="openFeedbackResult(feedback)"><i class="fa fa-eye"></i></button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <uib-pagination ng-change="pageChanged()" total-items="totalItems" items-per-page="query.size" ng-model="query.page"
+                max-size="maxSize" class="pagination-sm m-t-none m-b" boundary-links="true" rotate="false"
+                num-pages="numPages"></uib-pagination>
 </div>

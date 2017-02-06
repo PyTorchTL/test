@@ -1,0 +1,81 @@
+<div class="wrapper-md">
+<!-- <toaster-container toaster-options="{'position-class': 'toast-top-right', 'close-button':true}"></toaster-container> -->
+<div class="panel panel-default bg-light lter">
+        <div class="panel-body">
+            <form class="bs-example form-horizontal">
+                <div class="col-lg-3 col-md-4">
+                    <div class="form-group">
+                        <label class="col-lg-4 control-label">产品名称</label>
+
+                        <div class="col-lg-8">
+                            <input type="text" class="form-control" ng-model="query.keyword">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-4">
+                    <div class="form-group">
+                        <label class="col-lg-4 control-label">客户姓名</label>
+
+                        <div class="col-lg-8">
+                            <input type="text" class="form-control" ng-model="query.userRealName">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-4">
+                        <div class="form-group">
+                            <label class="col-lg-4 control-label">&nbsp;</label>
+                            <div class="col-lg-8">
+                                <button type="submit" class="btn btn-default w-xs" ng-click="search()">搜索</button>
+                            </div>
+                        </div>
+                </div>
+
+                    <!-- <div class="col-lg-offset-2">
+                            <button type="submit" class="btn btn-default w-xs" ng-click="search()">搜索</button>
+                        </div> -->
+            </form>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <table st-table="" class="table table-bordered table-striped">
+          <thead>
+          <tr>
+            <th>产品名称</th>
+            <th>客户姓名</th>
+            <th>购买金额(万)</th>
+            <th>购买期限</th>
+            <th>购买层级</th>
+            <th>购买时间</th>
+            <th>理财师</th>
+            <th>操作</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr ng-repeat="redeem in model.redeemList" st-select-row="row">
+            <td>{{redeem.name}}</td>
+            <td>{{redeem.userRealName}}</td>
+            <td>{{redeem.purchaseAmount | rmbTT}}</td>
+            <td><span ng-if="redeem.productType === 0">{{redeem.anualRatePeriod}}</span></td>
+            <td>
+                <span ng-if="redeem.subscribeLevel==1">优先级</span>
+                <span ng-if="redeem.subscribeLevel==2">劣后级</span>
+            </td>
+            <td>{{redeem.purchaseTime}}</td>
+            <td>{{redeem.employeeRealName}}</td>
+            <td>
+              <div>
+                  <button uib-popover="审核" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs btn-icon btn-icon-sm" ng-click="openFixedRedeemApprove(redeem)" ng-if="redeem.productType === 0"><i class="fa fa-check"></i></button>
+                  <button uib-popover="审核" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs btn-icon btn-icon-sm" ng-click="openFloatingRedeemApprove(redeem)" ng-if="redeem.productType === 1"><i class="fa fa-check"></i></button>
+              </div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+    </div>
+    <uib-pagination ng-change="pageChanged()" total-items="totalItems" items-per-page="query.size" ng-model="query.page"
+                max-size="maxSize" class="pagination-sm m-t-none m-b" boundary-links="true" rotate="false"
+                num-pages="numPages"></uib-pagination>
+</div>

@@ -1,0 +1,24 @@
+<div name="MessageListCtrlForm" class="bs-example form-horizontal m-md">
+    <div class="form-group">
+        <label class="col-lg-3 control-label">标题</label>
+        <span class="col-lg-9 padding-sm">{{item.title}}</span>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-3 control-label">内容</label>
+        <span class="col-lg-9 padding-sm">{{item.content}}</span>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-3 control-label">状态</label>
+        <span class="col-lg-9 padding-sm" ng-if="item.status==='1'">已读</span>
+        <span class="col-lg-9 padding-sm" ng-if="item.status==='0'">未读</span>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-3 control-label">公告时间</label>
+        <span class="col-lg-9 padding-sm">{{item.createTime}}</span>
+    </div>
+    <div class="form-group">
+        <div class="col-lg-offset-4">
+            <button  class="btn btn-default m-b-xs m-r-md w-xs"  ng-click="cancel()" value="关闭">关闭</button>
+        </div>
+    </div>
+</div>

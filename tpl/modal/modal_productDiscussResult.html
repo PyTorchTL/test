@@ -1,22 +1,51 @@
-<!---弹出框-->
 <form class="bs-example form-horizontal" method="post" style="padding-top:20px;">
-    <div class="form-group">
-        <label class="col-lg-2 control-label">过会意见</label>
-        <div class="col-lg-8">
+    <!-- <div class="form-group">
+        <label class="col-lg-2 control-label myform-label">过会意见:</label>
+        <div class="col-lg-8 padding-sm">
             <p>{{item.myDiscussRemark}}</p>
         </div>
     </div>
 
     <div class="form-group">
-        <label class="col-lg-2 control-label">过会结果</label>
-        <div class="col-lg-8">
-            <p>{{item.myDiscussDecision}}</p>        
+        <label class="col-lg-2 control-label myform-label">过会结果:</label>
+        <div class="col-lg-8 padding-sm">
+            <p ng-if="item.myDiscussDecision === 1">通过</p>
+            <p ng-if="item.myDiscussDecision === 2">不通过</p>
         </div>
-    </div>
-    <div class="form-group">
-        <label class="col-lg-2 control-label">审核时间</label>
+    </div> -->
+    <!-- <div class="form-group">
+        <label class="col-lg-2 control-label myform-label">审核时间</label>
         <div class="col-lg-8">
-            <p>{{}}</p>        
+            <p>{{}}</p>
         </div>
-    </div>
+    </div> -->
+
+    <table class="table table-bordered table-striped">
+      <thead>
+      <tr>
+        <th>姓名</th>
+        <th>过会意见</th>
+        <th>过会结果</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr ng-repeat="decision in item.dicussDecisions" st-select-row="row">
+        <td>{{decision.employeeName}}</td>
+        <td>{{decision.remark}}</td>
+        <td>
+            <p ng-if="decision.decision === 1">通过</p>
+            <p ng-if="decision.decision === 2">不通过</p>
+        </td>
+      </tr>
+      <tr>
+        <td>我</td>
+        <td>{{item.myDiscussRemark}}</td>
+        <td>
+            <p ng-if="item.myDiscussDecision === 1">通过</p>
+            <p ng-if="item.myDiscussDecision === 2">不通过</p>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
 </form>

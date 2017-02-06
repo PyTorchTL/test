@@ -1,0 +1,145 @@
+<form name="ContactCrtForm" class="bs-example form-horizontal" style="padding-top:20px;">
+    <div class="form-group">
+        <label class="col-lg-3 control-label">客户姓名</label>
+        <div class="col-lg-6">
+            <!-- <typeahead-dropdown id="ex1" ng-model="model.selectedCustomer" options="model.userList" config="ex1config" ng-required="true"></typeahead-dropdown> -->
+            <input type="text" ng-model="model.selectedCustomer" uib-typeahead="customer as customer.realName for customer in model.userList | filter:{realName:$viewValue} | limitTo:8" class="form-control" typeahead-select-on-blur="true" ng-required="true">
+            <!-- <select class="form-control" ng-model="contact.userId" ng-required="true">
+                <option ng-repeat="user in model.userList" ng-value="user.id">{{user.realName}}</span></option>
+            </select> -->
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-lg-3 control-label">联系方式</label>
+        <div class="col-lg-6">
+            <select class="form-control" ng-model="contact.contractType" ng-required="true">
+                <option value="1">电话</option>
+                <option value="2">拜访</option>
+                <option value="3">活动邀约</option>
+                <option value="4">QQ</option>
+                <option value="5">微信</option>
+                <option value="6">短信</option>
+                <option value="7">邮件</option>
+                <option value="8">其他</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+            <label class="col-lg-3 control-label">联系时间</label>
+            <div class="col-lg-6">
+                <my-datetime-picker dropdown-id="'dropdown_contactDate'" date="contact.contractDate"></my-datetime-picker>
+            </div>
+        </div>
+
+    <div class="form-group">
+        <label class="col-lg-3 control-label">跟进情况</label>
+        <div class="col-lg-6">
+            <select class="form-control" ng-model="contact.followUp" ng-required="true">
+                <option value="1">有效跟进</option>
+                <option value="2">一般跟进</option>
+                <option value="3">约见</option>
+                <option value="4">无效跟进</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-lg-3 control-label">联系内容</label>
+
+        <div class="col-lg-7">
+            <textarea class="form-control" rows="4" ng-model="contact.content"></textarea>
+        </div>
+    </div>
+    <!-- <div class="form-group">
+        <label class="col-lg-3 control-label">下次联系</label>
+        <div class="col-lg-6">
+            <div class="radio">
+                <div class="col-lg-3">
+                    <label class="i-checks">
+                        <input type="radio" name="a" value="2" ng-model="contact.status" ng-required="true">
+                        <i></i>
+                        是
+                    </label>
+                </div>
+                <div class="col-lg-3">
+                    <label class="i-checks">
+                        <input type="radio" name="a" value="1" ng-model="contact.status" ng-required="true">
+                        <i></i>
+                        否
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+    <div class="form-group">
+        <label class="col-lg-3 control-label">下次联系时间</label>
+        <div class="col-lg-6">
+            <my-datetime-picker dropdown-id="'dropdown_warnDate'" date="contact.warnDate"></my-datetime-picker>
+        </div>
+    </div>
+
+    <!-- <div>
+        <div class="form-group">
+            <label class="col-lg-3 control-label">下次联系时间</label>
+            <div class="col-lg-6">
+                <my-date-picker date="contact.contractDate"></my-date-picker>
+            </div>
+        </div>
+    </div> -->
+
+<!--     <div class="form-group">
+        <label class="col-lg-3 control-label">设置提醒</label>
+        <div class="col-lg-6">
+            <div class="checkbox">
+                <div class="col-lg-6">
+                <label class="i-checks">
+                    <input type="checkbox" ng-model="contact.warnFlg" ng-true-value="1" ng-false-value="0">
+                    <i></i>
+                    是否提醒
+                </label>
+                </div>
+            </div>
+        </div>
+    </div>
+ -->
+    <div class="form-group">
+        <label class="col-lg-3 control-label">提醒方式</label>
+        <div class="col-lg-9">
+            <div class="checkbox">
+                <div class="col-lg-3">
+                    <label class="i-checks">
+                        <input type="checkbox" ng-model="contact.warnSms" ng-true-value="1" ng-false-value="0">
+                        <i></i>
+                        短信
+                    </label>
+                </div>
+                <div class="col-lg-3">
+                    <label class="i-checks">
+                        <input type="checkbox" ng-model="contact.warnEmail" ng-true-value="1" ng-false-value="0">
+                        <i></i>
+                        邮箱
+                    </label>
+                </div>
+                <div class="col-lg-5">
+                    <label class="i-checks">
+                        <input type="checkbox" ng-model="contact.warnOther" ng-true-value="1" ng-false-value="0">
+                        <i></i>
+                        系统消息
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-lg-offset-3 col-lg-6">
+            <button type="submit" ng-click="submit()" class="btn m-b-xs m-r-md w-xs btn-primary" ng-disabled="!ContactCrtForm.$valid" value="保存">
+                保存
+            </button>
+            <button ng-click="cancel()" type="button" class="btn m-b-xs w-xs btn-default" value="取消" tabindex="0">取消</button>
+        </div>
+    </div>
+</form>

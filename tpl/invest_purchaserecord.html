@@ -1,1 +1,161 @@
-<h1>购买记录</h1>
+<div class="wrapper-md">
+<!-- <toaster-container toaster-options="{'position-class': 'toast-top-right', 'close-button':true}"></toaster-container> -->
+ <div class="panel panel-default bg-light lter">
+        <div class="panel-body">
+            <form class="bs-example form-horizontal">
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <div class="form-group">
+                        <label class="col-lg-4 control-label">产品名称</label>
+
+                        <div class="col-lg-8">
+                            <input type="text" class="form-control" ng-model="query.keyword">
+                        </div>
+                    </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                    <div class="form-group">
+                            <label class="col-lg-4 control-label">产品类型</label>
+
+                            <div class="col-lg-8">
+                                <select class="form-control" ng-model="query.productType">
+                                    <option value="-1">全部</option>
+                                    <option value="0">固定类</option>
+                                    <option value="1">浮动类</option>
+                                    <option value="2">金融不良资产</option>
+                                </select>
+                            </div>
+                        </div>
+
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3 col-md-3">
+                    <!-- <div class="col-lg-6">
+                        <div class="form-group">
+                            <label class="col-lg-4 control-label">产品状态</label>
+
+                            <div class="col-lg-8">
+                                <select class="form-control" ng-model="query.status">
+                                    <option value="-1">全部</option>
+                                    <option value="0">过会中</option>
+                                    <option value="1">待上线</option>
+                                    <option value="2">募集期</option>
+                                    <option value="3">待成立</option>
+                                    <option value="4">存续期</option>
+                                    <option value="5">展期中</option>
+                                    <option value="6">已兑付</option>
+                                    <option value="11">过会失败</option>
+                                    <option value="12">上线失败</option>
+                                    <option value="13">成立失败</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div> -->
+
+                    <div class="form-group">
+                        <label class="col-lg-4 control-label">客户姓名</label>
+
+                        <div class="col-lg-8">
+                            <input type="text" class="form-control" ng-model="query.userRealName">
+                        </div>
+                    </div>
+</div>
+      <div class="col-lg-3  col-md-3">
+
+                        <div class="form-group m-b-n">
+                            <label class="col-lg-4 control-label">预约时间</label>
+                            <div class="col-lg-8">
+                                <my-datetime-picker dropdown-id="'dropdown-startSubscribeTime'" date="query.startSubscribeTime"></my-datetime-picker>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div class="col-lg-3  col-md-3">
+
+                        <!-- <div class="form-group">
+                            <label class="col-lg-4 control-label">理财师</label>
+
+                            <div class="col-lg-8">
+                                <input type="text" class="form-control" ng-model="query.employeeRealName">
+                            </div>
+                        </div> -->
+
+                        <div class="form-group m-b-n">
+                            <label class="col-lg-2 control-label">至</label>
+
+                            <div class="col-lg-8">
+                                <my-datetime-picker dropdown-id="'dropdown-endSubscribeTime'" date="query.endSubscribeTime"></my-datetime-picker>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="col-lg-3 col-md-3">
+                    <div class="col-lg-offset-2">
+                            <button type="submit" class="btn btn-default w-xs" ng-click="search()">搜索</button>
+                        </div>
+                        </div> -->
+                        <div class="col-lg-3 col-md-3">
+                        <div class="form-group m-b-n">
+                            <label class="col-lg-4 control-label">&nbsp;</label>
+                            <div class="col-lg-8">
+                                <button type="submit" class="btn btn-default w-xs" ng-click="search()">搜索</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <table st-table="" class="table table-bordered table-striped">
+          <thead>
+          <tr>
+            <th>购买时间</th>
+            <th>产品名称</th>
+            <th>产品类型</th>
+            <th>客户姓名</th>
+            <th>购买金额(万)</th>
+            <th>购买期限</th>
+            <th>购买层级</th>
+            <th>理财经理</th>
+            <th>所属部门</th>
+            <th>操作</th>
+            <th>状态</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr ng-repeat="purchaseRecord in model.purchaseRecord" st-select-row="row">
+            <td>{{purchaseRecord.purchaseTime}}</td>
+            <td>{{purchaseRecord.name}}</td>
+            <td>{{purchaseRecord.productTypeShow}}</td>
+            <td>{{purchaseRecord.userRealName}}</td>
+            <td>{{purchaseRecord.myPurchaseAmount | rmbTT}}</td>
+            <!-- <td><span ng-if="purchaseRecord.incomeSetting.anualRatePeriod">{{purchaseRecord.incomeSetting.anualRatePeriod}}{{getPeriodTypeShow(purchaseRecord)}}</span></td> -->
+            <td>{{getPurchasePeriod(purchaseRecord)}}</td>
+            <td>
+                <span ng-if="purchaseRecord.subscribeLevel==1">优先级</span>
+                <span ng-if="purchaseRecord.subscribeLevel==2">劣后级</span>
+            </td>
+            <td>{{purchaseRecord.employeeRealName}}</td>
+            <td>{{purchaseRecord.departName}}</td>
+            <td>
+              <div>
+                  <button uib-popover="查看" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs btn-icon btn-icon-sm" ng-click="openPurchaseRecordView(purchaseRecord)"><i class="fa fa-briefcase"></i></button>
+              </div>
+            </td>
+            <td>
+                <span ng-if="purchaseRecord.purchaseApproveDecision==0">未审核</span>
+                <span ng-if="purchaseRecord.purchaseApproveDecision==1">审核通过</span>
+                <span ng-if="purchaseRecord.purchaseApproveDecision==2">审核未通过</span>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+    </div>
+    <uib-pagination ng-change="pageChanged()" total-items="totalItems" items-per-page="query.size" ng-model="query.page"
+                max-size="maxSize" class="pagination-sm m-t-none m-b" boundary-links="true" rotate="false"
+                num-pages="numPages"></uib-pagination>
+</div>

@@ -1,0 +1,174 @@
+<div class="wrapper-md">
+    <!-- <toaster-container toaster-options="{'position-class': 'toast-top-right', 'close-button':true}"></toaster-container> -->
+
+    <div class="top-buttons">
+      <button type="submit" ng-click="openUserCrt('lg')" class="btn m-b-xs m-r-md w-s btn-primary" value="新建客户">
+          新建客户
+      </button>
+      <button type="submit" ng-click="openUserContactCrt()" class="btn m-b-xs m-r-md w-s btn-primary" value="新建联系记录">
+          新建联系记录
+      </button>
+    </div>
+
+    <div class="panel panel-default bg-light lter">
+        <div class="panel-body">
+            <!--页眉框-->
+
+            <form class="bs-example form-horizontal">
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        <label class="col-lg-4 control-label">客户姓名</label>
+
+                        <div class="col-lg-8">
+                            <input type="text" class="form-control" ng-model="query.name">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-4 control-label">成交记录</label>
+
+                        <div class="col-lg-8">
+                             <select class="form-control wrapper-xs" ng-model="query.buyRecord">
+                                <option value="">全部</option>
+                                <option value="true">有成交记录</option>
+                                <option value="false">无成交记录</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        <label class="col-lg-4 control-label">客户类型</label>
+
+                        <div class="col-lg-8">
+                             <select class="form-control wrapper-xs" ng-model="query.customType">
+                                 <option value="-1">全部</option>
+                                <option value="1">钻石</option>
+                                <option value="2">黄金</option>
+                                <option value="3">白银</option>
+                                <option value="4">重点</option>
+                                <option value="5">意向</option>
+                                <option value="6">一般</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-4 control-label">联系日期</label>
+
+                        <div class="col-lg-8">
+                            <my-date-picker date="query.startContactTime"></my-date-picker>
+                            <!-- <my-datetime-picker dropdown-id="'dropdown1'" date="query.startContactTime"></my-datetime-picker> -->
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        <label class="col-lg-4 control-label">跟进情况</label>
+
+                        <div class="col-lg-8">
+                            <select class="form-control" ng-model="query.followUp">
+                                <option value="-1">全部</option>
+                                <option value="1">有效跟进</option>
+                                <option value="2">一般跟进</option>
+                                <option value="3">约见</option>
+                                <option value="4">无效跟进</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-4 control-label">至</label>
+
+                        <div class="col-lg-8">
+                            <my-date-picker date="query.endContactTime"></my-date-picker>
+                            <!-- <my-datetime-picker dropdown-id="'dropdown1'" date="query.endContactTime"></my-datetime-picker> -->
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        <label class="col-lg-4 control-label">手机</label>
+
+                        <div class="col-lg-8">
+                            <input type="text" class="form-control" ng-model="query.phone">
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2">
+                        <button class="btn btn-default w-xs" ng-click="search()">搜索</button>
+                    </div>
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <table st-table="" class="table table-bordered table-striped">
+            <thead>
+            <tr>
+                <th>客户名称</th>
+                <th>客户类型</th>
+                <th>手机</th>
+                <th>电话</th>
+                <th>生日</th>
+                <th>跟进情况</th>
+                <th>联系时间</th>
+                <th>下次联系时间</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="user in model.user" st-select-row="row">
+                <td>{{user.realName}}</td>
+                <td>{{user.customTypeShow}}</td>
+                <td>{{user.phone}}</td>
+                <td>{{user.landline}}</td>
+                <td>{{user.birthday | getDate}}</td>
+                <td>
+                    <span ng-if="user.followUp=== 1">有效跟进</span>
+                    <span ng-if="user.followUp=== 2">一般跟进</span>
+                    <span ng-if="user.followUp=== 3">约见</span>
+                    <span ng-if="user.followUp=== 4">无效跟进</span>
+                </td>
+                <td>{{user.contactTime}}</td>
+                <td>{{user.nextContactTime}}</td>
+                <td>
+                    <div ng-if="getOperationMenuType() === 1"> <!--我的客户-->
+                        <button uib-popover="编辑" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs btn-icon btn-icon-sm" ng-click="openChangeUserCrt(user, 'lg')"><i class="fa fa-pencil"></i></button>
+                        <button uib-popover="放弃" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs btn-icon btn-icon-sm" ng-click="openAbandonUser(user)"><i class="fa fa-user-times"></i></button>
+                        <button uib-popover="对账单" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs btn-icon btn-icon-sm" ng-click="openViewBillReport(user, 'lg')"><i class="fa fa-briefcase"></i></button>
+                        <button uib-popover="新建联系记录" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs btn-icon btn-icon-sm" ng-click="openUserContactCrt(user)"><i class="fa fa-plus"></i></button>
+                        <button uib-popover="查看联系记录" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs btn-icon btn-icon-sm" ng-click="openViewContacts(user)"><i class="fa fa-list"></i></button>
+                    </div>
+                    <!--公海客户: use customer_list_public.html-->
+                    <!-- <div ng-if="getOperationMenuType() === 2">
+                        <button uib-popover="查看客户详情" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs btn-icon btn-icon-sm" ng-click="openViewUserCrt(user)"><i class="fa fa-eye"></i></button>
+                        <button uib-popover="纳入囊中" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs btn-icon btn-icon-sm" ng-click="openTakeUser(user)"><i class="fa fa-user-plus"></i></button>
+                    </div> -->
+                    <div ng-if="getOperationMenuType() === 3">  <!--其他-->
+                        <button uib-popover="查看客户详情" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs btn-icon btn-icon-sm" ng-click="openViewUserCrt(user)"><i class="fa fa-eye"></i></button>
+                        <button uib-popover="查看联系记录" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs btn-icon btn-icon-sm" ng-click="openViewContacts(user)"><i class="fa fa-list"></i></button>
+                        <!-- <button uib-popover="查看" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs btn-icon btn-icon-sm" ng-click="openViewUserCrt(user)"><i class="fa fa-eye"></i></button>
+                        <button uib-popover="修改" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs btn-icon btn-icon-sm" ng-click="openChangeUserCrt(user, 'lg')"><i class="fa fa-pencil"></i></button>
+                        <!-- <button uib-popover="删除" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs btn-icon btn-icon-sm" ng-click="openDeleteUserCtr(user)"><i class="fa fa-times"></i></button> -->
+                        <!-- <button uib-popover="对账单" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs btn-icon btn-icon-sm" ng-click="openViewBillReport(user, 'lg')"><i class="fa fa-briefcase"></i></button> -->
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <uib-pagination ng-change="pageChanged()" total-items="totalItems" items-per-page="query.size" ng-model="query.page" max-size="maxSize" class="pagination-sm m-t-none m-b" boundary-links="true" rotate="false" num-pages="numPages"></uib-pagination>
+</div>

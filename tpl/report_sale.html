@@ -1,1 +1,266 @@
-<h1>销售明细表</h1>
+<div class="wrapper-md">
+    <div class="panel panel-default bg-light lter">
+        <div class="panel-body">
+            <form class="bs-example form-horizontal">
+            	<div class="row">
+	                <div class="col-lg-3">
+	                    <div class="form-group">
+	                        <label class="col-lg-3 control-label">产品名称</label>
+	                        <div class="col-lg-8">
+	                            <input type="text" class="form-control" ng-model="query.keyword">
+	                        </div>
+	                    </div>
+	                </div>
+	                <div class="col-lg-3">
+	                    <div class="form-group">
+	                        <label class="col-lg-3 control-label">产品类型</label>
+	                        <div class="col-lg-8">
+	                            <select class="form-control" ng-model="query.productType">
+	                                <option value="-1">全部</option>
+	                                <option value="0">固定类</option>
+	                                <option value="1">浮动类</option>
+	                                <option value="2">金融不良资产</option>
+	                            </select>
+	                        </div>
+	                    </div>
+	                </div>
+	                <div class="col-lg-3">
+	                    <div class="form-group">
+	                        <label class="col-lg-3 control-label">客户姓名</label>
+	                        <div class="col-lg-8">
+	                            <input type="text" class="form-control" ng-model="query.userRealName">
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+                <div class="row">
+                	<div class="col-lg-3">
+	                    <div class="form-group">
+	                        <label class="col-lg-3 control-label">理财经理</label>
+	                        <div class="col-lg-8">
+	                            <input type="text" class="form-control" ng-model="query.employeeId">
+	                        </div>
+	                    </div>
+	                </div>
+	                <div class="col-lg-3">
+	                    <div>
+	                        <div class="form-group">
+	                            <label class="col-lg-3 control-label">购买时间</label>
+	                            <div class="col-lg-9">
+	                                <my-date-picker date="query.purchaseStartTime"></my-date-picker>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+	                <div class="col-lg-3">
+	                    <div class="form-group">
+	                        <span class="col-lg-2 control-label">至</span>
+	                        <div class="col-lg-9">
+	                            <my-date-picker date="query.purchaseEndTime"></my-date-picker>
+	                        </div>
+	                    </div>
+	                </div>
+	                <div class="col-lg-3">
+	                    <div class="form-group">
+	                        <button class="btn btn-default w-xs" ng-click="salesDetailReportSearch()">搜索</button>
+	                    </div>
+	                </div>
+	            </div>
+            </form>
+        </div>
+    </div>
+    <div class="panel panel-default bg-light lter">
+        <div class="panel-body">
+	        <div class="checkbox">
+	        <div class="row">
+	        	<div class="col-lg-2">
+	                <label class="i-checks">
+	                    <input type="checkbox" ng-model="checked.shortName" ng-checked="checked.shortName" ng-init="checked.shortName = false">
+	                    <i></i>
+	                    项目简称
+	                </label>
+	            </div>
+	            <div class="col-lg-2">
+	                <label class="i-checks">
+	                    <input type="checkbox" ng-model="checked.departName" ng-checked="checked.departName" ng-init="checked.departName = false">
+	                    <i></i>
+	                    所属部门
+	                </label>
+	            </div>
+	            <div class="col-lg-2">
+	                <label class="i-checks">
+	                    <input type="checkbox" ng-model="checked.productTypeShow">
+	                    <i></i>
+	                    项目类型
+	                </label>
+	            </div>
+	            <div class="col-lg-2">
+	                <label class="i-checks">
+	                    <input type="checkbox" ng-model="checked.orgnization" ng-checked="checked.orgnization" ng-init="checked.orgnization = false">
+	                    <i></i>
+	                    托管机构
+	                </label>
+	            </div>
+	            <div class="col-lg-2">
+	                <label class="i-checks">
+	                    <input type="checkbox" ng-model="checked.establishDate" ng-checked="checked.establishDate" ng-init="checked.establishDate = false">
+	                    <i></i>
+	                    成立日期
+	                </label>
+	            </div>
+	            <div class="col-lg-2">
+	                <label class="i-checks">
+	                    <input type="checkbox" ng-model="checked.finishDate" ng-checked="checked.finishDate" ng-init="checked.finishDate = false">
+	                    <i></i>
+	                    到期日期
+	                </label>
+	            </div>
+	        </div>
+	        <div class="row">
+	            <div class="col-lg-2">
+	                <label class="i-checks">
+	                    <input type="checkbox" ng-model="checked.distributionTypeShow" ng-checked="checked.distributionTypeShow" ng-init="checked.distributionTypeShow = false">
+	                    <i></i>
+	                    付息方式
+	                </label>
+	            </div>
+	            <div class="col-lg-2">
+	                <label class="i-checks">
+	                    <input type="checkbox" ng-model="checked.companyAccomplish" ng-checked="checked.companyAccomplish" ng-init="checked.companyAccomplish = false">
+	                    <i></i>
+	                    公司业绩量
+	                </label>
+	            </div>
+	            <div class="col-lg-2">
+	                <label class="i-checks">
+	                    <input type="checkbox" ng-model="checked.personalAccomplish" ng-checked="checked.personalAccomplish" ng-init="checked.personalAccomplish = false">
+	                    <i></i>
+	                    个人业绩量
+	                </label>
+	            </div>
+	            <div class="col-lg-2">
+	                <label class="i-checks">
+	                    <input type="checkbox" ng-model="checked.homeAddress" ng-checked="checked.homeAddress" ng-init="checked.homeAddress = false">
+	                    <i></i>
+	                    家庭住址
+	                </label>
+	            </div>
+	            <div class="col-lg-2">
+	                <label class="i-checks">
+	                    <input type="checkbox" ng-model="checked.customTypeShow" ng-checked="checked.customTypeShow" ng-init="checked.customTypeShow = false">
+	                    <i></i>
+	                    客户类型
+	                </label>
+	            </div>
+	            <div class="col-lg-2">
+	                <label class="i-checks">
+	                    <input type="checkbox" ng-model="checked.identityId" ng-checked="checked.identityId" ng-init="checked.identityId = false">
+	                    <i></i>
+	                    证件号码
+	                </label>
+	            </div>
+	        </div>
+	        <div class="row">
+	            <div class="col-lg-2">
+	                <label class="i-checks">
+	                    <input type="checkbox" ng-model="checked.phone" ng-checked="checked.phone" ng-init="checked.phone = false">
+	                    <i></i>
+	                    联系方式
+	                </label>
+	            </div>
+	            <div class="col-lg-2">
+	                <label class="i-checks">
+	                    <input type="checkbox" ng-model="checked.birthday" ng-checked="checked.birthday" ng-init="checked.birthday = false">
+	                    <i></i>
+	                    出生年月
+	                </label>
+	            </div>
+	            <div class="col-lg-2">
+	                <label class="i-checks">
+	                    <input type="checkbox" ng-model="checked.bankCard" ng-checked="checked.bankCard" ng-init="checked.bankCard = false">
+	                    <i></i>
+	                    银行卡号
+	                </label>
+	            </div>
+	            <div class="col-lg-2">
+	                <label class="i-checks">
+	                    <input type="checkbox" ng-model="checked.bankName" ng-checked="checked.bankName" ng-init="checked.bankName = false">
+	                    <i></i>
+	                    开户行
+	                </label>
+	            </div>
+	            <div class="col-lg-2">
+	                <label class="i-checks">
+	                    <input type="checkbox" ng-model="checked.remark" ng-checked="checked.remark" ng-init="checked.remark = false">
+	                    <i></i>
+	                    备注
+	                </label>
+	            </div>
+	        </div>
+        	</div>
+        </div>
+    </div>
+    <button type="submit" ng-click="exportReportBtn()" class="btn m-b-xs m-r-md w-xs btn-primary" value="报表导出">
+        报表导出
+    </button>
+    <div class="panel panel-default">
+    	<table class="table table-bordered table-striped">
+		  <thead>
+		  <tr>
+		    <th>产品名称</th>
+		    <th>产品类型</th>
+		    <th>项目状态</th>
+		    <th>认购金额(万)</th>
+		    <th>项目期限</th>
+		    <th>年化利率</th>
+		    <th>理财师</th>
+		    <th>客户姓名</th>
+		    <th ng-if="checked.shortName   === true">项目简称</th>
+		    <th ng-if="checked.departName === true">所属部门</th>
+		    <th ng-if="checked.orgnization === true">托管机构</th>
+		    <th ng-if="checked.establishDate === true">成立日期</th>
+		    <th ng-if="checked.finishDate === true">到期日期</th>
+		    <th ng-if="checked.distributionTypeShow === true">付息方式</th>
+		    <th ng-if="checked.companyAccomplish === true">公司业绩量</th>
+		    <th ng-if="checked.personalAccomplish === true">个人业绩量</th>
+		    <th ng-if="checked.homeAddress === true">家庭住址</th>
+		    <th ng-if="checked.customTypeShow === true">客户类型</th>
+		    <th ng-if="checked.identityId === true">证件号码</th>
+		    <th ng-if="checked.phone === true">联系方式</th>
+		    <th ng-if="checked.birthday === true">出生年月</th>
+		    <th ng-if="checked.bankCard === true">银行卡号</th>
+		    <th ng-if="checked.bankName === true">开户行</th>
+		    <th ng-if="checked.remark === true">备注</th>
+		  </tr>
+		  </thead>
+		  <tbody>
+		   <tr ng-repeat="report in model.reportList" st-select-row="row">
+		    <td>{{report.name}}</td>
+		    <td>{{report.productTypeShow}}</td>
+		    <td>{{report.statusShow}}</td>
+				<td>{{report.purchaseAmount | rmbTT}}</td><!-- <td>{{report.establishAmount}}</td> -->
+		    <td>{{report.anualRatePeriod}}</td>
+		    <td>{{report.rate}}</td>
+		    <td>{{report.employeeRealName}}</td>
+		    <td>{{report.userRealName}}</td>
+		    <td ng-if="checked.shortName === true">{{report.shortName}}</td>
+		    <td ng-if="checked.departName === true">{{report.departName}}</td>
+		    <td ng-if="checked.orgnization === true">{{report.orgnization}}</td>
+		    <td ng-if="checked.establishDate === true">{{report.establishDate}}</td>
+		    <td ng-if="checked.finishDate === true">{{report.finishDate}}</td>
+		    <td ng-if="checked.distributionTypeShow === true">{{report.distributionTypeShow}}</td>
+		    <td ng-if="checked.companyAccomplish === true">{{report.companyAccomplish}}</td>
+		    <td ng-if="checked.personalAccomplish === true">{{report.personalAccomplish}}</td>
+		    <td ng-if="checked.homeAddress === true">{{report.homeAddress}}</td>
+		    <td ng-if="checked.customTypeShow === true">{{report.customTypeShow}}</td>
+		    <td ng-if="checked.identityId === true">{{report.identityId}}</td>
+		    <td ng-if="checked.phone === true">{{report.phone}}</td>
+		    <td ng-if="checked.birthday === true">{{report.birthday}}</td>
+		    <td ng-if="checked.bankCard === true">{{report.bankCard}}</td>
+		    <td ng-if="checked.bankName === true">{{report.bankName}}</td>
+		    <td ng-if="checked.remark === true">{{report.remark}}</td>
+		   </tr>
+		  </tbody>
+		</table>
+    </div>
+</div>

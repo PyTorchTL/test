@@ -13,7 +13,8 @@
       <tr ng-repeat="sign in model.signListOne" st-select-row="row">
         <td>{{sign.employeeRealName}}</td>
         <td>{{sign.signTime}}</td>
-        <td>{{sign.status}}</td>
+        <td ng-if="sign.status === 1">会签通过</td>
+        <td ng-if="sign.status === 2">会签不通过</td>
         <td>{{sign.signRemark}}</td>
       </tr>
       </tbody>
@@ -27,7 +28,7 @@
       	<div class="col-sm-4">
         <div class="radio">
           <label class="i-checks">
-            <input type="radio" name="result" value="true" ng-model="item.finalReviewDecision" checked ng-required="true">
+            <input type="radio" name="result" value="true" ng-model="submitData.finalReviewDecision" checked ng-required="true">
             <i></i>
             通过
           </label>
@@ -36,7 +37,7 @@
         <div class="col-sm-4">
         <div class="radio">
           <label class="i-checks">
-            <input type="radio" name="result" value="false" ng-model="item.finalReviewDecision" ng-required="true">
+            <input type="radio" name="result" value="false" ng-model="submitData.finalReviewDecision" ng-required="true">
             <i></i>
             不通过
           </label>

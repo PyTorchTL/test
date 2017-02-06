@@ -1,5 +1,5 @@
 <div class="wrapper-md">
-<toaster-container toaster-options="{'position-class': 'toast-top-right', 'close-button':true}"></toaster-container>
+<!-- <toaster-container toaster-options="{'position-class': 'toast-top-right', 'close-button':true}"></toaster-container> -->
 	<div class="panel panel-default">
 		<nav class="navbar navbar-default" role="navigation">
 		    <div class="navbar-header">
@@ -10,13 +10,13 @@
 		            <div class="form-group">
 		                <input type="text" class="form-control" placeholder="搜索活动名称" ng-model="query.keyword">
 		            </div>
-		            <button type="submit" class="btn btn-default" ng-click="search()">搜索</button>
+		            <button type="submit" class="btn btn-default" ng-click="signSearch()">搜索</button>
 		        </form>
 		    </div>
 		</nav>
 	</div>
 	<div class="panel panel-default">
-		<table st-table="" class="table table-bordered table-striped">
+		<table class="table table-bordered table-striped">
 		  <thead>
 		  <tr>
 		    <th>活动名称</th>
@@ -35,19 +35,23 @@
 		    <td>{{activity.content}}</td>
 		    <td>{{activity.attendees}}</td>
 		    <td>{{activity.firstReviewTime}}</td>
-		    <td ng-if="activity.mySignStatus === 0">未会签</td>
-		    <td ng-if="activity.mySignStatus === 1">会签通过</td>
-		    <td ng-if="activity.mySignStatus === 2">会签不通过</td>
-		    <td>
+		    <td class="nowrap" ng-if="activity.mySignStatus === 0">未会签</td>
+		    <td class="nowrap" ng-if="activity.mySignStatus === 1">会签通过</td>
+		    <td class="nowrap" ng-if="activity.mySignStatus === 2">会签不通过</td>
+		    <td class="nowrap">
+		    	<a ng-href="" ng-click="openView(activity)" style="display:block;">【查看】</a>
 			    <div ng-if="activity.mySignStatus === 0">
-			        <a ng-href="" ng-click="openSign(activity)" style="display:block;">【会签】</a>
-		        </div>
+					<button uib-popover="会签" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs" ng-click="openSign(activity)"><i class="fa fa-edit"></i></button>
+				</div>
 		        <div ng-if="activity.mySignStatus !== 0">
-			        <a ng-href="" ng-click="openSignResult(activity)" style="display:block;">【查看会签结果】</a>
-		        </div>
+					<button uib-popover="查看会签结果" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs" ng-click="openSignResult(activity)"><i class="fa fa-eye"></i></button>
+				</div>
 		    </td>
 		  </tr>
 		  </tbody>
 		</table>
 	</div>
+
+	<uib-pagination ng-change="pageChanged()" total-items="totalItems" items-per-page="query.size" ng-model="query.page" max-size="maxSize" class="pagination-sm m-t-none m-b" boundary-links="true" rotate="false" num-pages="numPages"></uib-pagination>
+
 </div>

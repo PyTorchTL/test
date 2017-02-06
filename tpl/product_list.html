@@ -1,114 +1,365 @@
 <div class="wrapper-md">
-    <div class="panel panel-default">
+<!-- <toaster-container toaster-options="{'position-class': 'toast-top-right', 'close-button':true}"></toaster-container> -->
+    <div class="panel panel-default bg-light lter">
         <div class="panel-body">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="pannel panel-default b-a">
-                        <div class="panel-body">
-                            <form class="bs-example form-horizontal">
-                                <div class="col-lg-3">
-                                    <div class="form-group">
-                                        <label class="col-lg-3 control-label">产品名称</label>
-                                        <div class="col-lg-8">
-                                            <input type="text" class="form-control">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3">
-                                    <div class="form-group">
-                                        <label class="col-lg-3 control-label">产品状态</label>
-                                        <div class="col-lg-8">
-                                            <select class="form-control">
-                                                <option value="">募集期</option>
-                                                <option value="">存续期</option>
-                                                <option value="">已兑付</option>
-                                                <option value="">不成立</option>
-                                                <option value="">未过会</option>
-                                                <option value="">展期中</option>
-                                            </select>
-                                        </div>
-                                    </div>                                   
-                                </div>
-                                <div class="col-lg-3">
-                                    <div class="form-group">
-                                        <label class="col-lg-3 control-label">产品类型</label>
-                                        <div class="col-lg-8">
-                                            <select class="form-control">
-                                                <option value="">固定类</option>
-                                                <option value="">浮动类</option>
-                                                <option value="">私募股权类</option>
-                                                <option value="">现金类</option>
-                                            </select>
-                                        </div>
-                                    </div>                                    
-                                </div>
-                                <div class="col-lg-3">
-                                    <div class="form-group">
-                                        <label class="col-lg-3 control-label">机构类型</label>
-                                        <div class="col-lg-8">
-                                            <select class="form-control">
-                                                <option value="">信托</option>
-                                                <option value="">资管</option>
-                                                <option value="">契约性私募</option>
-                                                <option value="">公司型私募</option>
-                                                <option value="">有限合伙</option>
-                                                <option value="">私募债</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3">
-                                    <div ng-controller="DatepickerDemoCtrl" class="m-b-lg">
-                                        <div class="form-group">
-                                            <label class="col-lg-3 control-label">创建时间</label>
-                                            <div class="col-lg-9">
-                                                <p class="input-group">
-                                                    <input type="text" class="form-control" datepicker-popup="{{format}}"
-                                                           ng-model="activity.startTime"
-                                                           is-open="opened" datepicker-options="dateOptions"
-                                                           ng-required="true" close-text="Close"/>
-                                                    <span class="input-group-btn">
-                                                        <button type="button" class="btn btn-default" ng-click="open($event)">
-                                                            <i class="glyphicon glyphicon-calendar"></i>
-                                                        </button>
-                                                    </span>
-                                                </p>
-                                            </div>
-                                            <!-- <span class="col-lg-1 control-label">至</span> -->
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3">
-                                    <div ng-controller="DatepickerDemoCtrl" class="m-b-lg">
-                                        <div class="form-group">
-                                            <span class="col-lg-2 control-label">至</span>
-                                            <div class="col-lg-9">
-                                                <p class="input-group">
-                                                    <input type="text" class="form-control" datepicker-popup="{{format}}"
-                                                           ng-model="activity.endTime"
-                                                           is-open="opened" datepicker-options="dateOptions"
-                                                           ng-required="true" close-text="Close"/>
-                                                    <span class="input-group-btn">
-                                                        <button type="button" class="btn btn-default" ng-click="open($event)">
-                                                            <i class="glyphicon glyphicon-calendar"></i>
-                                                        </button>
-                                                    </span>
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-lg-offset-1">
-                                    <div class="form-group">
-                                        <button class="btn btn-default w-xs">搜索</button>
-                                    </div>
-                                </div>
-                            </form>
+            <form class="bs-example form-horizontal">
+                <div class="col-lg-3 col-md-6">
+                    <div class="form-group">
+                        <label class="col-lg-3 col-md-3 control-label">产品名称</label>
+
+                        <div class="col-lg-8 col-md-8">
+                            <input type="text" class="form-control" ng-model="query.keyword">
                         </div>
                     </div>
                 </div>
-            </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="form-group">
+                        <label class="col-lg-3 col-md-3 control-label">产品状态</label>
+
+                        <div class="col-lg-8 col-md-8">
+                            <select class="form-control" ng-model="query.status">
+                                <option value="-1">全部</option>
+                                <!-- <option value="1">待上线</option> -->
+                                <option value="2">募集期</option>
+                                <option value="0">过会中</option>
+                                <!-- <option value="3">待成立</option> -->
+                                <option value="4">存续期</option>
+                                <option value="5">展期中</option>
+                                <option value="6">已兑付</option>
+                                <option value="7">已下线</option>
+                                <option value="11">过会失败</option>
+                                <!-- <option value="12">上线失败</option> -->
+                                <option value="13">成立失败</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="form-group">
+                        <label class="col-lg-3 col-md-3 control-label">产品类型</label>
+
+                        <div class="col-lg-8 col-md-8">
+                            <select class="form-control" ng-model="query.productTypes">
+                                <option value="'0,1'">全部</option>
+                                <option value="0">固定类</option>
+                                <option value="1">浮动类</option>
+                                <!-- <option value="2">金融不良资产</option> -->
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="form-group">
+                        <label class="col-lg-3 col-md-3 control-label">机构类型</label>
+
+                        <div class="col-lg-8 col-md-8">
+                            <select class="form-control" ng-model="query.orgnizationType">
+                                <option value="-1">全部</option>
+                                <option value="0">信托</option>
+                                <option value="1">证券公司</option>
+                                <option value="2">证券子公司</option>
+                                <option value="3">公募基金</option>
+                                <option value="4">基金子公司</option>
+                                <option value="5">私募管理人</option>
+                                <option value="6">有限合伙</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div>
+                        <div class="form-group">
+                            <label class="col-lg-3 col-md-3 control-label">创建时间</label>
+
+                            <div class="col-lg-9 col-md-9">
+                                <my-date-picker date="query.startCreateTime"></my-date-picker>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="form-group">
+                        <span class="col-lg-2 col-md-2 control-label">至</span>
+
+                        <div class="col-lg-9 col-md-9">
+                            <my-date-picker date="query.endCreateTime"></my-date-picker>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="form-group">
+                        <button class="btn btn-default w-xs" ng-click="productListSearch()">搜索</button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
-
+    <!--tab-->
+    <uib-tabset active="active" class="tab-container">
+        <uib-tab index="0" heading="全部" select="switchTab(-1)">
+            <div class="panel panel-default">
+                <table st-table="" class="table table-borderd table-striped">
+                    <thead>
+                    <tr>
+                        <th>产品名称</th>
+                        <th>产品类型</th>
+                        <th>产品状态</th>
+                        <th>项目规模(万)</th>
+                        <th>可打款金额(万)</th>
+                        <th>预约(万)</th>
+                        <th>打款(万)</th>
+                        <th>操作</th>
+                    </tr>
+                    <tr ng-repeat="product in model.productList" st-select-row="row">
+                        <td>{{product.name}}</td>
+                        <td>{{product.productTypeShow}}</td>
+                        <td>{{getStatus(product)}}</td>
+                        <td>{{product.amount | rmbTT}}</td>
+                        <td>{{product.availablePurchaseAmount | rmbTT}}</td>
+                        <td>{{product.subscribeAmount | rmbTT}}</td>
+                        <td>{{product.establishAmount | rmbTT}}</td><!-- <td>{{product.purchaseAmount}}</td> -->
+                        <td class="nowrap">
+                            <button uib-popover="查看产品" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs btn-icon btn-icon-sm" ng-click="openProductView(product)"><i class="fa fa-briefcase"></i></button>
+                            <button uib-popover="编辑" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs btn-icon btn-icon-sm" ng-click="openProductEdit(product)" ><i class="fa fa-pencil"></i></button>
+                        </td>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </uib-tab>
+        <uib-tab index="1" heading="募集期" select="switchTab(2)">
+            <div class="panel panel-default">
+                <table st-table="" class="table table-borderd table-striped">
+                    <thead>
+                    <tr>
+                        <th>产品名称</th>
+                        <th>管理机构</th>
+                        <th>机构类型</th>
+                        <th>项目类型</th>
+                        <th>项目规模(万)</th>
+                        <th>可打款金额(万)</th>
+                        <th>预约(万)</th>
+                        <th>打款(万)</th>
+                        <th>操作</th>
+                    </tr>
+                    <tr ng-repeat="product in model.productList" st-select-row="row">
+                        <td>{{product.name}}</td>
+                        <td>{{product.orgnization}}</td>
+                        <td>{{product.orgnizationTypeShow}}</td>
+                        <td>{{product.productTypeShow}}</td>
+                        <td>{{product.amount | rmbTT}}</td>
+                        <td>{{product.availablePurchaseAmount | rmbTT}}</td>
+                        <td>{{product.subscribeAmount | rmbTT}}</td>
+                        <td>{{product.establishAmount | rmbTT}}</td><!-- <td>{{product.purchaseAmount}}</td> -->
+                        <td class="nowrap">
+                            <button uib-popover="查看产品" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs btn-icon btn-icon-sm" ng-click="openProductView(product)"><i class="fa fa-briefcase"></i></button>
+                            <button uib-popover="编辑" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs btn-icon btn-icon-sm" ng-click="openProductEdit(product)" ><i class="fa fa-pencil"></i></button>
+                        </td>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </uib-tab>
+        <uib-tab index="2" heading="过会中" select="switchTab(0)">
+            <div class="panel panel-default">
+                <table st-table="" class="table table-borderd table-striped">
+                    <thead>
+                    <tr>
+                        <th>产品名称</th>
+                        <th>管理机构</th>
+                        <th>机构类型</th>
+                        <th>项目类型</th>
+                        <th>项目规模(万)</th>
+                    </tr>
+                    <tr ng-repeat="product in model.productList" st-select-row="row">
+                        <td>{{product.name}}</td>
+                        <td>{{product.orgnization}}</td>
+                        <td>{{product.orgnizationTypeShow}}</td>
+                        <td>{{product.productTypeShow}}</td>
+                        <td>{{product.amount | rmbTT}}</td>
+                        <td class="nowrap">
+                            <button uib-popover="查看产品" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs btn-icon btn-icon-sm" ng-click="openProductView(product)"><i class="fa fa-briefcase"></i></button>
+                            <button uib-popover="编辑" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs btn-icon btn-icon-sm" ng-click="openProductEdit(product)" ><i class="fa fa-pencil"></i></button>
+                        </td>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </uib-tab>
+        <uib-tab index="3" heading="存续期" select="switchTab(4)">
+            <div class=" panel panel-default">
+                <table st-table="" class="table table-borderd table-striped">
+                    <thead>
+                    <tr>
+                        <th>产品名称</th>
+                        <th>管理机构</th>
+                        <th>机构类型</th>
+                        <th>项目类型</th>
+                        <th>项目规模(万)</th>
+                        <th>成立日期</th>
+                        <th>操作</th>
+                    </tr>
+                    <tr ng-repeat="product in model.productList" st-select-row="row">
+                        <td>{{product.name}}</td>
+                        <td>{{product.orgnization}}</td>
+                        <td>{{product.orgnizationTypeShow}}</td>
+                        <td>{{product.productTypeShow}}</td>
+                        <td>{{product.amount | rmbTT}}</td>
+                        <td>{{product.establishDate | getDate}}</td>
+                        <td class="nowrap">
+                            <button uib-popover="查看产品" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs btn-icon btn-icon-sm" ng-click="openProductView(product)"><i class="fa fa-briefcase"></i></button>
+                            <button uib-popover="编辑" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs btn-icon btn-icon-sm" ng-click="openProductEdit(product)" ><i class="fa fa-pencil"></i></button>
+                        </td>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </uib-tab>
+        <uib-tab index="4" heading="展期中" select="switchTab(5)">
+            <div class=" panel panel-default">
+                <table st-table="" class="table table-borderd table-striped">
+                    <thead>
+                    <tr>
+                        <th>产品名称</th>
+                        <th>管理机构</th>
+                        <th>机构类型</th>
+                        <th>项目类型</th>
+                        <th>项目规模(万)</th>
+                        <th>成立日期</th>
+                        <th>操作</th>
+                    </tr>
+                    <tr ng-repeat="product in model.productList" st-select-row="row">
+                        <td>{{product.name}}</td>
+                        <td>{{product.orgnization}}</td>
+                        <td>{{product.orgnizationTypeShow}}</td>
+                        <td>{{product.productTypeShow}}</td>
+                        <td>{{product.amount | rmbTT}}</td>
+                        <td>{{product.establishDate | getDate}}</td>
+                        <td class="nowrap">
+                            <button uib-popover="查看产品" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs btn-icon btn-icon-sm" ng-click="openProductView(product)"><i class="fa fa-briefcase"></i></button>
+                            <button uib-popover="编辑" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs btn-icon btn-icon-sm" ng-click="openProductEdit(product)" ><i class="fa fa-pencil"></i></button>
+                        </td>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </uib-tab>
+        <uib-tab index="5" heading="已兑付" select="switchTab(6)">
+            <div class="panel panel-default">
+                <table st-table="" class="table table-borderd table-striped">
+                    <thead>
+                    <tr>
+                        <th>产品名称</th>
+                        <th>管理机构</th>
+                        <th>机构类型</th>
+                        <th>项目类型</th>
+                        <th>项目规模(万)</th>
+                        <th>成立规模(万)</th>
+                        <th>成立日期</th>
+                        <th>兑付日期</th>
+                        <th>操作</th>
+                    </tr>
+                    <tr ng-repeat="product in model.productList" st-select-row="row">
+                        <td>{{product.name}}</td>
+                        <td>{{product.orgnization}}</td>
+                        <td>{{product.orgnizationTypeShow}}</td>
+                        <td>{{product.productTypeShow}}</td>
+                        <td>{{product.amount | rmbTT}}</td>
+                        <td>{{product.establishAmount | rmbTT}}</td>
+                        <td>{{product.establishDate | getDate}}</td>
+                        <td>{{product.finishDate}}</td>
+                        <td class="nowrap">
+                            <button uib-popover="查看产品" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs btn-icon btn-icon-sm" ng-click="openProductView(product)"><i class="fa fa-briefcase"></i></button>
+                            <button uib-popover="编辑" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs btn-icon btn-icon-sm" ng-click="openProductEdit(product)" ><i class="fa fa-pencil"></i></button>
+                        </td>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </uib-tab>
+        <uib-tab index="6" heading="已下线" select="switchTab(7)">
+            <div class="panel panel-default">
+                <table st-table="" class="table table-borderd table-striped">
+                    <thead>
+                    <tr>
+                        <th>产品名称</th>
+                        <th>管理机构</th>
+                        <th>机构类型</th>
+                        <th>项目类型</th>
+                        <th>项目规模(万)</th>
+                    </tr>
+                    <tr ng-repeat="product in model.productList" st-select-row="row">
+                        <td>{{product.name}}</td>
+                        <td>{{product.orgnization}}</td>
+                        <td>{{product.orgnizationTypeShow}}</td>
+                        <td>{{product.productTypeShow}}</td>
+                        <td>{{product.amount | rmbTT}}</td>
+                        <td class="nowrap">
+                            <button uib-popover="查看产品" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs btn-icon btn-icon-sm" ng-click="openProductView(product)"><i class="fa fa-briefcase"></i></button>
+                            <button uib-popover="编辑" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs btn-icon btn-icon-sm" ng-click="openProductEdit(product)" ><i class="fa fa-pencil"></i></button>
+                        </td>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </uib-tab>
+        <uib-tab index="7" heading="成立失败" select="switchTab(13)">
+            <div class="panel panel-default">
+                <table st-table="" class="table table-borderd table-striped">
+                    <thead>
+                    <tr>
+                        <th>产品名称</th>
+                        <th>管理机构</th>
+                        <th>机构类型</th>
+                        <th>项目类型</th>
+                        <th>项目规模(万)</th>
+                        <th>打款金额(万)</th>
+                        <th>退款日期</th>
+                        <th>操作</th>
+                    </tr>
+                    <tr ng-repeat="product in model.productList" st-select-row="row">
+                        <td>{{product.name}}</td>
+                        <td>{{product.orgnization}}</td>
+                        <td>{{product.orgnizationTypeShow}}</td>
+                        <td>{{product.productTypeShow}}</td>
+                        <td>{{product.amount | rmbTT}}</td>
+                        <td>{{product.establishAmount | rmbTT}}</td><!-- <td>{{product.purchaseAmount}}</td> -->
+                        <td>{{product.refundDate}}</td>
+                        <td class="nowrap">
+                            <button uib-popover="查看产品" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs btn-icon btn-icon-sm" ng-click="openProductView(product)"><i class="fa fa-briefcase"></i></button>
+                            <button uib-popover="编辑" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs btn-icon btn-icon-sm" ng-click="openProductEdit(product)" ><i class="fa fa-pencil"></i></button>
+                        </td>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </uib-tab>
+        <uib-tab index="8" heading="过会失败" select="switchTab(11)">
+            <div class="panel panel-default">
+                <table st-table="" class="table table-borderd table-striped">
+                    <thead>
+                    <tr>
+                        <th>产品名称</th>
+                        <th>管理机构</th>
+                        <th>机构类型</th>
+                        <th>项目类型</th>
+                        <th>项目规模(万)</th>
+                    </tr>
+                    <tr ng-repeat="product in model.productList" st-select-row="row">
+                        <td>{{product.name}}</td>
+                        <td>{{product.orgnization}}</td>
+                        <td>{{product.orgnizationTypeShow}}</td>
+                        <td>{{product.productTypeShow}}</td>
+                        <td>{{product.amount | rmbTT}}</td>
+                        <td class="nowrap">
+                            <button uib-popover="查看产品" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs btn-icon btn-icon-sm" ng-click="openProductView(product)"><i class="fa fa-briefcase"></i></button>
+                            <button uib-popover="编辑" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs btn-icon btn-icon-sm" ng-click="openProductEdit(product)" ><i class="fa fa-pencil"></i></button>
+                        </td>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </uib-tab>
+    </uib-tabset>
+    <uib-pagination ng-change="pageChanged()" total-items="totalItems" items-per-page="query.size" ng-model="query.page" max-size="maxSize" class="pagination-sm m-t-none m-b" boundary-links="true" rotate="false" num-pages="numPages"></uib-pagination>
 </div>

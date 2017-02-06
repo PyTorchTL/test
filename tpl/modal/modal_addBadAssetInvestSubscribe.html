@@ -1,0 +1,34 @@
+<form name="addInvestSubscribeForm" class="bs-example form-horizontal" style="padding-top:20px;">
+    <div class="form-group">
+        <label class="col-sm-5 col-sm-offset-2 control-label">金融不良资产产品预约</label>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 col-sm-offset-1 control-label">产品名称</label>
+        <div class="col-sm-5 padding-sm">
+            <p>{{item.name}}</p>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 col-sm-offset-1 control-label">客户姓名</label>
+        <div class="col-sm-5">
+            <!-- <typeahead-dropdown id="ex1" ng-model="model.selectedCustomer" options="model.customer" config="ex1config" ng-required="true"></typeahead-dropdown> -->
+            <input type="text" ng-model="model.selectedCustomer" uib-typeahead="customer as customer.realName for customer in model.customer | filter:{realName:$viewValue} | limitTo:8" class="form-control" typeahead-select-on-blur="true" ng-required="true">
+            <!-- <input type="text" ng-model="model.selectedCustomer"
+                typeahead="customer as customer.realName for customer in model.customer | filter:{realName:$viewValue}"
+                typeahead-editable="false"
+                class="form-control padder"
+                placeholder="查找用户"
+                ng-required="true"> -->
+            <!-- <select class="form-control" ng-model="submitData.userId">
+                <option ng-repeat="customer in model.customer" value="{{customer.id}}">{{customer.realName}}</option>
+            </select> -->
+        </div>
+    </div>
+    <div class="form-group">
+       <div class="col-sm-offset-3 col-sm-10">
+            <button type="submit"  class="btn m-b-xs m-r-md w-xs btn-primary" ng-click="submit()" value="保存" ng-disabled="!addInvestSubscribeForm.$valid">保存
+            </button>
+            <button type="button" class="btn m-b-xs w-xs btn-default" value="取消" tabindex="0" ng-click="cancel()">取消</button>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,47 @@
+<div class="wrapper-md">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <form class="bs-example form-horizontal">
+                <div class="form-group">
+                    <label class="col-lg-1 control-label">标题</label>
+
+                    <div class="col-lg-3">
+                        <input type="text" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-1 control-label">创建人</label>
+
+                    <label class="col-lg-1 control-label">自动读出本人</label>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-1 control-label">创建时间</label>
+
+                    <label class="col-lg-1 control-label">2015-06-07 20:16:13</label>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-1 control-label">内容</label>
+
+                    <div class="col-lg-3">
+                        <textarea class="form-control" rows="4" ></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-1 control-label">收件人</label>
+
+                    <div class="col-lg-3">
+                        <hierarchical-selector data="employees" select-only-leafs="true" multi-select="true" on-selection-changed="onSelectionChanged(items)" no-button />
+                    </div>
+                </div>
+
+
+            </form>
+            <div class="col-lg-offset-4 col-lg-10">
+                <button type="submit" class="btn m-b-xs m-r-md w-xs btn-primary"  value="确认">确认</button>
+                <button type="button" class="btn m-b-xs w-xs btn-default" value="取消" >取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--<hierarchical-selector data="employees" select-only-leafs="true" multi-select="true" on-selection-changed="onSelectionChanged(items)" no-button />-->

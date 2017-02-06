@@ -1,65 +1,64 @@
 <div class="wrapper-md">
-<div class="panel panel-default">
-    <div class="panel-body">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="pannel panel-default b-a">
-                    <div class="panel-body">
-                        <form class="bs-example form-horizontal">
-                            <div class="col-lg-4">
-                                <div class="form-group">
-                                    <label class="col-lg-4 control-label">产品名称</label>
-                                    <div class="col-lg-8">
-                                        <input type="text" class="form-control" ng-model="query.name">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-3">
-                                <div class="form-group">
-                                    <label class="col-lg-4 control-label">产品类型</label>
-                                    <div class="col-lg-8">
-                                        <select class="form-control" ng-model="query.productType">
-                                            <option value="0">固定类</option>
-                                            <option value="1">浮动类</option>
-                                            <option value="2">金融不良资产</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-3">
-                                <div class="form-group">
-                                    <label class="col-lg-4 control-label">机构类型</label>
-                                    <div class="col-lg-8">
-                                        <select class="form-control" ng-model="query.orgnizationType">
-                                            <option value="">信托</option>
-                                            <option value="">资管</option>
-                                            <option value="">契约性私募</option>
-                                            <option value="">公司型私募</option>
-                                            <option value="">有限合伙</option>
-                                            <option value="">私募债</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-2">
-                                <div class="form-group">
-                                    <button class="btn btn-default w-xs" ng-model="search()">搜索</button>
-                                </div>
-                            </div>
-                        </form>
+<!-- <toaster-container toaster-options="{'position-class': 'toast-top-right', 'close-button':true}"></toaster-container> -->
+<div class="panel panel-default bg-light lter">
+        <div class="panel-body">
+            <form class="bs-example form-horizontal">
+                <div class="col-lg-4 col-md-6">
+                    <div class="form-group">
+                        <label class="col-lg-4 col-md-4 control-label">产品名称</label>
+
+                        <div class="col-lg-8 col-md-8">
+                            <input type="text" class="form-control" ng-model="query.keyword">
+                        </div>
                     </div>
                 </div>
-            </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="form-group">
+                        <label class="col-lg-4 col-md-4 control-label">产品类型</label>
+
+                        <div class="col-lg-8 col-md-8">
+                            <select class="form-control" ng-model="query.productType">
+                                <option value="-1">全部</option>
+                                <option value="0">固定类</option>
+                                <option value="1">浮动类</option>
+                                <option value="2">金融不良资产</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="form-group">
+                        <label class="col-lg-4 col-md-4 control-label">机构类型</label>
+
+                        <div class="col-lg-8 col-md-8">
+                            <select class="form-control" ng-model="query.orgnizationType">
+                                <option value="-1">全部</option>
+                                <option value="0">信托</option>
+                                <option value="1">证券公司</option>
+                                <option value="2">证券子公司</option>
+                                <option value="3">公墓基金</option>
+                                <option value="4">基金子公司</option>
+                                <option value="5">私募管理人</option>
+                                <option value="6">有限合伙</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 text-center">
+                    <div class="form-group">
+                        <button class="btn btn-default w-xs" ng-click="discussSearch()">搜索</button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
-</div>
 <div class="panel panel-default">
     <table class="table table-bordered table-striped">
       <thead>
       <tr>
         <th>产品名称</th>
         <th>产品类型</th>
-        <th>产品规模</th>
+        <th>产品规模(万)</th>
         <th>产品期限</th>
         <th>我的审核意见</th>
         <th>操作</th>
@@ -69,17 +68,19 @@
       <tr ng-repeat="product in model.discussList" st-select-row="row">
         <td>{{product.name}}</td>
         <td>{{getProductTypeShow(product.productType)}}</td>
-        <td>{{product.amount}}</td>
+        <td>{{product.amount  | rmbTT}}</td>
         <td>{{getPeriodShow(product.period)}}</td>
-        <td ng-if="product.myDiscussDecision === 0">未审批</td>
-        <td ng-if="product.myDiscussDecision === 1">通过</td>
-        <td ng-if="product.myDiscussDecision === 2">不通过</td>
+        <td ng-if="product.myDiscussDecision === 0" class="nowrap">未审批</td>
+        <td ng-if="product.myDiscussDecision === 1" class="nowrap">通过</td>
+        <td ng-if="product.myDiscussDecision === 2" class="nowrap">不通过</td>
         <td>
-            <a ng-href="" ng-click="openDiscuss(product)" style="display:block;" ng-if="product.myDiscussDecision === 0">【审核】</a>
-            <a ng-href="" ng-click="openDiscussResult(product)" style="display:block;" ng-if="product.myDiscussDecision !== 0">【查看】</a>
+            <button uib-popover="查看产品" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs btn-icon btn-icon-sm" ng-click="openProductView(product)"><i class="fa fa-briefcase"></i></button>
+            <button uib-popover="审核" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs btn-icon btn-icon-sm" ng-click="openDiscuss(product)" ng-if="product.myDiscussDecision === 0"><i class="fa fa-check"></i></button>
+            <button uib-popover="查看" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs btn-icon btn-icon-sm" ng-click="openDiscussResult(product)" ng-if="product.myDiscussDecision !== 0"><i class="fa fa-eye"></i></button>
         </td>
       </tr>
       </tbody>
     </table>
 </div>
+    <uib-pagination ng-change="pageChanged()" total-items="totalItems" items-per-page="query.size" ng-model="query.page" max-size="maxSize" class="pagination-sm m-t-none m-b" boundary-links="true" rotate="false" num-pages="numPages"></uib-pagination>
 </div>

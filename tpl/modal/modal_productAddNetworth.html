@@ -1,37 +1,39 @@
-<!---弹出框-->
-<toaster-container toaster-options="{'position-class': 'toast-top-right', 'close-button':true}"></toaster-container>
 
-<form class="form-horizontal" method="post" style="padding-top:20px;">
+<form class="form-horizontal form-validation" method="post" style="padding-top:20px;">
   <div class="form-group">
     <label class="col-sm-2 col-sm-offset-1 control-label">净值</label>
-    <div class="col-sm-7">
-    <input type="text" class="form-control" ng-model="newNetworth.networth">
+    <div class="col-sm-6">
+      <input type="number" step="any" class="form-control" ng-model="newNetworth.networth" ng-change="networthChanged()" placeholder="数字">
     </div>
+    <div class="col-sm-1 control-label text-left"><p>元</p></div>
   </div>
   <div class="form-group">
     <label class="col-sm-2 col-sm-offset-1 control-label">复权净值</label>
-    <div class="col-sm-7">
-    <input type="text" class="form-control" ng-model="newNetworth.adjustedNetworth">
+    <div class="col-sm-6">
+      <input type="number" step="any" class="form-control" ng-model="newNetworth.adjustedNetworth" placeholder="数字">
     </div>
-  </div> 
+    <div class="col-sm-1 control-label text-left"><p>元</p></div>
+  </div>
   <div class="form-group">
     <label class="col-sm-2 col-sm-offset-1 control-label">基金总资产</label>
-    <div class="col-sm-7">
+    <div class="col-sm-6">
+      <input type="number" step="any" class="form-control" ng-model="totalAmount" ng-change="totalAmountChanged()" placeholder="数字">
     <!-- <input type="text" class="form-control" ng-model="newNetworth.networth*item.share"> -->
-    <p>{{newNetworth.networth*item.share}}</p>
+    <!-- <p>{{newNetworth.networth*item.share}}</p> -->
     </div>
-  </div> 
+    <div class="col-sm-1 control-label text-left"><p>元</p></div>
+  </div>
   <div class="form-group">
     <label class="col-sm-2 col-sm-offset-1 control-label">净值日期</label>
     <div class="col-sm-7">
-    <input type="text" class="form-control" ng-model="newNetworth.networthDate">
+      <my-date-picker date="newNetworth.networthDate"></my-date-picker>
     </div>
-  </div> 
+  </div>
   <div class="form-group">
     <div class="col-sm-9 col-sm-offset-3">
         <button type="submit" ng-click="onAdd()" class="btn m-b-xs m-r-md w-xs btn-primary" ng-click="onAdd()" value="提交">提交
         </button>
-        <button type="submit" class="btn m-b-xs w-xs btn-default" value="取消" tabindex="0" ng-click="cancel()">取消</button>
+        <button type="button" class="btn m-b-xs w-xs btn-default" value="取消" tabindex="0" ng-click="cancel()">取消</button>
     </div>
   </div>
 </form>

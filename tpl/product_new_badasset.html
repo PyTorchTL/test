@@ -1,54 +1,56 @@
 <div class="wrapper-md">
-<toaster-container toaster-options="{'position-class': 'toast-top-right', 'close-button':true}"></toaster-container>
+<!-- <toaster-container toaster-options="{'position-class': 'toast-top-right', 'close-button':true}"></toaster-container> -->
 <div class="panel panel-default">
     <div class="panel-body">
-        <form name="newBadassetForm"class="bs-example form-horizontal">
+        <form name="newBadassetForm" class="bs-example form-horizontal form-validation">
             <div class="row">
-                <div class="col-sm-3">
+                <div class="col-lg-3 col-md-6">
                     <div class="form-group">
                         <label class="col-sm-5 control-label">产品名称</label>
                         <div class="col-sm-7">
-                            <input type="text" class="form-control" ng-model="products.name" ng-required="true">
+                            <input type="text" class="form-control" ng-model="product.name" ng-required="true" placeholder="必填">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-5 control-label">债务人</label>
                         <div class="col-sm-7">
-                            <input type="text" class="form-control" ng-model="products.debter" ng-required="true">
+                            <input type="text" class="form-control" ng-model="product.debter">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-5 control-label">法定代表人</label>
                         <div class="col-sm-7">
-                            <input type="text" class="form-control" ng-model="products.legalRep" ng-required="true">
+                            <input type="text" class="form-control" ng-model="product.legalRep">
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-3">
+                <div class="col-lg-3 col-md-6">
                     <div class="form-group">
                         <label class="col-sm-5 control-label">地区分类</label>
-                        <div class="col-lg-7">
-                            <input type="text" class="form-control" ng-model="products.regionCategory" ng-required="true">
+                        <div class="col-lg-7 col-sm-7">
+                            <input type="text" class="form-control" ng-model="product.regionCategory">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-5 control-label">贷款本金</label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control" ng-model="products.loanAmount" ng-required="true">
+                        <div class="col-sm-5">
+                            <input type="number" class="form-control" ng-model="product.loanAmount" placeholder="数字">
                         </div>
+                        <span class="col-md-2 control-label" >万元</span>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-5 control-label">实收资本</label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control" ng-model="products.recievedCapital" ng-required="true">
+                        <div class="col-sm-5">
+                            <input type="number" class="form-control" ng-model="product.recievedCapital" placeholder="数字">
                         </div>
+                        <span class="col-md-2 control-label" >万元</span>
                     </div>
                 </div>
-                <div class="col-sm-3">
+                <div class="col-lg-3 col-md-6">
                     <div class="form-group">
                         <label class="col-sm-5 control-label">抵押物类型</label>
                         <div class="col-sm-7">
-                            <select class="form-control" ng-required="true" ng-model="products.mortageType">
+                            <select class="form-control" ng-model="product.mortageType">
                                 <option value="0">住宅</option>
                                 <option value="1">写字楼</option>
                                 <option value="2">商铺</option>
@@ -62,34 +64,37 @@
                     </div>
                     <div class="form-group">
                         <label class="col-sm-5 control-label">贷款利息</label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control" ng-model="products.loanInterest" ng-required="true"ng-required="true">
+                        <div class="col-sm-5">
+                            <input type="number" class="form-control" ng-model="product.loanInterest" placeholder="数字">
                         </div>
+                        <span class="col-md-2 control-label" >万元</span>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-5 control-label">注册地址</label>
                         <div class="col-sm-7">
-                            <input type="text" class="form-control" ng-model="products.registerAddress" ng-required="true">
+                            <input type="text" class="form-control" ng-model="product.registerAddress">
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-3">
+                <div class="col-lg-3 col-md-6">
                     <div class="form-group">
                         <label class="col-sm-5 control-label">抵押物估值</label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control" ng-model="products.mortageValue" ng-required="true">
+                        <div class="col-sm-5">
+                            <input type="number" class="form-control" ng-model="product.mortageValue" placeholder="数字">
                         </div>
+                        <span class="col-md-2 control-label" >万元</span>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-5 control-label">转让底价</label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control" ng-model="products.transferPrice" ng-required="true">
+                        <div class="col-sm-5">
+                            <input type="number" class="form-control" ng-model="product.transferPrice" placeholder="数字">
                         </div>
+                        <span class="col-md-2 control-label" >万元</span>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-5 control-label">企业经营状况</label>
                         <div class="col-sm-7">
-                            <select class="form-control" ng-required="true" ng-model="products.operateStatus">
+                            <select class="form-control" ng-model="product.operateStatus" placeholder="数字">
                                 <option value="0">勉强经营</option>
                                 <option value="1">尚在经营</option>
                                 <option value="2">停产</option>
@@ -100,80 +105,98 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-6">
-                    <div class="form-group">
-                        <label class="col-lg-2 control-label">担保情况</label>
-                        <div class="col-lg-10">
-                            <textarea class="form-control" rows="4" ng-model="products.assureStatus" ng-required="true"></textarea>
+                <div class="col-lg-6 col-md-12">
+                <div class="form-group">
+                        <label class="col-lg-2 col-md-2 control-label">产品简介</label>
+                        <div class="col-lg-10 col-md-10">
+                            <textarea class="form-control" rows="4" ng-model="product.description"></textarea>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-lg-2 control-label">质押情况</label>
-                        <div class="col-lg-10">
-                            <textarea class="form-control" rows="4" ng-model="products.pledgeStatus" ng-required="true"></textarea>
+                        <label class="col-lg-2 col-md-2 control-label">担保情况</label>
+                        <div class="col-lg-10 col-md-10">
+                            <textarea class="form-control" rows="4" ng-model="product.assureStatus"></textarea>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-lg-2 control-label">查封情况</label>
-                        <div class="col-lg-10">
-                            <textarea class="form-control" rows="4" ng-model="products.sealStatus" ng-required="true"></textarea>
+                        <label class="col-lg-2 col-md-2 control-label">质押情况</label>
+                        <div class="col-lg-10 col-md-10">
+                            <textarea class="form-control" rows="4" ng-model="product.pledgeStatus"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 col-md-2 control-label">查封情况</label>
+                        <div class="col-lg-10 col-md-10">
+                            <textarea class="form-control" rows="4" ng-model="product.sealStatus"></textarea>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-6 col-md-12">
                     <div class="form-group">
-                        <label class="col-lg-2 control-label">抵押情况</label>
-                        <div class="col-lg-10">
-                            <textarea class="form-control" rows="4" ng-model="products.mortageStatus" ng-required="true"></textarea>
+                        <label class="col-lg-2 col-md-2 control-label">产品介绍</label>
+                        <div class="col-lg-10 col-md-10">
+                            <textarea class="form-control" rows="4" ng-model="product.info"></textarea>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-lg-2 control-label">诉讼情况</label>
-                        <div class="col-lg-10">
-                            <textarea class="form-control" rows="4" ng-model="products.lawsuitStatus" ng-required="true"></textarea>
+                        <label class="col-lg-2 col-md-2 control-label">抵押情况</label>
+                        <div class="col-lg-10 col-md-10">
+                            <textarea class="form-control" rows="4" ng-model="product.mortageStatus"></textarea>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-lg-2 control-label">基金经理照片</label>
-                        <div class="thumb-xl m-l-md">
+                        <label class="col-lg-2 col-md-2 control-label">诉讼情况</label>
+                        <div class="col-lg-10 col-md-10">
+                            <textarea class="form-control" rows="4" ng-model="product.lawsuitStatus"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col col-lg-5 col-md-5">
+                            <label class="control-label">抵押物照片</label>
+                            <my-img-upload ng-model="product.photo"></my-img-upload>
+                        </div>
+                        <!-- <div class="thumb-xl m-l-md">
                             <img src="img/a0.jpg" alt="基金经理照片">
-                        </div>
-                        <button class="btn btn-default inline m-sm w-xs">选择材料</button>
-                        <button class="btn btn-default inline w-xs">上传</button>
+                        </div> -->
+                        <!-- <button class="btn btn-default inline m-sm w-xs">选择材料</button>
+                        <button class="btn btn-default inline w-xs">上传</button> -->
                     </div>
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-6">
+                <div class="col-lg-6 col-md-12">
                     <div class="form-group">
                         <label class="col-sm-2 control-label">产品附件</label>
                         <div class="col-sm-7">
-                            <input ui-jq="filestyle" type="file" data-icon="false"
+                            <!-- <input ui-jq="filestyle" type="file" data-icon="false"
                                    data-classButton="btn btn-default"
                                    data-classInput="form-control inline v-middle input-s">
                         </div>
                         <div class="col-sm-2">
-                            <button class="btn btn-default w-xs">上传</button>
+                            <button class="btn btn-default w-xs">上传</button> -->
+                            <my-file-upload files="product.attachment"></my-file-upload>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-6 col-md-12">
                     <div class="form-group">
                         <label class="col-sm-2 control-label">推荐材料</label>
                         <div class="col-sm-7">
-                            <input ui-jq="filestyle" type="file" data-icon="false"
+                            <!-- <input ui-jq="filestyle" type="file" data-icon="false"
                                    data-classButton="btn btn-default"
                                    data-classInput="form-control inline v-middle input-s">
                         </div>
                         <div class="col-sm-2">
-                            <button class="btn btn-default w-xs">上传</button>
+                            <button class="btn btn-default w-xs">上传</button> -->
+                            <my-file-upload files="product.recommendMaterial"></my-file-upload>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="form-group">
-                <div class="col-lg-offset-10 col-lg-12">
-                    <button type="submit" class="btn m-b-xs m-r-md w-xs btn-primary" ng-click="onAdd()" value="保存" ng-disabled="!newBadassetForm.$valid">保存
+                <div class="col-lg-offset-10 col-lg-2 col-md-offset-10">
+                    <!-- <button type="submit" class="btn m-b-xs m-r-md w-xs btn-primary" ng-click="onAdd()" value="保存" ng-disabled="!newBadassetForm.$valid">保存 -->
+                    <button type="submit" class="btn m-b-xs m-r-md w-xs btn-primary" ng-click="onAdd()" value="保存" ng-class="{'disabled': !newBadassetForm.$valid && isSubmitting}">保存
                     </button>
                     <!-- <button type="submit" class="btn m-b-xs w-xs btn-default" value="取消" tabindex="0" ng-click="cancel()">取消</button> -->
                 </div>

@@ -1,0 +1,53 @@
+<div nv-file-drop="" uploader="uploader" filters="queueLimit, customFilter">
+
+    <div class="row">
+            <div class="form-group">
+                <div class="col-sm-9">
+                    <input ui-jq="filestyle" type="file" nv-file-select uploader="uploader" data-icon="false" data-classButton="btn btn-default"
+                           data-classInput="form-control inline v-middle input-s" ui-options="{ buttonText: '' }">
+                </div>
+
+                <div class="col-sm-3">
+                    <button type="button" class="btn btn-success btn-s" ng-click="uploader.uploadAll()" ng-disabled="!uploader.getNotUploadedItems().length">
+                        <span class="glyphicon glyphicon-upload"></span> 上传
+                    </button>
+                </div>
+            </div>
+            <div class="col-md-9 b-a bg-light lter" ng-show="files && files.length!==0"  style="margin-bottom: 40px">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th class="col-md-9">文件名称</th>
+                        <th class="col-md-3">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <!-- <tr ng-repeat="item in uploader.queue">
+                        <td ng-show="item.isSuccess"><strong>{{ item.file.name }}</strong></td>
+                        <td ng-show="uploader.isHTML5&&item.isSuccess" nowrap>{{ item.file.size/1024/1024|number:2 }} MB</td>
+                        <td class="text-center">
+                            <span ng-show="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
+                        </td>
+                        <td nowrap>
+                            <button ng-show="item.isSuccess" type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
+                                <span class="glyphicon glyphicon-trash"></span> 删除
+                            </button>
+                        </td>
+                    </tr> -->
+
+                    <tr ng-repeat="item in files track by $index">
+                        <td><a target="_blank" ng-href='{{ downloadRootURL + item.url }}'>{{ item.filename }}</a></td>
+                        <td nowrap>
+                            <button type="button" class="btn btn-danger btn-xs" ng-click="remove(item)">
+                                <span class="glyphicon glyphicon-trash"></span> 删除
+                            </button>
+                        </td>
+                    </tr>
+
+                    </tbody>
+                </table>
+
+            </div>
+
+    </div>
+</div>

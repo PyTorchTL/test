@@ -1,5 +1,20 @@
 <div class="wrapper-md">
-<toaster-container toaster-options="{'position-class': 'toast-top-right', 'close-button':true}"></toaster-container>
+<!-- <toaster-container toaster-options="{'position-class': 'toast-top-right', 'close-button':true}"></toaster-container> -->
+    <div class="panel panel-default">
+      <nav class="navbar navbar-default" role="navigation">
+          <div class="navbar-header">
+              <a class="navbar-brand">活动名称</a>
+          </div>
+          <div>
+              <form class="navbar-form navbar-left" role="search">
+                  <div class="form-group">
+                      <input type="text" class="form-control" placeholder="搜索活动名称" ng-model="query.keyword">
+                  </div>
+                  <button type="submit" class="btn btn-default" ng-click="subscribeSearch()">搜索</button>
+              </form>
+          </div>
+      </nav>
+    </div>
     <div class="panel panel-default">
         <table st-table="" class="table table-bordered table-striped">
           <thead>
@@ -16,11 +31,12 @@
             <td>{{activity.startTime}} - {{activity.endTime}}</td>
             <td>{{activity.content}}</td>
             <td>
-              <a ng-href="" ng-click="openAddSubscribe(activity)" style="display:block;">【添加预约】</a>
-              <a ng-href="" ng-click="openSubscribeResult(activity)" style="display:block;">【查看预约】</a>
+                <!-- <button uib-popover="添加预约" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs" ng-click="openAddSubscribe(activity)"><i class="fa fa-plus"></i></button> -->
+                <button uib-popover="查看预约" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs" ng-click="openSubscribeResult(activity)"><i class="fa fa-eye"></i></button
             </td>
           </tr>
           </tbody>
         </table>
     </div>
+    <uib-pagination ng-change="pageChanged()" total-items="totalItems" items-per-page="query.size" ng-model="query.page" max-size="maxSize" class="pagination-sm m-t-none m-b" boundary-links="true" rotate="false" num-pages="numPages"></uib-pagination>
 </div>

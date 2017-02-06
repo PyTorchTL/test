@@ -1,0 +1,82 @@
+<div class="wrapper-md">
+<form name="fixedIncomeDistributionCrForm" class="bs-example form-horizontal" style="padding-top:20px;">
+    <div class="panel panel-default">
+        <table class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <th>客户姓名</th>
+              <th>认购金额</th>
+              <th>认购期限</th>
+              <th ng-if="::distribution.productType === 0">年化利率</th>
+              <th ng-if="::distribution.productType === 1">认购层级</th>
+              <th>兑付本金(万元)</th>
+              <th>分配收益(元)</th>
+
+            </tr>
+          </thead>
+          <tbody>
+           <tr ng-repeat="user in model.incomeDistributionUserList" st-select-row="row">
+            <td>{{user.userRealName}}</td>
+            <td>{{user.purchaseAmount}}</td>
+            <td>{{user.anualRatePeriod}}</td>
+            <td ng-if="::distribution.productType === 0">
+              {{user.rate}}
+            </td>
+            <td ng-if="::distribution.productType === 1">
+              <p ng-if="user.subscribeLevel==1">优先级</p>
+              <p ng-if="user.subscribeLevel==2">劣后级</p>
+            </td>
+            <td>
+              <input type="number" step="0.000001" placeholder="数字" class="form-control" ng-model="user.captialAmount" ng-required="true">
+              <!-- <span  ng-if="distribution.productType === 1">{{user.captialAmount}}</span> -->
+            </td>
+            <td>
+              <input type="number" step="0.01" placeholder="数字" class="form-control" ng-model="user.incomeAmount" ng-required="true">
+              <!-- <span  ng-if="distribution.productType === 1">{{user.incomeAmount}}</span> -->
+            </td>
+           </tr>
+           <tr ng-if="model.incomeDistributionUserList.length > 0">
+             <td colspan="3"></td>
+             <td>合计</td> <!--实际分配-->
+             <td>
+               <!-- <input type="number" placeholder="数字" class="form-control" ng-model="model.totalToDistributeCapitalAmount" ng-required="true"> -->
+               <span>{{getTotalToDistributeCapitalAmount()}}</span>
+             </td>
+             <td>
+                <span>{{getTotalToDistributeIncomeAmount()}}</span>
+             </td>
+           </tr>
+           <tr ng-if="model.incomeDistributionUserList.length > 0">
+             <td colspan="3"></td>
+             <td>应分配合计</td>  <!--后台决定-->
+             <td>{{distribution.toDistributeCaptialAmount | rmbTT}}</td>
+             <td>
+              <!-- {{distribution.toDistributeCaptialAmount | rmbTT}} -->
+              <input type="number" placeholder="数字" class="form-control" ng-model="model.totalToDistributeIncomeAmount" ng-required="true">
+              </td>
+           </tr>
+           <!-- <tr>
+             <td colspan="4"></td>
+             <td colspan="2">
+               <my-datetime-picker date="user.distributeTime" dropdown-id="'dropdown1'"></my-datetime-picker>
+             </td>
+           </tr> -->
+           <tr ng-if="model.incomeDistributionUserList.length > 0">
+             <td colspan="3"></td>
+             <td>分配日期</td>
+             <td>{{distribution.distributeTime | getDate}}</td>
+             <td>
+              </td>
+           </tr>
+          </tbody>
+        </table>
+        </div>
+    <div class="form-group">
+       <div class="col-sm-offset-3 col-sm-8">
+            <button type="submit"  class="btn m-b-xs m-r-md w-xs btn-primary" ng-click="submit()" value="提交" ng-disabled="!fixedIncomeDistributionCrForm.$valid">提交
+            </button>
+            <button type="button" class="btn m-b-xs w-xs btn-default" value="取消" tabindex="0" ng-click="cancel()">取消</button>
+        </div>
+    </div>
+</form>
+</div>

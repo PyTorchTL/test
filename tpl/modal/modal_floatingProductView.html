@@ -1,0 +1,214 @@
+<div class="wrapper-md">
+
+    <form class="bs-example form-horizontal form-validation">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <label class="col-lg-4 control-label myform-label">产品名称 :</label>
+                    <span class="col-lg-8 padding-sm">{{model.product.name}}</span>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-4 control-label myform-label">管理机构 :</label>
+                    <span class="col-lg-8 padding-sm">{{model.product.orgnization}}</span>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-4 control-label myform-label">起购金额 :</label>
+                    <span class="col-lg-8 padding-sm">{{model.product.minPurchaseAmount | rmbTT}}万元</span>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-4 control-label myform-label">杠杆比例 :</label>
+                    <span class="col-lg-8  padding-sm">{{getShow('lever_rate', model.product.leverageRatio)}}</span>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-4 control-label myform-label">预期收益 :</label>
+                    <span class="col-lg-8  padding-sm">{{model.product.estimateIncome}}</span>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <label class="col-lg-4 control-label myform-label">产品简称 :</label>
+                    <span class="col-lg-8  padding-sm">{{model.product.shortName}}</span>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-4 control-label myform-label">机构类型 :</label>
+                    <span class="col-lg-8  padding-sm">{{getShow('orgnization_type', model.product.orgnizationType)}}</span>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-4 control-label myform-label">运作方式 :</label>
+                    <span class="col-lg-8  padding-sm">{{getShow('operation_type', model.product.operationType)}}</span>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-4 control-label myform-label">封闭期 :</label>
+                    <span class="col-lg-8  padding-sm">{{model.product.closePeriod}}</span>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-4 control-label myform-label">风险回撤 :</label>
+                    <span class="col-lg-8  padding-sm">{{model.product.riskWithdraw}}</span>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <label class="col-lg-4 control-label myform-label">产品规模 :</label>
+                    <span class="col-lg-8  padding-sm">{{model.product.amount | rmbTT}}万元</span>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-4 control-label myform-label">托管机构 :</label>
+                    <span class="col-lg-8  padding-sm">{{model.product.hostBank}}</span>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-4 control-label myform-label">投资领域 :</label>
+                    <span class="col-lg-8  padding-sm">{{model.product.investArea}}</span>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-4 control-label myform-label">开放期 :</label>
+                    <span class="col-lg-8  padding-sm">{{model.product.openPeriod}}</span>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-4 control-label myform-label">风险等级 :</label>
+                    <span class="col-lg-8  padding-sm">{{getShow('product_risk_level', model.product.riskLevel)}}</span>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <label class="col-lg-4 control-label myform-label">产品类型 :</label>
+                    <span class="col-lg-4 control-label myform-label">浮动类</span>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-4 control-label myform-label">产品期限 :</label>
+                    <span class="col-lg-8  padding-sm">{{model.product.period[0]}}月</span>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-4 control-label myform-label">展期 :</label>
+                    <span class="col-lg-8  padding-sm">{{model.product.period[1]}}月</span>
+                </div>
+                <fieldset disabled>
+                    <div class="form-group">
+                        <label class="col-lg-4 control-label myform-label">成立日期 :</label>
+                        <span class="col-lg-8  padding-sm">{{model.product.establishDate}}</span>
+                    </div>
+                </fieldset>
+                <div class="form-group">
+                    <label class="col-lg-6 control-label myform-label">基金经理姓名 :</label>
+                    <span class="col-lg-6  padding-sm">{{model.product.managerName}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <label class="col-lg-4 control-label myform-label">管理费 :</label>
+                    <span class="col-lg-8  padding-sm">{{model.product.manageFee}}%</span>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-4 control-label myform-label">申购费 :</label>
+                    <span class="col-lg-8  padding-sm">{{model.product.purchaseFee}}%</span>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-6 control-label myform-label">业绩报酬费率 :</label>
+                    <span class="col-lg-6  padding-sm">{{model.product.rewardFee}}%</span>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <label class="col-lg-4 control-label myform-label">托管费 :</label>
+                    <span class="col-lg-8  padding-sm">{{model.product.hostFee}}%</span>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-4 control-label myform-label">其他费率 :</label>
+                    <span class="col-lg-8  padding-sm">{{model.product.otherFee}}%</span>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-4 control-label myform-label">佣金费率 :</label>
+                    <span class="col-lg-8  padding-sm">{{model.product.commissionFee}}%</span>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <label class="col-lg-4 control-label myform-label">认购费 :</label>
+                    <span class="col-lg-8  padding-sm">{{model.product.subscribeFee}}%</span>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-4 control-label myform-label">赎回费 :</label>
+                    <span class="col-lg-8  padding-sm">{{model.product.redeemFee}}%</span>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-4 control-label myform-label">销售费率 :</label>
+                    <span class="col-lg-8  padding-sm">{{model.product.saleFee}}%</span>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <div class="col col-lg-5">
+                        <label class="control-label myform-label">基金经理照片 :</label>
+                        <!-- <my-img-viewer class="col-lg-8  padding-sm" ng-model="model.product.photo"></my-img-viewer> -->
+                        <img ng-if="model.product.photo" class="col-lg-8 my-photo" ng-src="{{getImageUrl(model.product.photo)}}"></img>
+                    </div>
+                    <!-- <div class="thumb-xl m-l-md">
+                        <img src="img/a0.jpg" alt="基金经理照片">
+                    </div> -->
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label class="col-lg-2 control-label myform-label">费率说明 :</label>
+                    <span class="col-lg-10  padding-sm">{{model.product.feeExplain}}</span>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-3 control-label myform-label">开放期设置 :</label>
+                    <span class="col-lg-9  padding-sm">{{model.product.openPeriodSetting}}</span>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label myform-label">收益描述 :</label>
+                    <span class="col-lg-10  padding-sm">{{model.product.incomeDescription}}</span>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-3 control-label myform-label">基金经理介绍 :</label>
+                    <span class="col-lg-9  padding-sm">{{model.product.managerIntro}}</span>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label myform-label">风险提示 :</label>
+                    <span class="col-lg-10  padding-sm">{{model.product.riskTip}}</span>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label class="col-lg-2 control-label myform-label">产品简介 :</label>
+                    <span class="col-lg-10  padding-sm">{{model.product.description}}</span>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label myform-label">产品介绍 :</label>
+                    <span class="col-lg-10  padding-sm">{{model.product.info}}</span>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-3 control-label myform-label">基金公司介绍 :</label>
+                    <span class="col-lg-9  padding-sm">{{model.product.companyIntro}}</span>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label myform-label">投研团队 :</label>
+                    <span class="col-lg-10  padding-sm">{{model.product.teamIntro}}</span>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label myform-label">产品亮点 :</label>
+                    <span class="col-lg-10  padding-sm">{{model.product.highlight}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label myform-label">产品附件 :</label>
+                        <my-file-viewer class="col-lg-9  padding-sm" files="model.product.attachment"></my-file-viewer>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label myform-label">推荐材料 :</label>
+                            <my-file-viewer class="col-lg-9  padding-sm" files="model.product.recommendMaterial"></my-file-viewer>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </form>
+</div>

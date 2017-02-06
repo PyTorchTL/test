@@ -1,0 +1,63 @@
+<div class="wrapper-md">
+<form class="bs-example form-horizontal" style="">
+    <div class="form-group">
+        <label class="col-lg-2 control-label myform-label">活动名称 :</label>
+        <span class="col-lg-9 padding-sm">{{item.name}}</span>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-2 control-label myform-label">活动内容 :</label>
+        <span class="col-lg-9 padding-sm">{{item.content}}</span>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <!-- <div ng-controller="DatepickerDemoCtrl" class="m-b-lg"> -->
+            <!-- <div class="m-b-lg"> -->
+                <div class="form-group">
+                    <label class="col-lg-4 control-label myform-label">时间 :</label>
+                    <span class="col-lg-6 padding-sm">{{item.startTime}}</span>
+                    <span class="col-lg-2 control-label myform-label">至</span>
+                </div>
+            <!-- </div> -->
+        </div>
+
+        <div class="col-lg-6">
+            <!-- <div ng-controller="DatepickerDemoCtrl" class="m-b-lg"> -->
+            <!-- <div class="m-b-lg"> -->
+                <div class="form-group">
+                    <label class="col-lg-0 control-label myform-label"></label>
+
+                    <span class="col-lg-6 padding-sm">{{item.endTime}}</span>
+                    <!-- <my-date-picker date="activity.endTime"></my-date-picker> -->
+                </div>
+            <!-- </div> -->
+        </div>
+    </div>
+
+    <fieldset disabled>
+        <div class="form-group">
+            <label for="disabledTextInput" class="col-lg-2 control-label myform-label">初审人员 :</label>
+
+            <span class="col-lg-9 padding-sm">{{item.firstReviewEmployeeRealName}}</span>
+        </div>
+    </fieldset>
+
+    <div class="form-group">
+        <label class="col-lg-2 control-label myform-label">参加人数 :</label>
+
+        <span class="col-lg-9 padding-sm">{{item.numAttendees}}</span>
+    </div>
+
+    <div class="form-group">
+        <label class="col-lg-2 control-label myform-label">参与人员 :</label>
+
+        <span class="col-lg-9 padding-sm">{{item.attendees}}</span>
+    </div>
+
+    <div class="form-group">
+        <label class="col-lg-2 control-label myform-label">附件 :</label>
+
+        <!-- <span class="col-lg-9 padding-sm">{{item.attachment}}</span> -->
+        <my-file-viewer class="col-lg-9 padding-sm" files="item.attachment"></my-file-viewer>
+    </div>
+</form>
+</div>

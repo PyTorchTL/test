@@ -1,0 +1,110 @@
+<!--NO USE-->
+<div class="wrapper-md">
+    <!-- <toaster-container toaster-options="{'position-class': 'toast-top-right', 'close-button':true}"></toaster-container> -->
+    <div class="panel panel-default bg-light lter">
+        <div class="panel-body">
+            <form class="bs-example form-horizontal">
+                <div class="col-lg-6">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="col-lg-4 control-label">客户姓名</label>
+
+                                <div class="col-lg-8">
+                                    <input type="text" class="form-control" ng-model="query.name">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="col-lg-4 control-label">理财师</label>
+
+                                <div class="col-lg-8">
+                                    <input type="text" class="form-control" ng-model="query.employeeRealName">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group m-b-n">
+                                <label class="col-lg-5 control-label m-l-n">下次联系时间</label>
+
+                                <div class="col-lg-7">
+                                    <my-date-picker date="query.nextStartTime"></my-date-picker>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group m-b-n">
+                                <label class="col-lg-0 control-label"></label>
+                                <div class="col-lg-7">
+                                    <my-date-picker date="query.nextEndTime"></my-date-picker>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+                <div class="col-lg-6">
+                    <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="col-lg-4 control-label">联系时间</label>
+                                <div class="col-lg-8">
+                                    <my-datetime-picker dropdown-id="'dropdown1'" date="query.startTime"></my-datetime-picker>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="col-lg-0 control-label"></label>
+                                <div class="col-lg-8">
+                                    <my-datetime-picker dropdown-id="'dropdown2'" date="query.endTime"></my-datetime-picker>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="col-lg-3 col-lg-offset-3">
+                        <button class="btn btn-default w-xs" ng-click="search()">搜索</button>
+                    </div>
+                    <div class="col-lg-3">
+                        <button class="btn btn-default " ng-click="openContactCrt()">新建联系记录</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <table st-table="" class="table table-bordered table-striped">
+            <thead>
+            <tr>
+                <th>客户名称</th>
+                <th>客户类型</th>
+                <th>理财师</th>
+                <th>联系时间</th>
+                <!-- <th>下次联系时间</th> -->
+                <th>联系内容</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="user in model.userContact" st-select-row="row">
+                <td>{{user.realName}}</td>
+                <td>{{user.contractTypeShow}}</td>
+                <td>{{user.employeeRealName}}</td>
+                <td>{{user.contractDate}}</td>
+                <!-- <td>{{user.warnDate}}</td> -->
+                <td>{{user.content}}</td>
+                <td>
+                    <div>
+                        <button uib-popover="查看" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs btn-icon btn-icon-sm" ng-click="openViewContactCrt(user)"><i class="fa fa-eye"></i></button>
+                        <button uib-popover="修改" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs btn-icon btn-icon-sm" ng-click="openChangeContactCrt(user)"><i class="fa fa-pencil"></i></button>
+                        <button uib-popover="删除" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs btn-icon btn-icon-sm" ng-click="openDeleteContactCtr(user)"><i class="fa fa-times"></i></button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <uib-pagination ng-change="pageChanged()" total-items="totalItems" items-per-page="query.size" ng-model="query.page"
+                max-size="maxSize" class="pagination-sm m-t-none m-b" boundary-links="true" rotate="false"
+                num-pages="numPages"></uib-pagination>
+</div>

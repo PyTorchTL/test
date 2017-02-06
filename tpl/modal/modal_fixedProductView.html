@@ -1,0 +1,238 @@
+<div class="wrapper-md">
+        <form name="newFixedForm" class="bs-example form-horizontal form-validation">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        <label class="col-lg-4 control-label myform-label">产品名称 :</label>
+                        <span class="col-lg-8 padding-sm">{{model.product.name}}</span>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4 control-label myform-label">管理机构 :</label>
+                        <span class="col-lg-8 padding-sm">{{model.product.orgnization}}</span>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4 control-label myform-label">融资方 :</label>
+                        <span class="col-lg-8 padding-sm">{{model.product.financer}}</span>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4 control-label myform-label">起购金额 :</label>
+                        <span class="col-lg-8 padding-sm">{{model.product.minPurchaseAmount  | rmbTT}}万元</span>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        <label class="col-lg-4 control-label myform-label">产品简称 :</label>
+                        <span class="col-lg-8 padding-sm">{{model.product.shortName}}</span>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4 control-label myform-label">机构类型 :</label>
+                        <span class="col-lg-8 padding-sm">{{getShow('orgnization_type', model.product.orgnizationType)}}</span>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4 control-label myform-label">运作方式 :</label>
+                        <span class="col-lg-8 padding-sm">{{getShow('operation_type', model.product.operationType)}}</span>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4 control-label myform-label">开放期 :</label>
+                        <span class="col-lg-8 padding-sm">{{model.product.openPeriod}}</span>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        <label class="col-lg-4 control-label myform-label">产品规模 :</label>
+                        <span class="col-lg-8 padding-sm">{{model.product.amount | rmbTT}}万元</span>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4 control-label myform-label">托管机构 :</label>
+                        <span class="col-lg-8 padding-sm">{{model.product.hostBank}}</span>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4 control-label myform-label">收益分配 :</label>
+                        <span class="col-lg-8 padding-sm">{{getShow('distribution_type', model.product.distributionType)}}</span>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4 control-label myform-label">投资领域 :</label>
+                        <span class="col-lg-8 padding-sm">{{model.product.investArea}}</span>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        <label class="col-lg-4 control-label myform-label">产品类型 :</label>
+                        <span class="col-lg-4 padding-sm">固定类</span>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4 control-label myform-label">产品期限 :</label>
+                        <span class="col-lg-8 padding-sm" ng-if="model.product.period[2] === 0">{{model.product.period[0]}}月 + {{model.product.period[1]}}月</span>
+                        <span class="col-lg-8 padding-sm" ng-if="model.product.period[2] !== 0">{{model.product.period[2]}}天</span>
+                        <!-- <div class="col-lg-8 col-md-8">
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" ng-change='onSelectPeriod(selectedPeriod)' name="optionsRadios" id="optionsRadios2" ng-model="selectedPeriod" value="1" ng-required="true">
+                                    <input type="number" class="form-control input-sm yw-w-xxxs inline" ng-model="product.period[0]">
+                                    月 +
+                                    <input type="number" class="form-control input-sm yw-w-xxxs inline" ng-model="product.period[1]">
+                                    月
+                                 :</label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" ng-change='onSelectPeriod(selectedPeriod)' name="optionsRadios" id="optionsRadios2" ng-model="selectedPeriod" value="2" ng-required="true">
+                                    <input type="number" class="form-control input-sm w-xxs inline" ng-model="product.period[2]">
+                                    天
+                                 :</label>
+                            </div>
+                        </div> -->
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4 control-label myform-label">成立日期 :</label>
+                        <span class="col-lg-8 padding-sm">{{model.product.establishDate}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        <label class="col-lg-4 control-label myform-label">管理费 :</label>
+                        <span class="col-lg-8 padding-sm">{{model.product.manageFee}}%</span>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4 control-label myform-label">销售费率 :</label>
+                        <span class="col-lg-8 padding-sm">{{model.product.saleFee}}%</span>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        <label class="col-lg-4 control-label myform-label">其他费率 :</label>
+                        <span class="col-lg-8 padding-sm">{{model.product.otherFee}}%</span>
+                    </div>
+                    <!-- <div class="form-group">
+                        <label class="col-lg-4 control-label myform-label">可打款金额 :</label>
+                        <div class="col-lg-6">
+                            <input type="text" class="form-control" ng-model="product.availablePurchaseAmount">
+                        </div>
+                    </div> -->
+                </div>
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        <label class="col-lg-4 control-label myform-label">托管费 :</label>
+                        <span class="col-lg-8 padding-sm">{{model.product.hostFee}}%</span>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        <label class="col-lg-4 control-label myform-label">佣金费率 :</label>
+                        <span class="col-lg-8 padding-sm">{{model.product.commissionFee}}%</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label myform-label">产品简介 :</label>
+                        <span class="col-lg-10 padding-sm">{{model.product.description}}</span>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label myform-label">还款来源 :</label>
+                        <span class="col-lg-10 padding-sm">{{model.product.repaySource}}</span>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label myform-label">产品介绍 :</label>
+                        <span class="col-lg-10 padding-sm">{{model.product.info}}</span>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label myform-label">风控措施 :</label>
+                        <span class="col-lg-10 padding-sm">{{model.product.riskControl}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label myform-label">风险提示 :</label>
+                        <span class="col-lg-10 padding-sm">{{model.product.riskTip}}</span>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="form-group">
+                        <label class="col-lg-1 control-label myform-label">收益设置 :</label>
+                        <!-- <div class="col-lg-3">
+                            <button type="button" class="btn btn-default" ng-click="addIncomeSetting()">
+                                添加时长阶梯
+                            </button>
+                        </div>
+                        <div class="col-lg-3">
+                            <button class="btn btn-default w-xs" ng-click="deleteIncomeSetting()">
+                                删减
+                            </button>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+            <div class="row" ng-repeat="setting in model.product.incomeSetting">
+                    <div class="pannel panel-default b-a m-b-md m-l-sm m-r-sm">
+                        <div class="panel-body">
+                            <form class="bs-example form-horizontal">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-lg-2 col-lg-offset-2 control-label myform-label">购买期限 :</label>
+                                            <div class="col-lg-8 text-left control-label myform-label">{{setting.anualRatePeriod}}{{getPeriodTypeShow(model.product.period)}}
+                                               <!--  <input type="text" class="form-control" ng-model="setting.anualRatePeriod"> -->
+
+                                            </div>
+                                            <!-- <div class="col-lg-1"><p class="control-label myform-label">月</p></div> -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6" ng-repeat="rate in setting.rates">
+                                        <div class="form-group">
+                                            <label class="col-lg-2 col-lg-offset-2 control-label myform-label">第{{$index+1}}档 :</label>
+                                            <div class="col-lg-8 no-padder">
+                                                <label class="mydang">
+                                                    认购金额
+                                                    <span class="control-label myform-label">{{rate.subscribeAmount[0] | rmbTT}}</span>
+                                                    &nbsp;-&nbsp;
+                                                    <span class="control-label myform-label">{{rate.subscribeAmount[1] | rmbTT}}</span>
+                                                    万元，年化收益
+                                                    <span class="control-label myform-label">{{rate.rate}}</span>
+                                                    %
+                                                </label>
+                                            </div>
+                                            <!-- <div class="col-lg-1 no-padder">
+                                                <button class="btn btn-xs btn-icon btn-icon-sm" ng-click="deleteRate(setting,rate)"><i class="glyphicon glyphicon-remove"></i></button>
+                                            </div> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <label class="col-sm-3 control-label myform-label">产品附件 :</label>
+                    <my-file-viewer class="col-lg-9 text-left" files="model.product.attachment"></my-file-viewer>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label myform-label">推荐材料 :</label>
+                        <my-file-viewer class="col-lg-9 text-left" files="model.product.recommendMaterial"></my-file-viewer>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="row">
+            <div class="col-lg-offset-4 col-lg-4">
+                    <button type="submit" class="btn m-t-md m-r-md w-xs btn-primary" ng-click="submit()" value="保存" ng-disabled="!newFixedForm.$valid">保存
+                    </button>
+                   <button type="button" class="btn m-t-md w-xs btn-default" value="取消" tabindex="0" ng-click="cancel()">取消</button>
+            </div>
+            </div> -->
+        </form>
+</div>

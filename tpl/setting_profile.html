@@ -1,1 +1,55 @@
-<h1>个人资料管理</h1>
+<div class="wrapper-md">
+<!-- <toaster-container toaster-options="{'position-class': 'toast-top-right', 'close-button':true}"></toaster-container> -->
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="col-lg-2 col-lg-offset-3 m-r-n">
+            <div class="thumb-xl">
+                <img src="img/a0.jpg" alt="基金经理照片">
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <form name="SettingProfileForm" class="bs-example form-horizontal">
+                <div class="form-group">
+                    <label class="col-lg-4 control-label">姓名：</label>
+                    <div class="col-lg-6">
+                        <label class="control-label">{{model.settingprofile.username}}</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-4 control-label">所属部门：</label>
+                    <div class="col-lg-6">
+                        <label class="control-label">{{model.settingprofile.departName}}</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-4 control-label">所属岗位：</label>
+                    <div class="col-lg-6">
+                        <label class="control-label">{{model.settingprofile.departJob}}</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-4 control-label">手机：</label>
+                    <div class="col-lg-6">
+                        <input type="text" class="form-control" ng-model="setting.phone" ng-required="true">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-4 control-label">邮箱：</label>
+                    <div class="col-lg-6">
+                        <input type="text" class="form-control" ng-model="setting.email" ng-required="true">
+                    </div>
+                </div>
+            <div class="form-group">
+                <div class="col-lg-offset-2">
+                    <button type="submit" ng-click="onAdd()" class="btn m-b-xs m-r-md w-xs btn-primary" ng-disabled="!SettingProfileForm.$valid" value="确定">
+                        确定
+                    </button>
+                    <!-- <button type="submit" class="btn m-b-xs w-xs btn-default" value="取消" tabindex="0">取消
+                    </button> -->
+                </div>
+            </div>
+           </form>
+        </div>
+    </div>
+</div>
+</div>

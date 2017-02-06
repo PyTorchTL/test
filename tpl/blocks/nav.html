@@ -22,22 +22,22 @@
                     <span>产品管理</span>
                 </a>
             </li>
-            <li ui-sref-active="active">
+            <li ui-sref-active="active" ng-if="isMenuAuthorized['app.product.new']">
                 <a ui-sref="app.product.new">
                     <span>产品录入</span>
                 </a>
             </li>
-            <li ui-sref-active="active">
+            <li ui-sref-active="active" ng-if="isMenuAuthorized['app.product.discuss']">
                 <a ui-sref="app.product.discuss">
                     <span>产品过会审批</span>
                 </a>
             </li>
-            <li ui-sref-active="active">
+            <li ui-sref-active="active" ng-if="isMenuAuthorized['app.product.open']">
                 <a ui-sref="app.product.open">
                     <span>产品上线审批</span>
                 </a>
             </li>
-            <li ui-sref-active="active">
+            <li ui-sref-active="active" ng-if="isMenuAuthorized['app.product.establish']">
                 <a ui-sref="app.product.establish">
                     <span>产品成立审批</span>
                 </a>
@@ -47,20 +47,37 @@
                     <span>申购赎回设置</span>
                 </a>
             </li> -->
-            <li ui-sref-active="active">
+            <li ui-sref-active="active" ng-if="isMenuAuthorized['app.product.networth']">
                 <a ui-sref="app.product.networth">
                     <span>净值设置</span>
                 </a>
             </li>
-            <li ui-sref-active="active">
+            <li ui-sref-active="active" ng-if="isMenuAuthorized['app.product.distribution']">
                 <a ui-sref="app.product.distribution">
                     <span>收益分配</span>
                 </a>
             </li>
-            <li ui-sref-active="active">
-                <a ui-sref="app.product.list">
-                    <span>产品列表</span>
+            <li>
+                <a href class="auto">
+                  <span class="pull-right text-muted">
+                    <i class="fa fa-fw fa-angle-right text"></i>
+                    <i class="fa fa-fw fa-angle-down text-active"></i>
+                  </span>
+                  <!-- <b class="label bg-info pull-right">2</b> -->
+                  <span>产品列表</span>
                 </a>
+                <ul class="nav dker">
+                    <li ui-sref-active="active" ng-if="isMenuAuthorized['app.product.list']">
+                        <a ui-sref="app.product.list">
+                            <span>金融产品列表</span>
+                        </a>
+                    </li>
+                  <li ui-sref-active="active" ng-if="isMenuAuthorized['app.product.badassetlist']">
+                    <a ui-sref="app.product.badassetlist">
+                      <span>金融不良资产产品列表</span>
+                    </a>
+                  </li>
+                </ul>
             </li>
         </ul>
     </li>
@@ -71,33 +88,67 @@
         <i class="fa fa-fw fa-angle-down text-active"></i>
       </span>
             <i class="glyphicon glyphicon-shopping-cart"></i>
-            <span class="font-bold">客户投资管理</span>
+            <span class="font-bold">投资管理</span>
         </a>
         <ul class="nav nav-sub dk">
             <li class="nav-sub-header">
                 <a href>
-                    <span>客户投资管理</span>
+                    <span>投资管理</span>
                 </a>
             </li>
-             <li ui-sref-active="active">
+            <li ui-sref-active="active" ng-if="isMenuAuthorized['app.invest.subscribelist']">
                 <a ui-sref="app.invest.subscribelist">
-                    <span>预约项目</span>
+                    <span>产品预约</span>
                 </a>
             </li>
-            <li ui-sref-active="active">
+            <li ui-sref-active="active" ng-if="isMenuAuthorized['app.invest.subscriberecord']">
                 <a ui-sref="app.invest.subscriberecord">
-                    <span>预约记录</span>
+                    <span>产品购买</span>
                 </a>
             </li>
-            <li ui-sref-active="active">
-                <a ui-sref="app.invest.purchaserecord">
-                    <span>购买记录</span>
-                </a>
-            </li>
-            <li ui-sref-active="active">
+            <li ui-sref-active="active" ng-if="isMenuAuthorized['app.invest.purchaseapprove']">
                 <a ui-sref="app.invest.purchaseapprove">
                     <span>购买审核</span>
                 </a>
+            </li>
+            <li ui-sref-active="active" ng-if="isMenuAuthorized['app.invest.purchaserecord']">
+                <a ui-sref="app.invest.purchaserecord">
+                    <span>购买记录</span>
+                    <!--我的购买记录-->
+                </a>
+            </li>
+            <li ui-sref-active="active" ng-if="isMenuAuthorized['app.invest.redeemlist']">
+                <a ui-sref="app.invest.redeemlist">
+                    <span>产品赎回</span>
+                </a>
+            </li>
+            <li ui-sref-active="active" ng-if="isMenuAuthorized['app.invest.redeemapprove']">
+                <a ui-sref="app.invest.redeemapprove">
+                    <span>赎回审核</span>
+                </a>
+            </li>
+            <li ui-sref-active="active" ng-if="isMenuAuthorized['app.invest.redeemresultlist']">
+                <a ui-sref="app.invest.redeemresultlist">
+                    <span>赎回记录</span>
+                    <!--我的赎回记录-->
+                </a>
+            </li>
+            <li ui-sref-active="active" ng-if="isMenuAuthorized['app.invest.subscriberesultlistall']">
+                <a ui-sref="app.invest.redeemresultlistall">
+                    <span>所有预约记录</span>
+                </a>
+            </li>
+            <li ui-sref-active="active" ng-if="isMenuAuthorized['app.invest.purchaseresultlistall']">
+                <a ui-sref="app.invest.redeemresultlistall">
+                    <span>所有购买记录</span>
+                </a>
+            </li>
+            <li ui-sref-active="active" ng-if="isMenuAuthorized['app.invest.redeemresultlistall']">
+                <a ui-sref="app.invest.redeemresultlistall">
+                    <span>所有赎回记录</span>
+                </a>
+            </li>
+
         </ul>
     </li>
     <li>
@@ -115,14 +166,249 @@
                     <span>客户管理</span>
                 </a>
             </li>
-            <li ui-sref-active="active">
+            <li ng-if="isMenuAuthorized['app.customer.contact']">
+                <a href class="auto">
+                  <span class="pull-right text-muted">
+                    <i class="fa fa-fw fa-angle-right text"></i>
+                    <i class="fa fa-fw fa-angle-down text-active"></i>
+                  </span>
+                  <span>我的日常联系</span>
+                </a>
+                <ul class="nav dker">
+                    <li ui-sref-active="active" >
+                        <a ui-sref="app.customer.list-today">
+                            <span>今日新增客户</span>
+                        </a>
+                    </li>
+                    <li ui-sref-active="active" >
+                        <a ui-sref="app.customer.tocontact-today">
+                            <span>今日需回访客户</span>
+                        </a>
+                    </li>
+                    <li ui-sref-active="active" >
+                        <a ui-sref="app.customer.contacted-today">
+                            <span>今日已联系客户</span>
+                        </a>
+                    </li>
+                    <li ui-sref-active="active" >
+                        <a ui-sref="app.customer.list-week">
+                            <span>本周新增客户</span>
+                        </a>
+                    </li>
+                    <li ui-sref-active="active" >
+                        <a ui-sref="app.customer.tocontact-week">
+                            <span>本周需回访客户</span>
+                        </a>
+                    </li>
+                    <li ui-sref-active="active" >
+                        <a ui-sref="app.customer.contacted-week">
+                            <span>本周已联系客户</span>
+                        </a>
+                    </li>
+                    <li ui-sref-active="active" >
+                        <a ui-sref="app.customer.list-month">
+                            <span>本月新增客户</span>
+                        </a>
+                    </li>
+                    <li ui-sref-active="active" >
+                        <a ui-sref="app.customer.tocontact-month">
+                            <span>本月需回访客户</span>
+                        </a>
+                    </li>
+                    <li ui-sref-active="active" >
+                        <a ui-sref="app.customer.contacted-month">
+                            <span>本月已联系客户</span>
+                        </a>
+                    </li>
+                    <li ui-sref-active="active" >
+                        <a ui-sref="app.customer.list-birthday">
+                            <span>近期生日客户</span>
+                        </a>
+                    </li>
+                    <li ui-sref-active="active" >
+                        <a ui-sref="app.customer.contact-overdue">
+                            <span>逾期未联系客户</span>
+                        </a>
+                    </li>
+                    <li ui-sref-active="active">
+                        <a ui-sref="app.customer.contact">
+                            <span>所有联系记录</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li ng-if="isMenuAuthorized['app.customer.contactteam']">
+                <a href class="auto">
+                  <span class="pull-right text-muted">
+                    <i class="fa fa-fw fa-angle-right text"></i>
+                    <i class="fa fa-fw fa-angle-down text-active"></i>
+                  </span>
+                  <span>下属日常联系</span>
+                </a>
+                <ul class="nav dker">
+                    <li ui-sref-active="active" >
+                        <a ui-sref="app.customer.listteam-today">
+                            <span>今日新增客户</span>
+                        </a>
+                    </li>
+                    <li ui-sref-active="active" >
+                        <a ui-sref="app.customer.tocontact-team-today">
+                            <span>今日需回访客户</span>
+                        </a>
+                    </li>
+                    <li ui-sref-active="active" >
+                        <a ui-sref="app.customer.contacted-team-today">
+                            <span>今日已联系客户</span>
+                        </a>
+                    </li>
+                    <li ui-sref-active="active" >
+                        <a ui-sref="app.customer.listteam-week">
+                            <span>本周新增客户</span>
+                        </a>
+                    </li>
+                    <li ui-sref-active="active" >
+                        <a ui-sref="app.customer.tocontact-team-week">
+                            <span>本周需回访客户</span>
+                        </a>
+                    </li>
+                    <li ui-sref-active="active" >
+                        <a ui-sref="app.customer.contacted-team-week">
+                            <span>本周已联系客户</span>
+                        </a>
+                    </li>
+                    <li ui-sref-active="active" >
+                        <a ui-sref="app.customer.listteam-month">
+                            <span>本月新增客户</span>
+                        </a>
+                    </li>
+                    <li ui-sref-active="active" >
+                        <a ui-sref="app.customer.tocontact-team-month">
+                            <span>本月需回访客户</span>
+                        </a>
+                    </li>
+                    <li ui-sref-active="active" >
+                        <a ui-sref="app.customer.contacted-team-month">
+                            <span>本月已联系客户</span>
+                        </a>
+                    </li>
+                    <li ui-sref-active="active" >
+                        <a ui-sref="app.customer.listteam-birthday">
+                            <span>近期生日客户</span>
+                        </a>
+                    </li>
+                    <li ui-sref-active="active" >
+                        <a ui-sref="app.customer.contactteam-overdue">
+                            <span>逾期未联系客户</span>
+                        </a>
+                    </li>
+                    <li ui-sref-active="active">
+                        <a ui-sref="app.customer.contactteam">
+                            <span>所有联系记录</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li ng-if="isMenuAuthorized['app.customer.contactall']">
+                <a href class="auto">
+                  <span class="pull-right text-muted">
+                    <i class="fa fa-fw fa-angle-right text"></i>
+                    <i class="fa fa-fw fa-angle-down text-active"></i>
+                  </span>
+                  <span>所有日常联系</span>
+                </a>
+                <ul class="nav dker">
+                    <li ui-sref-active="active" >
+                        <a ui-sref="app.customer.listall-today">
+                            <span>今日新增客户</span>
+                        </a>
+                    </li>
+                    <li ui-sref-active="active" >
+                        <a ui-sref="app.customer.tocontact-all-today">
+                            <span>今日需回访客户</span>
+                        </a>
+                    </li>
+                    <li ui-sref-active="active" >
+                        <a ui-sref="app.customer.contacted-all-today">
+                            <span>今日已联系客户</span>
+                        </a>
+                    </li>
+                    <li ui-sref-active="active" >
+                        <a ui-sref="app.customer.listall-week">
+                            <span>本周新增客户</span>
+                        </a>
+                    </li>
+                    <li ui-sref-active="active" >
+                        <a ui-sref="app.customer.tocontact-all-week">
+                            <span>本周需回访客户</span>
+                        </a>
+                    </li>
+                    <li ui-sref-active="active" >
+                        <a ui-sref="app.customer.contacted-all-week">
+                            <span>本周已联系客户</span>
+                        </a>
+                    </li>
+                    <li ui-sref-active="active" >
+                        <a ui-sref="app.customer.listall-month">
+                            <span>本月新增客户</span>
+                        </a>
+                    </li>
+                    <li ui-sref-active="active" >
+                        <a ui-sref="app.customer.tocontact-all-month">
+                            <span>本月需回访客户</span>
+                        </a>
+                    </li>
+                    <li ui-sref-active="active" >
+                        <a ui-sref="app.customer.contacted-all-month">
+                            <span>本月已联系客户</span>
+                        </a>
+                    </li>
+                    <li ui-sref-active="active" >
+                        <a ui-sref="app.customer.listall-birthday">
+                            <span>近期生日客户</span>
+                        </a>
+                    </li>
+                    <li ui-sref-active="active" >
+                        <a ui-sref="app.customer.contactall-overdue">
+                            <span>逾期未联系客户</span>
+                        </a>
+                    </li>
+                    <li ui-sref-active="active">
+                        <a ui-sref="app.customer.contactall">
+                            <span>所有联系记录</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li ui-sref-active="active" ng-if="isMenuAuthorized['app.customer.list']">
                 <a ui-sref="app.customer.list">
-                    <span>客户列表</span>
+                    <span>我的客户</span>
                 </a>
             </li>
-            <li ui-sref-active="active">
-                <a ui-sref="app.customer.contact">
-                    <span>联系记录列表</span>
+
+            <li ui-sref-active="active" ng-if="isMenuAuthorized['app.customer.listteam']">
+                <a ui-sref="app.customer.listteam">
+                    <span>下属客户</span>
+                </a>
+            </li>
+
+            <li ui-sref-active="active" ng-if="isMenuAuthorized['app.customer.listall']">
+                <a ui-sref="app.customer.listall">
+                    <span>所有客户</span>
+                </a>
+            </li>
+            <li ui-sref-active="active" ng-if="isMenuAuthorized['app.customer.listpublic']">
+                <a ui-sref="app.customer.listpublic">
+                    <span>公海客户</span>
+                </a>
+            </li>
+            <li ui-sref-active="active" ng-if="isMenuAuthorized['app.customer.assign']">
+                <a ui-sref="app.customer.assign">
+                    <span>客户分配</span>
+                </a>
+            </li>
+            <li ui-sref-active="active" ng-if="isMenuAuthorized['app.customer.import']">
+                <a ui-sref="app.customer.import">
+                    <span>客户导入</span>
                 </a>
             </li>
         </ul>
@@ -134,45 +420,45 @@
         <i class="fa fa-fw fa-angle-down text-active"></i>
       </span>
             <i class="glyphicon glyphicon-th-large"></i>
-            <span class="font-bold">活动沙龙管理</span>
+            <span class="font-bold">活动管理</span>
         </a>
         <ul class="nav nav-sub dk">
             <li class="nav-sub-header">
                 <a href>
-                    <span>活动沙龙管理</span>
+                    <span>活动管理</span>
                 </a>
             </li>
-            <li ui-sref-active="active">
+            <li ui-sref-active="active" ng-if="isMenuAuthorized['app.activity.new']">
                 <a ui-sref="app.activity.new">
-                    <span>添加活动</span>
+                    <span>活动添加</span>
                 </a>
             </li>
-            <li ui-sref-active="active">
+            <li ui-sref-active="active" ng-if="isMenuAuthorized['app.activity.firstreview']">
                 <a ui-sref="app.activity.firstreview">
                     <span>活动初审</span>
                 </a>
             </li>
-            <li ui-sref-active="active">
+            <li ui-sref-active="active" ng-if="isMenuAuthorized['app.activity.sign']">
                 <a ui-sref="app.activity.sign">
                     <span>活动会签</span>
                 </a>
             </li>
-            <li ui-sref-active="active">
+            <li ui-sref-active="active" ng-if="isMenuAuthorized['app.activity.finalreview']">
                 <a ui-sref="app.activity.finalreview">
                     <span>活动终审</span>
                 </a>
             </li>
-            <li ui-sref-active="active">
+            <li ui-sref-active="active" ng-if="isMenuAuthorized['app.activity.list']">
                 <a ui-sref="app.activity.list">
-                    <span>我发起的活动</span>
+                    <span>活动列表</span>
                 </a>
             </li>
-            <li ui-sref-active="active">
+            <li ui-sref-active="active" ng-if="isMenuAuthorized['app.activity.subscribe']">
                 <a ui-sref="app.activity.subscribe">
                     <span>活动预约</span>
                 </a>
             </li>
-            <li ui-sref-active="active">
+            <li ui-sref-active="active" ng-if="isMenuAuthorized['app.activity.feedback']">
                 <a ui-sref="app.activity.feedback">
                     <span>活动反馈</span>
                 </a>
@@ -194,17 +480,17 @@
                     <span>消息管理</span>
                 </a>
             </li>
-            <li ui-sref-active="active">
+            <li ui-sref-active="active" ng-if="isMenuAuthorized['app.message.notification']">
                 <a ui-sref="app.message.notification">
                     <span>通知公告</span>
                 </a>
             </li>
-            <li ui-sref-active="active">
+            <li ui-sref-active="active" ng-if="isMenuAuthorized['app.message.list']">
                 <a ui-sref="app.message.list">
                     <span>我的消息</span>
                 </a>
             </li>
-            <li ui-sref-active="active">
+            <li ui-sref-active="active" ng-if="isMenuAuthorized['app.message.send']">
                 <a ui-sref="app.message.send">
                     <span>发送消息</span>
                 </a>
@@ -226,19 +512,54 @@
                     <span>报表管理</span>
                 </a>
             </li>
-            <li ui-sref-active="active">
-                <a ui-sref="app.report.sale">
-                    <span>销售明细表</span>
+            <li ui-sref-active="active" ng-if="isMenuAuthorized['app.report.mydestribution']">
+                <a ui-sref="app.report.mydestribution">
+                    <span>我的收益分配表</span>
                 </a>
             </li>
-            <li ui-sref-active="active">
+            <li ui-sref-active="active" ng-if="isMenuAuthorized['app.report.sale']">
+                <a ui-sref="app.report.sale">
+                    <span>认购明细表</span>
+                </a>
+            </li>
+            <li ui-sref-active="active" ng-if="isMenuAuthorized['app.report.sale.depart']">
+                <a ui-sref="app.report.sale-depart">
+                    <span>部门认购明细表</span>
+                </a>
+            </li>
+            <li ui-sref-active="active" ng-if="isMenuAuthorized['app.report.commission']">
+                <a ui-sref="app.report.commission">
+                    <span>产品佣金明细表</span>
+                </a>
+            </li>
+            <li ui-sref-active="active" ng-if="isMenuAuthorized['app.report.subscribe']">
                 <a ui-sref="app.report.subscribe">
                     <span>预约认购汇总表</span>
                 </a>
             </li>
-            <li ui-sref-active="active">
+            <li ui-sref-active="active" ng-if="isMenuAuthorized['app.report.subscribe.depart']">
+                <a ui-sref="app.report.subscribe-depart">
+                    <span>部门预约认购汇总表</span>
+                </a>
+            </li>
+            <!-- <li ui-sref-active="active" ng-if="isMenuAuthorized['app.report.subscribedetail']">
+                <a ui-sref="app.report.subscribedetail">
+                    <span>单个项目预约认购明细表</span>
+                </a>
+            </li> -->
+            <li ui-sref-active="active" ng-if="isMenuAuthorized['app.report.statement']">
                 <a ui-sref="app.report.statement">
                     <span>客户对账函</span>
+                </a>
+            </li>
+            <li ui-sref-active="active" ng-if="isMenuAuthorized['app.report.productincomesum']">
+                <a ui-sref="app.report.productincomesum">
+                    <span>产品收益汇总表</span>
+                </a>
+            </li>
+            <li ui-sref-active="active" ng-if="isMenuAuthorized['app.report.productamountsum']">
+                <a ui-sref="app.report.productamountsum">
+                    <span>产品金额统计表</span>
                 </a>
             </li>
         </ul>
@@ -258,12 +579,12 @@
                     <span>个人设置</span>
                 </a>
             </li>
-            <li ui-sref-active="active">
+            <li ui-sref-active="active" ng-if="isMenuAuthorized['app.setting.profile']">
                 <a ui-sref="app.setting.profile">
                     <span>个人资料管理</span>
                 </a>
             </li>
-            <li ui-sref-active="active">
+            <li ui-sref-active="active" ng-if="isMenuAuthorized['app.setting.password']">
                 <a ui-sref="app.setting.password">
                     <span>密码管理</span>
                 </a>

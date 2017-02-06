@@ -1,0 +1,52 @@
+<div name="ContactCrtForm" class="bs-example form-horizontal m-md">
+    <div class="form-group">
+        <label class="col-lg-3 control-label myform-label">客户姓名 :</label>
+            <span class="col-lg-6 padding-sm">{{item.realName}}</span>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-3 control-label myform-label">联系方式 :</label>
+        <span class="col-lg-6 padding-sm">{{item.contractTypeShow}}</span>
+    </div>
+        <div class="form-group">
+            <label class="col-lg-3 control-label myform-label">联系时间 :</label>
+            <span class="col-lg-6 padding-sm">{{item.contractDate}}</span>
+        </div>
+    <div class="form-group">
+        <label class="col-lg-3 control-label myform-label">跟进情况 :</label>
+        <span class="col-lg-6 padding-sm" ng-if="item.followUp=== 1">有效跟进</span>
+        <span class="col-lg-6 padding-sm" ng-if="item.followUp=== 2">一般跟进</span>
+        <span class="col-lg-6 padding-sm" ng-if="item.followUp=== 3">约见</span>
+        <span class="col-lg-6 padding-sm" ng-if="item.followUp=== 4">无效跟进</span>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-3 control-label myform-label">联系内容 :</label>
+        <span class="col-lg-6 padding-sm">{{item.content}}</span>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-3 control-label myform-label">联系类型 :</label>
+        <span class="col-lg-6 padding-sm" ng-if="item.status=== 1">已联系</span>
+        <span class="col-lg-6 padding-sm" ng-if="item.status=== 2">下次联系</span>
+    </div>
+        <div class="form-group">
+            <label class="col-lg-3 control-label myform-label">下次联系时间 :</label>
+            <!-- <span class="col-lg-6 padding-sm">{{item.startSubscribeTime}}</span> -->
+            <span class="col-lg-6 padding-sm">{{item.warnDate}}</span>
+        </div>
+
+    <div class="form-group">
+        <label class="col-lg-3 control-label myform-label">设置提醒 :</label>
+        <span class="col-lg-6 padding-sm" ng-if="item.warnFlg === 1">是</span>
+        <span class="col-lg-6 padding-sm" ng-if="item.warnFlg === 0">否</span>
+    </div>
+
+    <div class="form-group">
+        <label class="col-lg-3 control-label myform-label">提醒方式 :</label>
+        <span class="col-lg-3 padding-sm" ng-if="item.warnSms === 1">短信提醒</span>
+        <span class="col-lg-3 padding-sm" ng-if="item.warnEmail === 1">邮箱提醒</span>
+        <span class="col-lg-5 padding-sm" ng-if="item.warnOther === 1">系统消息提醒</span>
+    </div>
+        <!-- <div class="form-group">
+            <label class="col-lg-3 control-label myform-label">提醒时间 :</label>
+            <span class="col-lg-6 padding-sm">{{item.warnDate}}</span>
+        </div> -->
+</div>

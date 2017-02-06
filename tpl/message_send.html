@@ -1,3 +1,51 @@
-<h1>发送消息</h1>
+<div class="wrapper-md">
+    <!-- <toaster-container toaster-options="{'position-class': 'toast-top-right', 'close-button':true}"></toaster-container> -->
+	<div class="panel panel-default">
+        <div class="panel-body">
+            <form name="sendMsgForm" class="bs-example form-horizontal">
+                <div class="form-group">
+                    <label class="col-lg-1 control-label">标题</label>
+                    <div class="col-lg-3">
+                        <input type="text" class="form-control" ng-required="true"  ng-model="message.title">
+                    </div>
+                </div>
+                <!-- <div class="form-group">
+                    <label class="col-lg-1 control-label">创建人</label>
+                    <div class="col-lg-3">
+                        <span>{{}}</span>
+                    </div>
+                </div> -->
+                <div class="form-group">
+                    <label class="col-lg-1 control-label">内容</label>
+                    <div class="col-lg-5">
+                        <textarea class="form-control" rows="4" ng-required="true" ng-model="message.content"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-1 control-label">收件人</label>
+                    <div class="col-lg-3">
+                        <hierarchical-selector data="employees" select-only-leafs="true" multi-select="true" on-selection-changed="onSelectionChanged(items)" no-button>
+                        </hierarchical-selector>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-1 control-label">产品附件</label>
+                    <div class="col-lg-4">
+                        <my-file-upload files="message.attachment"></my-file-upload>
+                    </div>
 
-<hierarchical-selector data="employees" select-only-leafs="true" multi-select="true" on-selection-changed="onSelectionChanged(items)" no-button />
+                </div>
+                <div class="form-group">
+                    <div class="col-lg-offset-1 col-lg-10">
+                        <button type="submit" class="btn m-b-xs m-r-md w-xs btn-primary" ng-disabled='!sendMsgForm.$valid' ng-click="sendMsg()" value="发送">发送</button>
+                        <!-- <button type="submit" class="btn m-b-xs w-xs btn-default" value="取消" tabindex="0" ng-click="cancel()">取消</button> -->
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+
+
+</div>

@@ -1,0 +1,120 @@
+<div class="wrapper-md">
+	<div class="panel panel-default bg-light lter">
+	    <div class="panel-body">
+	        <form class="bs-example form-horizontal">
+	            <div class="col-lg-4">
+	                <div class="form-group">
+	                    <div class="col-lg-5">
+	                        <select class="form-control" >
+	                            <option value="0">消息标题</option>
+	                            <option value="1">创建人</option>
+	                        </select>
+	                    </div>
+	                    <div class="col-lg-7">
+	                        <input type="text" class="form-control" >
+	                    </div>
+	                </div>
+
+	                <div class="form-group">
+	                    <label class="col-lg-3 control-label">公告时间</label>
+
+	                    <div class="col-lg-4">
+	                        <input type="text" class="form-control" >
+	                    </div>
+	                    <label class="col-lg-1 control-label">至</label>
+	                    <div class="col-lg-4">
+	                        <input type="text" class="form-control" >
+	                    </div>
+	                </div>
+	            </div>
+	            <div class="col-lg-4">
+	                <div class="row">
+	                    <div class="form-group">
+	                        <label class="col-lg-3 control-label">状态</label>
+
+	                        <div class="col-lg-3">
+	                            <select class="form-control" >
+	                                <option value="0">全部</option>
+	                                <option value="1">未读</option>
+	                                <option value="2">已读</option>
+	                            </select>
+	                        </div>
+	                    </div>
+	                </div>
+
+	                <div class="row">
+	                    <div class="col-lg-2 col-lg-offset-2">
+	                        <div class="form-group">
+	                            <button class="btn btn-default w-xs" ng-click="search()">搜索</button>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	            <div class="col-lg-2 col-lg-offset-2 m-t-xxl">
+	                <button class="btn btn-default w-xs " >发送消息</button>
+	            </div>
+	        </form>
+	    </div>
+	</div>
+  <!-- tab -->
+    <uib-tabset class="tab-container">
+      <uib-tab heading="收到的消息" select="switchTab(3)">
+      	<div class="panel panel-default">
+		    <table class="table table-bordered table-striped">
+		      <thead>
+		      <tr>
+		        <th>标题</th>
+		        <th>发送人</th>
+		        <th>发送时间</th>
+		        <th>状态</th>
+		        <th>操作</th>
+		      </tr>
+		      </thead>
+		      <tbody>
+		      <tr ng-repeat="msgRec in model.messageReceived" st-select-row="row">
+		        <td>{{msgRec.title}}</td>
+		        <td>{{msgRec.fromRealName}}</td>
+		        <td>{{msgRec.createTime}}</td>
+		        <td>{{msgRec.status}}</td>
+			    <td>
+		          <a ng-href="" style="display:block;">【查看】</a>
+		        </td>
+		      </tr>
+		      </tbody>
+		    </table>
+		</div>
+      </uib-tab>
+      <uib-tab heading="发送的消息" select="switchTab(5)">
+      	<div class="panel panel-default">
+		    <table st-table="" class="table table-bordered table-striped">
+		      <thead>
+		      <tr>
+		        <th>标题</th>
+		        <th>发送时间</th>
+		        <th>收件人</th>
+		        <th>操作</th>
+		      </tr>
+		      </thead>
+		      <tbody>
+		      <tr ng-repeat="msgSend in model.messageSent" st-select-row="row">
+		        <td>{{msgSend.title}}</td>
+		        <td>{{msgSend.createTime}}</td>
+		        <td>
+		        	<span ng-repeat="toEmployee in msgSend.toEmployee">
+		        		{{msgSend.toEmployee.$index}}
+		        		<span ng-if="theFirstEle($index) === false">，</span>
+		        		<span>{{toEmployee.toEmployeeRealName}}</span>
+		        	</span>
+		        </td>
+			    <td>
+		            <a ng-href="" style="display:block;">【查看】</a>
+		        </td>
+		      </tr>
+		      </tbody>
+		    </table>
+		  </div>
+      </uib-tab>
+    </uib-tabset>
+  <!--  tab -->
+
+</div>

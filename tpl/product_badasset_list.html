@@ -1,0 +1,106 @@
+<div class="wrapper-md">
+<!-- <toaster-container toaster-options="{'position-class': 'toast-top-right', 'close-button':true}"></toaster-container> -->
+    <div class="panel panel-default bg-light lter">
+        <div class="panel-body">
+            <form class="bs-example form-horizontal">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">产品名称</label>
+
+                        <div class="col-lg-8">
+                            <input type="text" class="form-control" ng-model="query.keyword">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">债务人</label>
+
+                        <div class="col-lg-8">
+                            <input type="text" class="form-control" ng-model="query.debter">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">地区分类</label>
+
+                        <div class="col-lg-8">
+                            <input type="text" class="form-control" ng-model="query.regionCategory">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3">
+                    <div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">创建时间</label>
+
+                            <div class="col-lg-9">
+                                <my-date-picker date="query.startCreateTime"></my-date-picker>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        <span class="col-lg-2 control-label">至</span>
+
+                        <div class="col-lg-9">
+                            <my-date-picker date="query.endCreateTime"></my-date-picker>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-lg-offset-1">
+                    <div class="form-group">
+                        <button class="btn btn-default w-xs" ng-click="productListSearch()">搜索</button>
+                    </div>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <table class="table table-bordered table-striped">
+          <thead>
+          <tr>
+            <th>产品名称</th>
+            <th>抵押物类型</th>
+            <th>抵押物估值(万)</th>
+            <th>地区分类</th>
+            <th>贷款本金(万)</th>
+            <th>贷款利息(万)</th>
+            <th>转让底价(万)</th>
+            <th>债务人</th>
+            <th>状态</th>
+            <th>操作</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr ng-repeat="product in model.productList" st-select-row="row" ng-if="product.productType === 2">
+            <td>{{product.name}}</td>
+            <td>{{product.mortageTypeShow}}</td>
+            <td>{{product.mortageValue | rmbTT}}</td>
+            <td>{{product.regionCategory}}</td>
+            <td>{{product.loanAmount | rmbTT}}</td>
+            <td>{{product.loanInterest | rmbTT}}</td>
+            <td>{{product.transferPrice | rmbTT}}</td>
+            <td>{{product.debter}}</td>
+            <td class="nowrap">{{product.statusShow}}</td>
+            <td class="nowrap">
+                <!-- <button uib-popover="预约" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs btn-icon btn-icon-sm" ng-click="openBadAssetSubscribe(product)"><i class="icon icon-clock"></i></button> -->
+                <!-- <a ng-href=""  ng-click="openBadAssetSubscribe(purchaseRecord)" style="display:block;">【预约】</a> -->
+                <button uib-popover="查看产品" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs btn-icon btn-icon-sm" ng-click="openProductView(product)"><i class="fa fa-briefcase"></i></button>
+                <button uib-popover="编辑" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs btn-icon btn-icon-sm" ng-click="openProductEdit(product)" ><i class="fa fa-pencil"></i></button>
+                <button ng-if="product.status!==7" uib-popover="下线" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs btn-icon btn-icon-sm" ng-click="openProductClose(product)"><i class="fa fa-download"></i></button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+    </div>
+
+    <uib-pagination ng-change="pageChanged()" total-items="totalItems" items-per-page="query.size" ng-model="query.page" max-size="maxSize" class="pagination-sm m-t-none m-b" boundary-links="true" rotate="false" num-pages="numPages"></uib-pagination>
+</div>

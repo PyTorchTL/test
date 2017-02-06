@@ -1,0 +1,80 @@
+<form name="addFixedRedeemForm" class="bs-example form-horizontal form-validation" style="padding-top:20px;">
+    <div class="form-group">
+        <label class="col-sm-5 col-sm-offset-2 control-label">固定类产品赎回审核</label>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 col-sm-offset-1 control-label">产品名称</label>
+        <div class="col-sm-7 padding-sm">
+            <p>{{item.name}}</p>
+        </div>
+    </div>
+     <div class="form-group">
+        <label class="col-sm-2 col-sm-offset-1 control-label">客户姓名</label>
+        <div class="col-sm-4 padding-sm">
+            <p>{{item.userRealName}}</p>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 col-sm-offset-1 control-label">认购金额</label>
+        <div class="col-sm-6 padding-sm">
+            <p>{{item.purchaseAmount | rmbTT}}</p>
+        </div>
+        <div class="col-sm-1 control-label text-left"><p>万元</p></div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 col-sm-offset-1 control-label">赎回金额</label>
+        <div class="col-sm-6">
+            <p>{{item.redeemAmount | rmbTT}}</p>
+        </div>
+        <div class="col-sm-1 control-label text-left"><p>万元</p></div>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-2 col-sm-offset-1 control-label">认购期限</label>
+        <div class="col-lg-7">
+            <label class="control-label">{{item.anualRatePeriod}}</label>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 col-sm-offset-1 control-label">认购层级</label>
+        <div class="col-sm-4 padding-sm">
+            <span ng-if="purchaseRecord.subscribeLevel==1">优先级</span>
+            <span ng-if="purchaseRecord.subscribeLevel==2">劣后级</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-2 col-sm-offset-1 control-label">赎回时间</label>
+        <div class="col-lg-7">
+            <my-datetime-picker date="submitData.redeemTime" dropdown-id="'dropdown1'"></my-datetime-picker>
+        </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 col-sm-offset-1 control-label">审核结果</label>
+      <div class="col-sm-8">
+        <div class="col-sm-6">
+        <div class="radio">
+          <label class="i-checks">
+            <input type="radio" name="result" value="1" ng-required="true" ng-model="submitData.redeemApproveDecision" checked>
+            <i></i>
+            通过
+          </label>
+        </div>
+        </div>
+        <div class="col-sm-6">
+        <div class="radio">
+          <label class="i-checks">
+            <input type="radio" name="result" value="2" ng-required="true" ng-model="submitData.redeemApproveDecision">
+            <i></i>
+            不通过
+          </label>
+        </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+       <div class="col-sm-offset-3 col-sm-10">
+            <button type="submit"  class="btn m-b-xs m-r-md w-xs btn-primary" ng-click="submit()" value="提交" ng-disabled="!addFixedRedeemForm.$valid">提交
+            </button>
+            <button type="button" class="btn m-b-xs w-xs btn-default" value="取消" tabindex="0" ng-click="cancel()">取消</button>
+        </div>
+    </div>
+</form>

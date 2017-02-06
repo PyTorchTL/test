@@ -1,0 +1,231 @@
+<form class="bs-example form-horizontal form-padding-top form-padding-right-left m-md">
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="form-group">
+                <label class="col-lg-4 control-label myform-label">客户姓名 :</label>
+                <span class="col-lg-8 padding-sm">
+                    {{item.realName}}
+                </span>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-4 control-label myform-label">固定电话 :</label>
+
+                <span class="col-lg-8">
+                    {{item.landline}}
+                </span>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-4 control-label myform-label">单位名称 :</label>
+
+                <span class="col-lg-8 padding-sm">
+                    {{item.companyName}}
+                </span>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="form-group">
+                <label class="col-lg-4 control-label myform-label">手机 :</label>
+
+                <span class="col-lg-8 padding-sm">
+                    {{item.phone}}
+                </span>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-4 control-label myform-label">生日 :</label>
+
+                <span class="col-lg-8 padding-sm">
+                    {{item.birthday}}
+                </span>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-4 control-label myform-label">性别 :</label>
+
+                <span class="col-lg-8 padding-sm">
+                    <!-- <p ng-if="item.gender === 1">男</p>
+                    <p ng-if="item.gender === 2">女</p> -->
+                    {{item.genderShow}}
+                </span>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="form-group">
+                <label class="col-lg-4 control-label myform-label">邮箱 :</label>
+
+                <span class="col-lg-8 padding-sm">
+                    {{item.email}}
+                </span>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-4 control-label myform-label">职务 :</label>
+
+                <span class="col-lg-8 padding-sm">
+                    {{item.companyJob}}
+                </span>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-4 control-label myform-label">婚姻状况 :</label>
+
+                <span class="col-lg-8 padding-sm">
+                    <!-- <p ng-if="item.marriage === 1">已婚</p>
+                    <p ng-if="item.marriage === 2">未婚</p> -->
+                    {{item.marriageShow}}
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-7">
+            <div class="form-group">
+                <label class="col-lg-2 control-label myform-label">所属区域 :</label>
+                <div class="col-lg-10 padding-sm">
+                    {{item.areaStore}}
+                </div>
+
+<!--                 <div class="col-lg-10">
+                    {{item.province}}省{{item.city}}市</p>
+                </div>
+ -->            </div>
+        </div>
+        <div class="col-lg-5">
+            <div class="form-group">
+                <label class="col-lg-3 control-label myform-label">身份证 :</label>
+
+                <div class="col-lg-9 padding-sm">
+                    {{item.identityId}}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="form-group">
+                <label class="col-lg-2 control-label myform-label m-l-n">单位地址 :</label>
+
+                <div class="col-lg-10 padding-sm">
+                    {{item.companyAddress}}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-2 control-label myform-label m-l-n">家庭地址 :</label>
+
+                <div class="col-lg-10 padding-sm">
+                    {{item.homeAddress}}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-2 control-label myform-label m-l-n">家庭情况 :</label>
+
+                <div class="col-lg-10 padding-sm">
+                    {{item.homeContent}}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-2 control-label myform-label m-l-n">兴趣爱好 :</label>
+
+                <div class="col-lg-10 padding-sm">
+                    {{item.hobby}}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-2 control-label myform-label m-l-n">备注 :</label>
+
+                <div class="col-lg-10 padding-sm">
+                    {{item.memo}}
+                </div>
+            </div>
+        </div>
+        <div class="row no-padder">
+            <div class="col-lg-12">
+                <div class="pannel panel-default b-a m-b-md bg-light bg">
+                    <div class="panel-body wrapper-xs">
+                        <form class="bs-example form-horizontal">
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label class="col-lg-4 control-label myform-label wrapper-xs">客户类型 :</label>
+
+                                    <span class="col-lg-8 m-r-n padding-sm">
+                                        {{item.customTypeShow}}
+                                    </span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-lg-4 control-label myform-label wrapper-xs">可用资产 :</label>
+
+                                    <span class="col-lg-8 padding-sm">
+                                        {{item.assetAvailable}}
+                                    </span>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-4 control-label myform-label wrapper-xs">开户银行 :</label>
+
+                                    <span class="col-lg-8 padding-sm">
+                                        {{item.bankName}}
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label class="col-lg-4 control-label myform-label wrapper-xs">风险等级 :</label>
+
+                                    <span class="col-lg-8 padding-sm">
+                                        {{item.customRiskShow}}
+                                    </span>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-4 control-label myform-label wrapper-xs">总资产 :</label>
+
+                                    <span class="col-lg-8 padding-sm">
+                                        {{item.assetTotal}}
+                                    </span>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-4 control-label myform-label wrapper-xs">银行卡号 :</label>
+
+                                    <span class="col-lg-8 padding-sm">
+                                        {{item.bankCard}}
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label class="col-lg-4 control-label myform-label wrapper-xs">客户来源 :</label>
+
+                                    <span class="col-lg-8 padder-xs padding-sm">
+                                        {{item.userSourceShow}}
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label class="col-lg-2 control-label myform-label  m-l-n wrapper-xs">投资记录 :</label>
+
+                                        <div class="col-lg-9 padding-sm">
+                                            {{item.tenderRecord}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="row">
+            <div class="col-lg-3 col-lg-offset-1">
+                <div class="form-group">
+                    <label class="col-lg-3 control-label myform-label">添加人 :</label>
+                    <div class="col-lg-6">
+                        <label class="control-label myform-label">梁委员 :</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-3 control-label myform-label">添加时间 :</label>
+                    <div class="col-lg-6">
+                        <label class="control-label myform-label">2015-07-06 14:15:16 :</label>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+    </div>
+</form>

@@ -1,11 +1,9 @@
-<!---弹出框-->
-<toaster-container toaster-options="{'position-class': 'toast-top-right', 'close-button':true}"></toaster-container>
-<form class="bs-example form-horizontal" method="post" style="padding-top:20px;">
+<form name="ProductDiscussForm" class="bs-example form-horizontal" method="post" style="padding-top:20px;">
     <div class="form-group">
         <label class="col-lg-2 control-label">过会意见</label>
 
         <div class="col-lg-7">
-            <textarea class="form-control" rows="4" ng-model="item.myDiscussRemark"></textarea>
+            <textarea class="form-control" rows="4" ng-model="submitData.myDiscussRemark" ng-required="true"></textarea>
         </div>
     </div>
 
@@ -15,14 +13,14 @@
             <div class="radio">
                 <div class="col-lg-6">
                     <label class="i-checks">
-                        <input type="radio" name="a" value="1" ng-model="item.myDiscussDecision">
+                        <input type="radio" name="result" value="1" ng-model="submitData.myDiscussDecision" ng-required="true">
                         <i></i>
                         通过
                     </label>
                 </div>
                 <div class="col-lg-6">
                     <label class="i-checks">
-                        <input type="radio" name="a" value="2" ng-model="item.myDiscussDecision">
+                        <input type="radio" name="result" value="2" ng-model="submitData.myDiscussDecision" ng-required="true">
                         <i></i>
                         不通过
                     </label>
@@ -32,9 +30,36 @@
     </div>
     <div class="form-group">
         <div class="col-lg-offset-2 col-lg-10">
-            <button type="submit" ng-click="submit()" class="btn m-b-xs m-r-md w-xs btn-primary" value="提交">提交
+            <button type="submit" ng-click="submit()" class="btn m-b-xs m-r-md w-xs btn-primary" value="提交" ng-disabled="!ProductDiscussForm.$valid">提交
             </button>
-            <button type="submit" ng-click="cancel()" class="btn m-b-xs w-xs btn-default" value="取消" tabindex="0">取消</button>
+            <button type="button" ng-click="cancel()" class="btn m-b-xs w-xs btn-default" value="取消" tabindex="0">取消</button>
         </div>
     </div>
+    <table class="table table-bordered table-striped" ng-show="isAdmin">
+      <thead>
+      <tr>
+        <th>姓名</th>
+        <th>过会意见</th>
+        <th>过会结果</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr ng-repeat="decision in item.dicussDecisions" st-select-row="row">
+        <td>{{decision.employeeName}}</td>
+        <td>{{decision.remark}}</td>
+        <td>
+            <p ng-if="decision.decision === 1">通过</p>
+            <p ng-if="decision.decision === 2">不通过</p>
+        </td>
+      </tr>
+      <tr>
+        <td>我</td>
+        <td>{{item.myDiscussRemark}}</td>
+        <td>
+            <p ng-if="item.myDiscussDecision === 1">通过</p>
+            <p ng-if="item.myDiscussDecision === 2">不通过</p>
+        </td>
+      </tr>
+      </tbody>
+    </table>
 </form>
