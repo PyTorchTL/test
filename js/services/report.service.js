@@ -8,25 +8,28 @@ app
         var setQuerySalesDetailReport = function (query) {
 
           if (query.keyword === '') {
-              delete query.keyword;
-            }
-            if ((query.productType === '') || (query.productType === '-1')) {
-              delete query.productType;
-            }
-            if (query.employeeId === '') {
-              delete query.employeeId;
-            }
-            if (query.purchaseStartTime === '') {
-              delete query.purchaseStartTime;
-            }
-            if (query.purchaseEndTime === '') {
-              delete query.purchaseEndTime;
-            }
-            if (query.columns === '') {
-              delete query.columns;
-            }
+            delete query.keyword;
+          }
+          if (query.status === '' || query.status == -1) {  // Note: not -1, but '-1'
+            delete query.status;
+          }
+          if ((query.productType === '') || (query.productType === '-1')) {  // Note: not -1, but '-1'
+            delete query.productType;
+          }
+          if (query.employeeId === '') {
+            delete query.employeeId;
+          }
+          if (query.purchaseStartTime === '') {
+            delete query.purchaseStartTime;
+          }
+          if (query.purchaseEndTime === '') {
+            delete query.purchaseEndTime;
+          }
+          if (query.columns === '') {
+            delete query.columns;
+          }
 
-            return query;
+          return query;
         };
 
         function serializeData( data ) {
@@ -94,6 +97,8 @@ app
 
             if (stateName && stateName.endsWith('depart')) {
               return $http.get('/api/v1/salesDetailDepartReport', {params: query});
+            } else if (stateName && stateName.endsWith('all')) {
+              return $http.get('/api/v1/salesDetailDepartAll', {params: query});
             } else {
               return $http.get('/api/v1/salesDetailReport', {params: query});
             }
@@ -104,6 +109,8 @@ app
           // return $http.get('/api/v1/salesDetailReportDown', {params: query});
           if (stateName && stateName.endsWith('depart')) {
             download('salesDetailReportDepartDown', query);
+          } else if (stateName && stateName.endsWith('all')) {
+            download('salesDetailDepartAllDown', query);
           } else {
             download('salesDetailReportDown', query);
           }
@@ -160,8 +167,13 @@ app
           }
         };
 
-        service.subscribeReport = function (product) {
-          return $http.get('/api/v1/subscribeReport/' + product.id); // NOTE: shoud be product.id
+        // types is array, e.g., [1], [1,2]
+        service.subscribeReport = function (product, types) {
+          var url = '/api/v1/subscribeReport/' + product.id;  // NOTE: shoud be product.id
+          if (types !== undefined) {
+            url += '?type=' + types.join(',');
+          }
+          return $http.get(url);
         };
 
         service.subscribeReportDownload = function (product) {
@@ -169,26 +181,32 @@ app
           download('subscribeReportDown/' + product.id, {});
         };
 
-        service.billReport = function (query) {
-          var userId = query.userId;
-          delete query.userId;
-          if (!query.endDate) {
-            delete query.endDate;
-          } else {
-            query.endDate = Util.getDate(query.endDate);
-          }
-          return $http.get('/api/v1/billReport/' + userId, {params: query});
+        // service.billReport = function (query) {
+        //   var userId = query.userId;
+        //   delete query.userId;
+        //   if (!query.endDate) {
+        //     delete query.endDate;
+        //   } else {
+        //     query.endDate = Util.getDate(query.endDate);
+        //   }
+        //   return $http.get('/api/v1/billReport/' + userId, {params: query});
+        // };
+        service.billReport = function (userId) {
+          return $http.get('/api/v1/billReport/' + userId);
         };
 
-        service.billReportDownload = function (query) {
-          var userId = query.userId;
-          delete query.userId;
-          if (!query.endDate) {
-            delete query.endDate;
-          } else {
-            query.endDate = Util.getDate(query.endDate);
-          }
-          download('billReportDown/' + userId, query);
+        // service.billReportDownload = function (query) {
+        //   var userId = query.userId;
+        //   delete query.userId;
+        //   if (!query.endDate) {
+        //     delete query.endDate;
+        //   } else {
+        //     query.endDate = Util.getDate(query.endDate);
+        //   }
+        //   download('billReportDown/' + userId, query);
+        // };
+        service.billReportDownload = function (userId) {
+          download('billReportDown/' + userId);
         };
 
 

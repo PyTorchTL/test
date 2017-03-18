@@ -1,0 +1,105 @@
+<div class="wrapper-md">
+<form name="fixedIncomeDistributionCrForm" class="bs-example form-horizontal" style="padding-top:20px;">
+    <div class="panel panel-default">
+        <table class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <th>客户姓名</th>
+              <th>认购金额</th>
+              <th ng-if="::record.productType === 1">认购份额</th>
+              <th>认购期限</th>
+              <th ng-if="::record.productType === 0">年化利率</th>
+              <th ng-if="::record.productType === 1">认购层级</th>
+              <th ng-if="::record.productType === 0">剩余本金(元)</th>
+              <th ng-if="::record.productType === 1">剩余份额</th>
+              <th ng-if="::record.productType === 0">兑付本金(元)</th>
+              <th ng-if="::record.productType === 1">兑付份额</th>
+              <th>分配收益(元)</th>
+
+            </tr>
+          </thead>
+          <tbody>
+           <tr ng-repeat="user in model.incomeDistributionUserList" st-select-row="row">
+            <td>{{user.userRealName}}</td>
+            <td>{{user.purchaseAmount}}</td>
+            <td ng-if="::record.productType === 1">{{user.purchaseShare}}</td>
+            <td>{{user.anualRatePeriod}}</td>
+            <td ng-if="::record.productType === 0">
+              {{user.rate}}
+            </td>
+            <td ng-if="::record.productType === 1">
+              <p>{{getSubscribeLevelShow(user.subscribeLevel)}}</p>
+            </td>
+            <td ng-if="::record.productType === 0">
+              {{user.residualCapitalAmount}}
+            </td>
+            <td ng-if="::record.productType === 1">
+              {{user.residualShare}}
+            </td>
+            <td ng-if="::record.productType === 0">
+              {{user.captialAmount}}
+            </td>
+            <td ng-if="::record.productType === 1">
+              {{user.share}}
+            </td>
+            <td>
+              {{user.incomeAmount}}
+            </td>
+
+           </tr>
+           <tr ng-if="model.incomeDistributionUserList.length > 0">
+             <td ng-if="::record.productType === 0" colspan="4"></td>
+             <td ng-if="::record.productType === 1" colspan="5"></td>
+             <td>合计</td>
+             <td>
+               <span ng-if="::record.productType === 0">{{record.totalCaptialAmount}}</span>
+               <span ng-if="::record.productType === 1">{{record.totalShare}}</span>
+             </td>
+             <td>
+                <span>{{record.totalIncomeAmount}}</span>
+             </td>
+           </tr>
+           <tr ng-if="model.incomeDistributionUserList.length > 0">
+             <td ng-if="::record.productType === 0" colspan="4"></td>
+             <td ng-if="::record.productType === 1" colspan="5"></td>
+             <td>分配日期</td>
+             <td colspan="2">{{record.distributeDate | getDate}}</td>
+           </tr>
+          </tbody>
+        </table>
+        </div>
+    <div class="form-group" ng-if="::approve">
+      <label class="col-sm-2 col-sm-offset-1 control-label">审核结果</label>
+      <div class="col-sm-8">
+        <div class="col-sm-6">
+        <div class="radio">
+          <label class="i-checks">
+            <input type="radio" name="result" value="1" ng-required="true" ng-model="submitData.status" checked>
+            <i></i>
+            通过
+          </label>
+        </div>
+        </div>
+        <div class="col-sm-6">
+        <div class="radio">
+          <label class="i-checks">
+            <input type="radio" name="result" value="2" ng-required="true" ng-model="submitData.status">
+            <i></i>
+            不通过
+          </label>
+        </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+       <div ng-if="::approve" class="col-sm-offset-3 col-sm-8">
+            <button type="submit"  class="btn m-b-xs m-r-md w-xs btn-primary" ng-click="submit()" value="提交" ng-disabled="!fixedIncomeDistributionCrForm.$valid">提交
+            </button>
+            <button type="button" class="btn m-b-xs w-xs btn-default" value="取消" tabindex="0" ng-click="cancel()">取消</button>
+        </div>
+        <div ng-if="::!approve" class="col-sm-offset-3 col-sm-8">
+            <button type="button" class="btn m-b-xs w-xs btn-default" value="关闭" tabindex="0" ng-click="cancel()">关闭</button>
+        </div>
+    </div>
+</form>
+</div>

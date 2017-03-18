@@ -15,7 +15,7 @@
           <th>认购时间</th>
           <th>认购金额</th>
           <th>期限</th><!-- <th>认购期限</th> -->
-          <th>层级/利率</th><!-- <th>认购层级</th> -->
+          <th>利率/层级</th><!-- <th>认购层级</th> -->
           <th>已收收益</th>
         </tr>
       </thead>
@@ -30,8 +30,6 @@
         <td>{{report.purchaseAmount}}</td>
         <td>{{getAnualRatePeriod(report)}}</td>  <!-- {{getPeriodTypeShow(report)}} -->
         <td>
-          <!-- <p ng-if="report.subscribeLevel==1">优先级</p>
-          <p ng-if="report.subscribeLevel==2">劣后级</p> -->
           {{getLevelOrRate(report)}}
         </td>
         <td>{{report.repayInterest}}</td>

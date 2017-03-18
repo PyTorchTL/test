@@ -31,14 +31,14 @@
     <div class="form-group">
         <label class="col-sm-2 col-sm-offset-1 control-label">认购层级</label>
         <div class="col-sm-4 padding-sm">
-            <span ng-if="purchaseRecord.subscribeLevel==1">优先级</span>
-            <span ng-if="purchaseRecord.subscribeLevel==2">劣后级</span>
+            <span>{{getSubscribeLevelShow(item.subscribeLevel)}}</span>
         </div>
     </div>
     <div class="form-group">
         <label class="col-lg-2 col-sm-offset-1 control-label">赎回时间</label>
         <div class="col-lg-7">
-            <my-datetime-picker date="submitData.redeemTime" dropdown-id="'dropdown1'"></my-datetime-picker>
+            <!-- <my-datetime-picker date="submitData.redeemTime" dropdown-id="'dropdown1'"></my-datetime-picker> -->
+            {{item.redeemTime | getDate}}
         </div>
     </div>
     <div class="form-group">

@@ -1,16 +1,21 @@
 'use strict';
 
+// 认购明细表
 app.controller('ReportSalesDetailCtrl', ['$scope', 'toaster', '$state', '$uibModal', 'Report', function($scope, toaster, $state, $uibModal, Report) {
     $scope.model = {};
-    $scope.query = {};
-    $scope.query.keyword = '';
+    $scope.query = {
+        keyword: '',
+        page: 1,
+        size: 10
+    };
     $scope.checked = {};
 
     $scope.get = function () {
         buildColumnsQuery();
         Report.salesDetailReport($scope.query, $state.current.name)
             .then(function (response) {
-                $scope.model.reportList = response.data.data;
+                // $scope.model.reportList = response.data.data;
+                $scope.model = response.data.data;
             });
     };
 
@@ -28,7 +33,12 @@ app.controller('ReportSalesDetailCtrl', ['$scope', 'toaster', '$state', '$uibMod
 
     $scope.get();
 
-    $scope.salesDetailReportSearch = function () {
+    $scope.search = function () {
+        $scope.query.page = 1;
+        $scope.get();
+    };
+
+    $scope.pageChanged = function () {
         $scope.get();
     };
 
@@ -199,13 +209,13 @@ app.controller('ReportSubscribeDetailModalCtrl', ['$scope', '$uibModalInstance',
             if (report.purchaseRate) {
                 return report.purchaseRate;
             } else {
-                return Util.getLevelShow(report.purchaseLevel);
+                return Util.getSubscribeLevelShow(report.purchaseLevel);
             }
         } else {
             if (report.subscribeRate) {
                 return report.subscribeRate;
             } else {
-                return Util.getLevelShow(report.subscribeLevel);
+                return Util.getSubscribeLevelShow(report.subscribeLevel);
             }
         }
     };
@@ -218,8 +228,8 @@ app.controller('ReportBillCtrl', ['$scope', 'toaster', '$uibModal', 'Report', 'C
         page: 1,
         size: 10
     };
-    var today = new Date();
-    $scope.query.endDate = Util.getDate(today);
+    // var today = new Date();
+    // $scope.query.endDate = Util.getDate(today);
 
     $scope.get = function () {
         // Customer.user($scope.query)
@@ -253,8 +263,8 @@ app.controller('ReportBillCtrl', ['$scope', 'toaster', '$uibModal', 'Report', 'C
           item: function () {
             return {
                 user: user,
-                endDate: $scope.query.endDate, // endDate: Util.getDate($scope.query.endDate)
-                status: $scope.query.status
+                // endDate: $scope.query.endDate, // endDate: Util.getDate($scope.query.endDate)
+                // status: $scope.query.status
             };
           }
         }
@@ -265,28 +275,35 @@ app.controller('ReportBillCtrl', ['$scope', 'toaster', '$uibModal', 'Report', 'C
 
 app.controller('ReportBillModalCtrl', ['$scope', '$uibModalInstance', 'Report', 'item', 'Util', function($scope, $uibModalInstance, Report, item, Util) {
     $scope.item = item;
-    $scope.model = {};
+    $scope.model = {
+        totalFixedSubscribeAmount: 0.0,
+        totalFixeRedeemAmount: 0.0,
+        totalFloatingSubscribeAmount: 0.0,
+        totalFloatingTotalAmount: 0.0,
+        totalFloatingRedeemShare: 0.0
+    };
 
-    $scope.query = {};
-    angular.copy(item, $scope.query);
-    delete $scope.query.user;
-    // var today = new Date();
-    // $scope.query.endDate = Util.getDate(today);
+    // $scope.query = {};
+    // angular.copy(item, $scope.query);
+    // delete $scope.query.user;
+    // // var today = new Date();
+    // // $scope.query.endDate = Util.getDate(today);
 
     $scope.get = function () {
-        $scope.query.userId = item.user.id; // deleted in service.billReport
-        Report.billReport($scope.query)
+        // $scope.query.userId = item.user.id; // deleted in service.billReport
+        Report.billReport(item.user.id)//Report.billReport($scope.query)
             .then(function(response){
-                $scope.model.billReportList = response.data.data;
+                // $scope.model.billReportList = response.data.data;
+                $scope.model = response.data;
             });
     };
 
     $scope.get();
 
     $scope.exportReportBtn = function () {
-        $scope.query.userId = item.user.id; // deleted in service.billReport
+        // $scope.query.userId = item.user.id; // deleted in service.billReport
 
-        Report.billReportDownload($scope.query);
+        Report.billReportDownload(item.user.id);//        Report.billReportDownload($scope.query);
     };
 
     $scope.setBtn = function () {
@@ -297,9 +314,9 @@ app.controller('ReportBillModalCtrl', ['$scope', '$uibModalInstance', 'Report', 
         return (bill.share * bill.networth).toFixed(2);
     }
 
-    $scope.getProfit = function (bill) {
-        return (bill.share * (bill.networth - 1)).toFixed(2);
-    }
+    // $scope.getProfit = function (bill) {
+    //     return (bill.share * (bill.networth - 1)).toFixed(2);
+    // }
 
 }]);
 

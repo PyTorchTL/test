@@ -45,10 +45,10 @@
           <tr>
             <th>产品名称</th>
             <th>客户姓名</th>
-            <th>购买金额(万)</th>
+            <th>赎回金额/份额</th>
             <th>购买期限</th>
-            <th>购买层级</th>
-            <th>购买时间</th>
+            <th>利率/层级</th>
+            <th>赎回时间</th>
             <th>理财师</th>
             <th>操作</th>
           </tr>
@@ -57,13 +57,16 @@
           <tr ng-repeat="redeem in model.redeemList" st-select-row="row">
             <td>{{redeem.name}}</td>
             <td>{{redeem.userRealName}}</td>
-            <td>{{redeem.purchaseAmount | rmbTT}}</td>
+            <td>
+                <span ng-if="redeem.productType === 0">{{redeem.redeemAmount | rmbTT}}</span>
+                <span ng-if="redeem.productType === 1">{{redeem.redeemShare}}</span>
+            </td>
             <td><span ng-if="redeem.productType === 0">{{redeem.anualRatePeriod}}</span></td>
             <td>
-                <span ng-if="redeem.subscribeLevel==1">优先级</span>
-                <span ng-if="redeem.subscribeLevel==2">劣后级</span>
+                <span ng-if="redeem.productType === 1">{{getSubscribeLevelShow(redeem.subscribeLevel)}}</span>
+                <span ng-if="redeem.productType === 0">{{redeem.purchaseRate}}</span>
             </td>
-            <td>{{redeem.purchaseTime}}</td>
+            <td>{{redeem.redeemTime | getDate}}</td>
             <td>{{redeem.employeeRealName}}</td>
             <td>
               <div>

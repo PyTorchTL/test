@@ -101,6 +101,17 @@ angular.module('app')
                   //     }]
                   // }
               })
+              .state('app.product.distributionapprove', {
+                  url: '/distributionapprove',
+                  templateUrl: 'tpl/product_distributionrecord.html',
+                  controller: 'ProductDistributeRecordCtrl',
+                  params: { approve: true }
+              })
+              .state('app.product.distributionrecord', {
+                  url: '/distributionrecord',
+                  templateUrl: 'tpl/product_distributionrecord.html',
+                  controller: 'ProductDistributeRecordCtrl'
+              })
               .state('app.product.list', {
                   url: '/list',
                   templateUrl: 'tpl/product_list.html',
@@ -115,18 +126,21 @@ angular.module('app')
                   url: '/invest',
                   template: '<div ui-view class="fade-in-up"></div>'
               })
+              // 产品预约
               .state('app.invest.subscribelist', {
                   url: '/subscribelist',
                   templateUrl: 'tpl/invest_subscribelist.html',
                   controller: 'InvestSubscribeListCtrl'
               })
+              // 产品购买（我的预约记录）
               .state('app.invest.subscriberecord', {
                   url: '/subscriberecord',
                   templateUrl: 'tpl/invest_subscriberecord.html',
                   controller: 'InvestSubscribeRecordCtrl'
               })
+              // （我的）购买记录
               .state('app.invest.purchaserecord', {
-                  url: '/purchaselist',
+                  url: '/purchaserecord',
                   templateUrl: 'tpl/invest_purchaserecord.html',
                   controller: 'InvestPurchaseRecordCtrl'
               })
@@ -135,7 +149,7 @@ angular.module('app')
                   templateUrl: 'tpl/invest_purchaseapprove.html',
                   controller: 'InvestPurchaseApproveCtrl'
               })
-              .state('app.invest.redeemlist', {
+              .state('app.invest.redeemlist', { // 产品赎回
                   url: '/redeemlist',
                   templateUrl: 'tpl/invest_redeemlist.html',
                   controller: 'InvestRedeemListCtrl'
@@ -145,23 +159,24 @@ angular.module('app')
                   templateUrl: 'tpl/invest_redeemapprove.html',
                   controller: 'InvestRedeemApproveCtrl'
               })
+              // （我的）赎回记录
               .state('app.invest.redeemresultlist', {
                   url: '/redeemresultlist',
                   templateUrl: 'tpl/invest_redeem_result_list.html',
                   controller: 'InvestRedeemResultListCtrl'
               })
               .state('app.invest.redeemresultlistall', {
-                  url: '/redeemresultlist',
+                  url: '/redeemresultlistall',
                   templateUrl: 'tpl/invest_redeem_result_list.html',
                   controller: 'InvestRedeemResultListCtrl'
               })
-              .state('app.invest.subscriberesultlistall', {
-                  url: '/subscriberesultlist',
+              .state('app.invest.subscribelistall', {
+                  url: '/subscriberecordall',
                   templateUrl: 'tpl/invest_subscriberecord.html',
                   controller: 'InvestSubscribeRecordCtrl'
               })
-              .state('app.invest.purchaseresultlistall', {
-                  url: '/purchaseresultlist',
+              .state('app.invest.purchaserecordall', {
+                  url: '/purchaserecordall',
                   templateUrl: 'tpl/invest_purchaserecord.html',
                   controller: 'InvestPurchaseRecordCtrl'
               })
@@ -513,6 +528,11 @@ angular.module('app')
               })
               .state('app.report.sale-depart', {
                   url: '/sale-depart',
+                  templateUrl: 'tpl/report_sale.html',
+                  controller: 'ReportSalesDetailCtrl'
+              })
+              .state('app.report.sale-all', {
+                  url: '/sale-all',
                   templateUrl: 'tpl/report_sale.html',
                   controller: 'ReportSalesDetailCtrl'
               })

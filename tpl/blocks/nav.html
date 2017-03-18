@@ -57,6 +57,16 @@
                     <span>收益分配</span>
                 </a>
             </li>
+            <li ui-sref-active="active" ng-if="isMenuAuthorized['app.product.distributionapprove']">
+                <a ui-sref="app.product.distributionapprove">
+                    <span>收益分配审核</span>
+                </a>
+            </li>
+            <li ui-sref-active="active" ng-if="isMenuAuthorized['app.product.distributionrecord']">
+                <a ui-sref="app.product.distributionrecord">
+                    <span>收益分配记录</span>
+                </a>
+            </li>
             <li>
                 <a href class="auto">
                   <span class="pull-right text-muted">
@@ -133,13 +143,13 @@
                     <!--我的赎回记录-->
                 </a>
             </li>
-            <li ui-sref-active="active" ng-if="isMenuAuthorized['app.invest.subscriberesultlistall']">
-                <a ui-sref="app.invest.redeemresultlistall">
+            <li ui-sref-active="active" ng-if="isMenuAuthorized['app.invest.subscribelistall']">
+                <a ui-sref="app.invest.subscribelistall">
                     <span>所有预约记录</span>
                 </a>
             </li>
-            <li ui-sref-active="active" ng-if="isMenuAuthorized['app.invest.purchaseresultlistall']">
-                <a ui-sref="app.invest.redeemresultlistall">
+            <li ui-sref-active="active" ng-if="isMenuAuthorized['app.invest.purchaserecordall']">
+                <a ui-sref="app.invest.purchaserecordall">
                     <span>所有购买记录</span>
                 </a>
             </li>
@@ -525,6 +535,11 @@
             <li ui-sref-active="active" ng-if="isMenuAuthorized['app.report.sale.depart']">
                 <a ui-sref="app.report.sale-depart">
                     <span>部门认购明细表</span>
+                </a>
+            </li>
+            <li ui-sref-active="active" ng-if="isMenuAuthorized['app.report.sale.all']">
+                <a ui-sref="app.report.sale-all">
+                    <span>所有认购明细表</span>
                 </a>
             </li>
             <li ui-sref-active="active" ng-if="isMenuAuthorized['app.report.commission']">

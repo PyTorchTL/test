@@ -138,15 +138,28 @@ String.prototype.endsWith = function(suffix) {
         }
       };
 
-      service.getLevelShow = function(level) {
-        if (level === 1) {
-          return '优先级';
-        } else if (level === 2) {
-          return '劣后级';
-        } else {
-          return '';
+      service.getSubscribeLevelShow = function (level) {
+        switch (level) {
+          case '1':
+          case 1: return '优先级';
+          case '2':
+          case 2: return '劣后级';
+          case '3':
+          case 3: return '夹层级';
+          case '4':
+          case 4: return '无层级';
+          default: return '';
         }
       };
+
+      // TODO
+      service.getLevelShowOrRate = function (record) {
+        if (record.subscribeRate) {
+          return invest.subscribeRate;
+        } else {
+          return Util.getSubscribeLevelShow(invest.subscribeLevel);
+        }
+      }
 
       // e.g., if we remove/delete model.attr in the view, model.attr === null
       //       when model is posted to server, attr is not changed

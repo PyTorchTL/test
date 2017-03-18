@@ -1,0 +1,74 @@
+<div class="wrapper-md">
+    <form name="productEstablishForm" class="bs-example form-horizontal" style="padding-top:20px;">
+        <div class="panel panel-default">
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>客户姓名</th>
+                        <th>认购金额</th>
+                        <!-- <th ng-if="::product.productType === 1">认购份额</th> -->
+                        <th>认购期限</th>
+                        <th ng-if="::product.productType === 0">年化利率</th>
+                        <th ng-if="::product.productType === 1">认购层级</th>
+                        <th>认购时间</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="user in model.subscribeReportList" st-select-row="row">
+                        <td>{{user.userRealName}}</td>
+                        <td>{{user.purchaseAmount}}</td>
+                        <!-- <td ng-if="::product.productType === 1">{{user.purchaseShare}}</td> -->
+                        <td>{{user.anualRatePeriod}}</td>
+                        <td ng-if="::product.productType === 0">
+                            {{user.purchaseRate}}
+                        </td>
+                        <td ng-if="::product.productType === 1">
+                            <p>{{getSubscribeLevelShow(user.subscribeLevel)}}</p>
+                        </td>
+                        <td>{{user.purchaseTime | getDate}}</td>
+                    </tr>
+                    <tr ng-if="model.subscribeReportList.length > 0">
+                        <td>募集总额</td>
+                        <td colspan="2">{{product.purchaseAmount}}</td>
+                        <!--TODO-->
+                        <td colspan="2"></td>
+                    </tr>
+                    <tr ng-if="model.subscribeReportList.length > 0">
+                        <td>成立日期</td>
+                        <td colspan="2">
+                            <my-date-picker date="submitData.establishDate"></my-date-picker>
+                        </td>
+                        <td colspan="2"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">是否成立</label>
+            <div class="col-sm-9">
+                <div class="col-sm-4">
+                    <div class="radio">
+                        <label class="i-checks">
+                            <input type="radio" name="result" value="1" ng-required="true" ng-model="submitData.establishDecision" checked>
+                            <i></i> 成立
+                        </label>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="radio">
+                        <label class="i-checks">
+                            <input type="radio" name="result" value="2" ng-required="true" ng-model="submitData.establishDecision">
+                            <i></i> 不成立
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-10 col-sm-offset-1">
+                <button type="submit" class="btn m-b-xs m-r-md w-xs btn-primary" ng-disabled='!productEstablishForm.$valid' ng-click="submit()" value="提交">提交</button>
+                <button type="button" class="btn m-b-xs w-xs btn-default" value="取消" tabindex="0" ng-click="cancel()">取消</button>
+            </div>
+        </div>
+    </form>
+</div>

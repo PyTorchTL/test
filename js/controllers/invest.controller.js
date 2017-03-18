@@ -95,6 +95,10 @@ app.controller('InvestSubscribeListCtrl', ['$scope', 'toaster', '$uibModal', 'In
         }
       });
     };
+
+    $scope.getSubscribeLevelShow = function (level) {
+      return Util.getSubscribeLevelShow(level);
+    }
 }]);
 
 app.controller('InvestFixedSubscribeListModalCtrl', ['$scope', '$uibModalInstance', 'toaster', 'item', 'Customer', 'Util', 'Invest', function($scope, $uibModalInstance, toaster, item, Customer, Util, Invest) {
@@ -294,6 +298,10 @@ app.controller('InvestSubscribeRecordCtrl', ['$scope', '$state', 'toaster', '$ui
       return Util.getProductPeriodTypeShow(invest.periodType);
     };
 
+    $scope.getSubscribeLevelShow = function (level) {
+      return Util.getSubscribeLevelShow(level);
+    }
+
     $scope.search = function () {
         $scope.query.page = 1;
         $scope.get();
@@ -355,6 +363,11 @@ app.controller('InvestSubscribeRecordCtrl', ['$scope', '$state', 'toaster', '$ui
           });
       }
     };
+
+    $scope.getSubscribeLevelShow = function(level) {
+      return Util.getSubscribeLevelShow(level);
+    };
+
 }]);
 
 app.controller('FixedPurchaseModalCtrl', ['$scope', '$uibModalInstance', 'toaster', 'item', 'Invest', 'Util', function($scope, $uibModalInstance, toaster, item, Invest, Util) {
@@ -434,6 +447,10 @@ app.controller('FloatingPurchaseModalCtrl', ['$scope', '$uibModalInstance', 'toa
     $scope.cancel = function () {
       $uibModalInstance.dismiss('cancel');
     };
+
+    $scope.getSubscribeLevelShow = function (level) {
+      return Util.getSubscribeLevelShow(level);
+    }
 }]);
 
 app.controller('InvestPurchaseRecordCtrl', ['$scope', '$state', 'toaster', '$uibModal', 'Invest', 'Util', function($scope, $state, toaster, $uibModal, Invest, Util) {
@@ -510,10 +527,19 @@ app.controller('InvestPurchaseRecordCtrl', ['$scope', '$state', 'toaster', '$uib
         return '';
       }
     }
+
+
+    $scope.getSubscribeLevelShow = function (level) {
+      return Util.getSubscribeLevelShow(level);
+    }
 }]);
 
-app.controller('InvestPurchaseRecordViewModelCtrl', ['$scope', '$uibModalInstance', 'toaster', 'item', 'Invest', function($scope, $uibModalInstance, toaster, item, Invest) {
+app.controller('InvestPurchaseRecordViewModelCtrl', ['$scope', '$uibModalInstance', 'toaster', 'item', 'Util', function($scope, $uibModalInstance, toaster, item, Util) {
     $scope.item = item;
+
+    $scope.getSubscribeLevelShow = function (level) {
+      return Util.getSubscribeLevelShow(level);
+    }
 }]);
 
 app.controller('InvestPurchaseApproveCtrl', ['$scope', 'toaster', '$uibModal', 'Invest', 'Util', function($scope, toaster, $uibModal, Invest, Util) {
@@ -544,6 +570,10 @@ app.controller('InvestPurchaseApproveCtrl', ['$scope', 'toaster', '$uibModal', '
     $scope.getPeriodTypeShow = function (purchaseRecord) {
       return Util.getProductPeriodTypeShow(purchaseRecord.periodType);
     };
+
+    $scope.getSubscribeLevelShow = function (level) {
+      return Util.getSubscribeLevelShow(level);
+    }
 
     $scope.search = function () {
         $scope.query.page = 1;
@@ -591,6 +621,10 @@ app.controller('InvestPurchaseApproveCtrl', ['$scope', 'toaster', '$uibModal', '
         }
       });
     };
+
+    $scope.getSubscribeLevelShow = function (level) {
+      return Util.getSubscribeLevelShow(level);
+    }
 }]);
 
 app.controller('FixedPurchaseApproveModalCtrl', ['$scope', '$uibModalInstance', 'toaster', 'item', 'Invest', 'Util', function($scope, $uibModalInstance, toaster, item, Invest, Util) {
@@ -621,7 +655,7 @@ app.controller('FixedPurchaseApproveModalCtrl', ['$scope', '$uibModalInstance', 
     };
 }]);
 
-app.controller('FloatingPurchaseApproveModalCtrl', ['$scope', '$uibModalInstance', 'toaster', 'item', 'Invest', function($scope, $uibModalInstance, toaster, item, Invest) {
+app.controller('FloatingPurchaseApproveModalCtrl', ['$scope', '$uibModalInstance', 'toaster', 'item', 'Invest', 'Util', function($scope, $uibModalInstance, toaster, item, Invest, Util) {
     $scope.item = item;
     $scope.submitData = {};
     $scope.submitData = {
@@ -643,6 +677,10 @@ app.controller('FloatingPurchaseApproveModalCtrl', ['$scope', '$uibModalInstance
     $scope.cancel = function () {
       $uibModalInstance.dismiss('cancel');
     };
+
+    $scope.getSubscribeLevelShow = function (level) {
+      return Util.getSubscribeLevelShow(level);
+    }
 }]);
 
 
@@ -673,6 +711,10 @@ app.controller('InvestRedeemListCtrl', ['$scope', 'toaster', '$uibModal', 'Inves
     $scope.pageChanged = function () {
         $scope.get();
     };
+
+    $scope.getSubscribeLevelShow = function (level) {
+      return Util.getSubscribeLevelShow(level);
+    }
 
     $scope.openFixedRedeemAdd = function (record) {
         var modalInstance = $uibModal.open({
@@ -712,6 +754,11 @@ app.controller('InvestRedeemListCtrl', ['$scope', 'toaster', '$uibModal', 'Inves
       });
     };
 
+
+    $scope.getSubscribeLevelShow = function (level) {
+      return Util.getSubscribeLevelShow(level);
+    }
+
 }]);
 
 app.controller('FixedRedeemAddModalCtrl', ['$scope', '$uibModalInstance', 'toaster', 'item', 'Invest', 'Util', function($scope, $uibModalInstance, toaster, item, Invest, Util) {
@@ -721,8 +768,11 @@ app.controller('FixedRedeemAddModalCtrl', ['$scope', '$uibModalInstance', 'toast
       id: $scope.item.id
     };
     $scope.submitData.redeemAmount = Util.toRmbTT(item.purchaseAmount);
+    var today = new Date();
+    $scope.submitData.redeemTime = Util.getDate(today);
 
     $scope.submit = function () {
+      $scope.submitData.redeemTime = Util.getDate($scope.submitData.redeemTime);
       Invest.productRedeemAdd($scope.submitData)
         .then(function () {
           $uibModalInstance.close(true);
@@ -735,17 +785,24 @@ app.controller('FixedRedeemAddModalCtrl', ['$scope', '$uibModalInstance', 'toast
     $scope.cancel = function () {
       $uibModalInstance.dismiss('cancel');
     };
+
+    $scope.getSubscribeLevelShow = function (level) {
+      return Util.getSubscribeLevelShow(level);
+    }
 }]);
 
-app.controller('FloatingRedeemAddModalCtrl', ['$scope', '$uibModalInstance', 'toaster', 'item', 'Invest', function($scope, $uibModalInstance, toaster, item, Invest) {
+app.controller('FloatingRedeemAddModalCtrl', ['$scope', '$uibModalInstance', 'toaster', 'item', 'Invest', 'Util', function($scope, $uibModalInstance, toaster, item, Invest, Util) {
     $scope.item = item;
     $scope.submitData = {};
     $scope.submitData = {
       id: $scope.item.id
     };
     $scope.submitData.redeemShare = item.share; // Util.toRmbTT(item.purchaseAmount);
+    var today = new Date();
+    $scope.submitData.redeemTime = Util.getDate(today);
 
     $scope.submit = function () {
+      $scope.submitData.redeemTime = Util.getDate($scope.submitData.redeemTime);
       Invest.productRedeemAdd($scope.submitData)
         .then(function () {
           $uibModalInstance.close(true);
@@ -758,6 +815,10 @@ app.controller('FloatingRedeemAddModalCtrl', ['$scope', '$uibModalInstance', 'to
     $scope.cancel = function () {
       $uibModalInstance.dismiss('cancel');
     };
+
+    $scope.getSubscribeLevelShow = function (level) {
+      return Util.getSubscribeLevelShow(level);
+    }
 }]);
 
 app.controller('InvestRedeemApproveCtrl', ['$scope', '$state', 'toaster', '$uibModal', 'Invest', 'Util', function($scope, $state, toaster, $uibModal, Invest, Util) {
@@ -787,6 +848,10 @@ app.controller('InvestRedeemApproveCtrl', ['$scope', '$state', 'toaster', '$uibM
     $scope.pageChanged = function () {
         $scope.get();
     };
+
+    $scope.getSubscribeLevelShow = function (level) {
+      return Util.getSubscribeLevelShow(level);
+    }
 
     $scope.openFixedRedeemApprove = function (redeem) {
         var modalInstance = $uibModal.open({
@@ -825,15 +890,20 @@ app.controller('InvestRedeemApproveCtrl', ['$scope', '$state', 'toaster', '$uibM
         }
       });
     };
+
+
+    $scope.getSubscribeLevelShow = function (level) {
+      return Util.getSubscribeLevelShow(level);
+    }
 }]);
 
 app.controller('FixedRedeemApproveModalCtrl', ['$scope', '$uibModalInstance', 'toaster', 'item', 'Invest', 'Util', function($scope, $uibModalInstance, toaster, item, Invest, Util) {
     $scope.item = item;
     $scope.submitData = {};
-    var today = new Date();
+    // var today = new Date();
     $scope.submitData = {
       redeemApproveDecision: '',
-      redeemTime: Util.getDate(today),
+      // redeemTime: Util.getDate(today),
       id: item.id
     };
 
@@ -850,15 +920,19 @@ app.controller('FixedRedeemApproveModalCtrl', ['$scope', '$uibModalInstance', 't
     $scope.cancel = function () {
       $uibModalInstance.dismiss('cancel');
     };
+
+    $scope.getSubscribeLevelShow = function (level) {
+      return Util.getSubscribeLevelShow(level);
+    }
 }]);
 
 app.controller('FloatingRedeemApproveModalCtrl', ['$scope', '$uibModalInstance', 'toaster', 'item', 'Util', 'Invest', function($scope, $uibModalInstance, toaster, item, Util, Invest) {
     $scope.item = item;
     $scope.submitData = {};
-    var today = new Date();
+    // var today = new Date();
     $scope.submitData = {
       redeemApproveDecision: '',
-      redeemTime: Util.getDate(today),
+      // redeemTime: Util.getDate(today),
       id: item.id
     };
 
@@ -875,9 +949,13 @@ app.controller('FloatingRedeemApproveModalCtrl', ['$scope', '$uibModalInstance',
     $scope.cancel = function () {
       $uibModalInstance.dismiss('cancel');
     };
+
+    $scope.getSubscribeLevelShow = function (level) {
+      return Util.getSubscribeLevelShow(level);
+    }
 }]);
 
-app.controller('InvestRedeemResultListCtrl', ['$scope', '$state', 'toaster', 'Invest', function($scope, $state, toaster, Invest) {
+app.controller('InvestRedeemResultListCtrl', ['$scope', '$state', 'toaster', 'Invest', 'Util', function($scope, $state, toaster, Invest, Util) {
   $scope.model = {};
     $scope.query = {
         keyword: '',
@@ -906,14 +984,19 @@ app.controller('InvestRedeemResultListCtrl', ['$scope', '$state', 'toaster', 'In
         $scope.get();
     };
 
-  $scope.getRedeemApproveResult = function(redeem) {
-    if (redeem.redeemApproveDecision === 0) {
-      return '未审核';
-    } else if (redeem.redeemApproveDecision === 1) {
-      return '审核通过';
-    } else if (redeem.redeemApproveDecision === 2) {
-      return '审核未通过';
+    $scope.getSubscribeLevelShow = function (level) {
+      return Util.getSubscribeLevelShow(level);
     }
-  }
+
+    $scope.getRedeemApproveResult = function(redeem) {
+      if (redeem.redeemApproveDecision === 0) {
+        return '未审核';
+      } else if (redeem.redeemApproveDecision === 1) {
+        return '审核通过';
+      } else if (redeem.redeemApproveDecision === 2) {
+        return '审核未通过';
+      }
+    }
+
 }]);
 

@@ -38,9 +38,7 @@
     <div class="form-group">
         <label class="col-lg-2 col-sm-offset-1 control-label">购买层级</label>
         <div class="col-lg-7 padding-sm">
-            <!-- <p>{{item.subscribeLevel}}</p> -->
-            <p ng-if="item.subscribeLevel==1">优先级</p>
-            <p ng-if="item.subscribeLevel==2">劣后级</p>
+            <p>{{getSubscribeLevelShow(item.subscribeLevel)}}</p>
         </div>
     </div>
     <div class="form-group">

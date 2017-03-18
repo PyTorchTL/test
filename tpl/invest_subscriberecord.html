@@ -109,7 +109,7 @@
                         <th>预约客户</th>
                         <th>预约金额(万)</th>
                         <th>预约期限</th>
-                        <th>预约层级</th>
+                        <th>利率/层级</th>
                         <th>理财经理</th>
                         <th>所属部门</th>
                         <th>操作</th>
@@ -123,9 +123,10 @@
                         <td>{{invest.userRealName}}</td>
                         <td>{{invest.mySubscribeAmount | rmbTT}}</td>
                         <td><span ng-if="invest.incomeSetting.anualRatePeriod">{{invest.incomeSetting.anualRatePeriod}}{{getPeriodTypeShow(invest)}}</span></td>
+                        <!-- <td>{{getSubscribeLevelShow(invest.subscribeLevel)}}</td> -->
                         <td>
-                            <span ng-if="invest.subscribeLevel==1">优先级</span>
-                            <span ng-if="invest.subscribeLevel==2">劣后级</span>
+                            <span ng-if="invest.productType===0">{{invest.subscribeRate}}</span>
+                            <span ng-if="invest.productType===1">{{getSubscribeLevelShow(invest.subscribeLevel)}}</span>
                         </td>
                         <td>{{invest.employeeRealName}}</td>
                         <td>{{invest.departName}}</td>

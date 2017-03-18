@@ -37,6 +37,8 @@ app
         service.subscribeRecord = function (query, stateName) {
             query.purchaseStatus = 0;
 
+            var url = '/api/v1/subscribeRecord';
+
             if (query.keyword === '') {
                 delete query.keyword;
             }
@@ -57,12 +59,12 @@ app
             }
 
             if (stateName) {
-                if (stateName.endsWith('all')) {
-                    query.all = 1;
+                if (!stateName.endsWith('all')) {
+                    url += 'Employee';  // query.all = 1;
                 }
             }
 
-            return $http.get('/api/v1/subscribeRecord', {params: query});
+            return $http.get(url, {params: query});
         };
 
         service.cancelSubscribe = function (invest) {
@@ -81,6 +83,8 @@ app
 
         service.purchaseRecord = function (query, stateName) {
             query.purchaseStatus = 1;
+
+            var url = '/api/v1/subscribeRecord';
 
             if (query.keyword === '') {
                 delete query.keyword;
@@ -102,13 +106,13 @@ app
             }
 
             if (stateName) {
-                if (stateName.endsWith('all')) {
-                    query.all = 1;
+                if (!stateName.endsWith('all')) {
+                    url += 'Employee'; //query.all = 1;
                 }
             }
 
 
-            return $http.get('/api/v1/subscribeRecord', {params: query});
+            return $http.get(url, {params: query});
         };
 
         service.productPurchaseApprove = function (query) {

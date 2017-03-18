@@ -1,0 +1,100 @@
+<div class="wrapper-md">
+<!-- <toaster-container toaster-options="{'position-class': 'toast-top-right', 'close-button':true}"></toaster-container> -->
+    <div class="panel panel-default bg-light lter">
+        <div class="panel-body">
+            <form class="bs-example form-horizontal">
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="form-group">
+                        <label class="col-lg-3 col-md-3 control-label">产品名称</label>
+
+                        <div class="col-lg-8 col-md-8">
+                            <input type="text" class="form-control" ng-model="query.name">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="form-group">
+                        <label class="col-lg-3 col-md-3 control-label">产品类型</label>
+
+                        <div class="col-lg-8 col-md-8">
+                            <select class="form-control" ng-model="query.productTypes">
+                                <option value="'0,1'">全部</option>
+                                <option value="0">固定类</option>
+                                <option value="1">浮动类</option>
+                                <!-- <option value="2">金融不良资产</option> -->
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="col-lg-4 col-md-6">
+                    <div class="form-group">
+                        <span>&nbsp;</span>
+                    </div>
+                </div> -->
+                </div>
+                <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div>
+                        <div class="form-group">
+                            <label class="col-lg-3 col-md-3 control-label">成立日期</label>
+
+                            <div class="col-lg-9 col-md-9">
+                                <my-date-picker date="query.startEstablishDate"></my-date-picker>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="form-group">
+                        <span class="col-lg-2 col-md-2 control-label">至</span>
+
+                        <div class="col-lg-9 col-md-9">
+                            <my-date-picker date="query.endEstablishDate"></my-date-picker>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="form-group">
+                        <button class="btn btn-default w-xs" ng-click="search()">搜索</button>
+                    </div>
+                </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="panel panel-default">
+                <table st-table="" class="table table-borderd table-striped">
+                    <thead>
+                    <tr>
+                        <th>分配日期</th>
+                        <th>产品名称</th>
+                        <th>产品类型</th>
+                        <th>成立日期</th>
+                        <th>兑付本金/份额</th>
+                        <th>分配收益</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="record in model.incomeDistributionRecord" st-select-row="row">
+                        <td>{{record.distributeDate}}</td>
+                        <td>{{record.name}}</td>
+                        <td>{{getProductTypeShow(record)}}</td>
+                        <td>{{record.establishDate | getDate}}</td>
+                        <td ng-if="::record.productType === 0">{{record.totalCaptialAmount}}</td>
+                        <td ng-if="::record.productType === 1">{{record.totalShare}}</td>
+                        <td>{{record.totalIncomeAmount}}</td>
+                        <td class="nowrap">
+                            <button ng-if="::approve" uib-popover="审核" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs btn-icon btn-icon-sm" ng-click="openIncomeDistributionRecordDetail(record)" ><i class="fa fa-pencil"></i></button>
+                            <button ng-if="::!approve" uib-popover="查看" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs btn-icon btn-icon-sm" ng-click="openIncomeDistributionRecordDetail(record)" ><i class="fa fa-eye"></i></button>
+                        </td>
+                    </tr>
+                    <tbody>
+                </table>
+            </div>
+
+
+
+    <uib-pagination ng-change="pageChanged()" total-items="totalItems" items-per-page="query.size" ng-model="query.page" max-size="maxSize" class="pagination-sm m-t-none m-b" boundary-links="true" rotate="false" num-pages="numPages"></uib-pagination>
+</div>

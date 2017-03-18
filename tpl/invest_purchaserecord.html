@@ -119,7 +119,7 @@
             <th>客户姓名</th>
             <th>购买金额(万)</th>
             <th>购买期限</th>
-            <th>购买层级</th>
+            <th>利率/层级</th>
             <th>理财经理</th>
             <th>所属部门</th>
             <th>操作</th>
@@ -135,9 +135,10 @@
             <td>{{purchaseRecord.myPurchaseAmount | rmbTT}}</td>
             <!-- <td><span ng-if="purchaseRecord.incomeSetting.anualRatePeriod">{{purchaseRecord.incomeSetting.anualRatePeriod}}{{getPeriodTypeShow(purchaseRecord)}}</span></td> -->
             <td>{{getPurchasePeriod(purchaseRecord)}}</td>
+            <!-- <td>{{getSubscribeLevelShow(purchaseRecord.subscribeLevel)}}</td> -->
             <td>
-                <span ng-if="purchaseRecord.subscribeLevel==1">优先级</span>
-                <span ng-if="purchaseRecord.subscribeLevel==2">劣后级</span>
+                <span ng-if="purchaseRecord.productType===0">{{purchaseRecord.purchaseRate}}</span>
+                <span ng-if="purchaseRecord.productType===1">{{getSubscribeLevelShow(purchaseRecord.purchaseLevel)}}</span>
             </td>
             <td>{{purchaseRecord.employeeRealName}}</td>
             <td>{{purchaseRecord.departName}}</td>

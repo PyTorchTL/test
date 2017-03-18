@@ -270,6 +270,21 @@
         }
       };
 
+      service.getDistributionTypeShow = function (type) {
+        switch (type) {
+          case 0: return '到期一次性支付';
+          case 1: return '经过季度分配';
+          case 2: return '经过半年度分配';
+          case 3: return '经过九个月分配';
+          case 4: return '经过年度分配';
+          case 5: return '自然季度分配';
+          case 6: return '自然半年度分配';
+          case 7: return '自然年度分配';
+          case 8: return '随收随付';
+          default: return '';
+        }
+      };
+
       service.distributionPlan = function (month, year) {
         var date = new Date();
         var m = date.getMonth();
@@ -309,30 +324,71 @@
         return $http.get('/api/v1/incomeDistributionPeriod', {params: query});
       };
 
-      service.incomeDistributionUserList = function(distributionId) {
-        return $http.get('/api/v1/incomeDistributionPeriodUserList/' + distributionId);
+      service.incomeDistributionRecord = function(query) {
+        if (query.productId === '') {
+            delete query.productId;
+        }
+        if (query.name === '') {
+            delete query.name;
+        }
+        if (query.status === '' || query.status === '-1') {
+            delete query.status;
+        }
+        if (!query.productTypes || query.productTypes === '') {
+          delete query.productTypes;
+        }
+
+
+        if (!query.startEstablishDate) {
+            delete query.startEstablishDate;
+        } else {
+          query.startEstablishDate = Util.getDate(query.startEstablishDate);
+        }
+
+        if (!query.endEstablishDate) {
+          delete query.endEstablishDate;
+        } else {
+          query.endEstablishDate = Util.getDate(query.endEstablishDate);
+        }
+
+        return $http.get('/api/v1/incomeDistributionRecord', {params: query});
       }
 
+      service.incomeDistributionRecordApproveUpt = function(record) {
+        return $http.post('/api/v1/incomeDistributionRecordApproveUpt/' + record.id, record);
+      }
+
+      service.incomeDistributionUserList = function (productId) {
+        return $http.get('/api/v1/incomeDistributionUserList/' + productId);
+      }
+
+      service.incomeDistributionRecordUserList = function (id) {
+        return $http.get('/api/v1/incomeDistributionRecordUserList/' + id);
+      }
+
+      // service.incomeDistributionCrt = function (distribution) {
+
+      //   // distribution.capitalAmount = Util.toRmbFromTT(distribution.capitalAmount);
+      //   // distribution.incomeAmount = Util.toRmbFromTT(distribution.incomeAmount);
+      //   // distribution.share = Util.toRmbFromTT(distribution.share);
+
+      //   // return $http.post('/api/v1/incomeDistributionCrt/' + distribution.id, distribution);
+      //   // return $http.post('/api/v1/incomeDistributionPeriodCrt', distribution);
+      //   return $http.post('/api/v1/incomeDistributionPeriodCrt', {data: distribution});
+
+      //   // var req = {
+      //   //  method: 'POST',
+      //   //  url: '/api/v1/incomeDistributionPeriodCrt',
+      //   //  headers: {
+      //   //    'Content-Type': undefined
+      //   //  },
+      //   //  data: "data=" + JSON.stringify(distribution)
+      //   // }
+
+      //   // return $http(req);
+      // };
       service.incomeDistributionCrt = function (distribution) {
-
-        // distribution.capitalAmount = Util.toRmbFromTT(distribution.capitalAmount);
-        // distribution.incomeAmount = Util.toRmbFromTT(distribution.incomeAmount);
-        // distribution.share = Util.toRmbFromTT(distribution.share);
-
-        // return $http.post('/api/v1/incomeDistributionCrt/' + distribution.id, distribution);
-        // return $http.post('/api/v1/incomeDistributionPeriodCrt', distribution);
-        return $http.post('/api/v1/incomeDistributionPeriodCrt', {data: distribution});
-
-        // var req = {
-        //  method: 'POST',
-        //  url: '/api/v1/incomeDistributionPeriodCrt',
-        //  headers: {
-        //    'Content-Type': undefined
-        //  },
-        //  data: "data=" + JSON.stringify(distribution)
-        // }
-
-        // return $http(req);
+        return $http.post('/api/v1/incomeDistributionCrt', distribution);
       };
 
       service.productEstablishDetails = function (product) {
@@ -341,11 +397,11 @@
 
       service.productEstablishUpt = function (product) {
         product.establishDate = Util.getDate(product.establishDate);
-        if (product.repayDateList) {
-          product.repayDateList.forEach(function(repay) {
-            repay.repayDate = Util.getDate(repay.repayDate);
-          });
-        }
+        // if (product.repayDateList) {
+        //   product.repayDateList.forEach(function(repay) {
+        //     repay.repayDate = Util.getDate(repay.repayDate);
+        //   });
+        // }
 
         return $http.post('/api/v1/productEstablishUpt/' + product.id, product);
       };

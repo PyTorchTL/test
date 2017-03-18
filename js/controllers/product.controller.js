@@ -680,29 +680,10 @@ app.controller('ProductEstablishCtrl', ['$scope', '$uibModal', 'toaster', 'Produ
       return Product.getPeriodShow(period);
     };
 
-    $scope.openDealFixedProductEstablish = function (product, lg) {
+    $scope.openProductEstablish = function (product, lg) {
       var modalInstance = $uibModal.open({
-        templateUrl: 'tpl/modal/modal_fixedProductEstablish.html',
-        controller: 'FixedProductEstablishModalCtrl',
-        size: 'lg',
-        resolve: {
-          item: function () {
-            return product;
-          }
-        }
-      });
-      modalInstance.result.then(function (result) {
-        if (result === true) {
-          $scope.get();
-          toaster.pop('success', '提交成功');
-        }
-      });
-    };
-
-    $scope.openDealFloatingProductEstablish = function (product, lg) {
-      var modalInstance = $uibModal.open({
-        templateUrl: 'tpl/modal/modal_floatingProductEstablish.html',
-        controller: 'FloatingProductEstablishModalCtrl',
+        templateUrl: 'tpl/modal/modal_productEstablish.html',
+        controller: 'ProductEstablishModalCtrl',
         size: 'lg',
         resolve: {
           item: function () {
@@ -734,99 +715,142 @@ app.controller('ProductEstablishCtrl', ['$scope', '$uibModal', 'toaster', 'Produ
     };
 }]);
 
-app.controller('FixedProductEstablishModalCtrl', ['$scope', '$uibModalInstance', 'item', 'toaster', 'Util', 'Product', function($scope, $uibModalInstance,item, toaster, Util, Product) {
-    $scope.item = item;
-    $scope.submitData = {};
-    $scope.submitData.id = item.id;
-    var today = new Date();
-    $scope.submitData.establishDate = Util.getDate(today);
+app.controller('ProductEstablishModalCtrl', ['$scope', '$uibModalInstance', 'item', 'toaster', 'Util', 'Product', 'Report', function($scope, $uibModalInstance,item, toaster, Util, Product, Report) {
 
-    Product.productEstablishDetails($scope.item)
-      .then(function (response) {
-        $scope.product = response.data;
-        $scope.submitData.repayDateList = $scope.product.repayDateList;
-        // for(var i=0; i<$scope.product.repayDateList.length; i++){
-        //   $scope.submitData.repayDateList[i].repayId = $scope.product.repayDateList[i].repayId;
-        //   $scope.submitData.repayDateList[i].repayDate = $scope.product.repayDateList[i].repayDate;
-        // }
+  $scope.product = item;
+  $scope.model = {};
+  $scope.submitData = {};
+  $scope.submitData.id = item.id;
+  var today = new Date();
+  $scope.submitData.establishDate = Util.getDate(today);
+
+  Report.subscribeReport($scope.product)
+    .then(function (response) {
+      $scope.model.subscribeReportList = response.data.data;
+    });
+
+  $scope.getPeriodShow = function (period) {
+    return Product.getPeriodShow(period);
+  };
+
+  $scope.getPeriodTypeShow = function (period) {
+    return Util.getProductPeriodTypeShow(period);
+  };
+
+  $scope.getSubscribeLevelShow = function (level) {
+    return Util.getSubscribeLevelShow(level);
+  }
+
+  $scope.submit = function () {
+    Product.productEstablishUpt($scope.submitData)
+      .then(function () {
+        $uibModalInstance.close(true);
+      })
+      .catch(function (res) {
+        // toaster.pop('error', '提交失败');
+        toaster.pop('error', res.data.message);
       });
+  };
 
-    $scope.getPeriodShow = function (period) {
-      return Product.getPeriodShow(period);
-    };
-
-    $scope.getPeriodTypeShow = function (period) {
-      return Util.getProductPeriodTypeShow(period);
-    };
-
-    $scope.submit = function () {
-      Product.productEstablishUpt($scope.submitData)
-        .then(function () {
-          $uibModalInstance.close(true);
-        })
-        .catch(function (res) {
-          // toaster.pop('error', '提交失败');
-          toaster.pop('error', res.data.message);
-        });
-    };
-
-    $scope.cancel = function () {
-      $uibModalInstance.dismiss('cancel');
-    };
-
-    $scope.addRepayDate = function () {
-      $scope.submitData.repayDateList.push({typeShow: '收益'});
-    };
-
-    $scope.deleteRepayDate = function (index) {
-      $scope.submitData.repayDateList.splice(index,1);
-    };
+  $scope.cancel = function () {
+    $uibModalInstance.dismiss('cancel');
+  };
 }]);
 
-app.controller('FloatingProductEstablishModalCtrl', ['$scope', '$uibModalInstance', 'item', 'toaster', 'Util', 'Product', function($scope, $uibModalInstance,item, toastr, Util, Product) {
-    $scope.item = item;
-    $scope.submitData = {};
-    $scope.submitData.id = item.id;
-    var today = new Date();
-    $scope.submitData.establishDate = Util.getDate(today);
 
-    Product.productEstablishDetails($scope.item)
-      .then(function (response) {
-        $scope.product = response.data;
-        $scope.submitData.repayDateList = $scope.product.repayDateList;
-        // for(var i=0; i<$scope.product.repayDateList.length; i++){
-        //   $scope.submitData.repayDateList[i].repayId = $scope.product.repayDateList[i].repayId;
-        //   $scope.submitData.repayDateList[i].repayDate = $scope.product.repayDateList[i].repayDate;
-        // }
-      });
+// app.controller('FixedProductEstablishModalCtrl', ['$scope', '$uibModalInstance', 'item', 'toaster', 'Util', 'Product', function($scope, $uibModalInstance,item, toaster, Util, Product) {
+//     $scope.item = item;
+//     $scope.submitData = {};
+//     $scope.submitData.id = item.id;
+//     var today = new Date();
+//     $scope.submitData.establishDate = Util.getDate(today);
 
-    $scope.getPeriodShow = function (period) {
-      return Product.getPeriodShow(period);
-    };
+//     Product.productEstablishDetails($scope.item)
+//       .then(function (response) {
+//         $scope.product = response.data;
+//         $scope.submitData.repayDateList = $scope.product.repayDateList;
+//         // for(var i=0; i<$scope.product.repayDateList.length; i++){
+//         //   $scope.submitData.repayDateList[i].repayId = $scope.product.repayDateList[i].repayId;
+//         //   $scope.submitData.repayDateList[i].repayDate = $scope.product.repayDateList[i].repayDate;
+//         // }
+//       });
 
-    $scope.submit = function () {
-      Product.productEstablishUpt($scope.submitData)
-        .then(function () {
-          $uibModalInstance.close(true);
-        })
-        .catch(function (res) {
-          // toaster.pop('error', '提交失败');
-          toaster.pop('error', res.data.message);
-        });
-    };
+//     $scope.getPeriodShow = function (period) {
+//       return Product.getPeriodShow(period);
+//     };
 
-    $scope.cancel = function () {
-      $uibModalInstance.dismiss('cancel');
-    };
+//     $scope.getPeriodTypeShow = function (period) {
+//       return Util.getProductPeriodTypeShow(period);
+//     };
 
-    $scope.addRepayDate = function () {
-      $scope.submitData.repayDateList.push({typeShow: '收益'});
-    };
+//     $scope.submit = function () {
+//       Product.productEstablishUpt($scope.submitData)
+//         .then(function () {
+//           $uibModalInstance.close(true);
+//         })
+//         .catch(function (res) {
+//           // toaster.pop('error', '提交失败');
+//           toaster.pop('error', res.data.message);
+//         });
+//     };
 
-    $scope.deleteRepayDate = function (index) {
-      $scope.submitData.repayDateList.splice(index,1);
-    };
-}]);
+//     $scope.cancel = function () {
+//       $uibModalInstance.dismiss('cancel');
+//     };
+
+//     $scope.addRepayDate = function () {
+//       $scope.submitData.repayDateList.push({typeShow: '收益'});
+//     };
+
+//     $scope.deleteRepayDate = function (index) {
+//       $scope.submitData.repayDateList.splice(index,1);
+//     };
+// }]);
+
+// app.controller('FloatingProductEstablishModalCtrl', ['$scope', '$uibModalInstance', 'item', 'toaster', 'Util', 'Product', function($scope, $uibModalInstance,item, toastr, Util, Product) {
+//     $scope.item = item;
+//     $scope.submitData = {};
+//     $scope.submitData.id = item.id;
+//     var today = new Date();
+//     $scope.submitData.establishDate = Util.getDate(today);
+
+//     Product.productEstablishDetails($scope.item)
+//       .then(function (response) {
+//         $scope.product = response.data;
+//         $scope.submitData.repayDateList = $scope.product.repayDateList;
+//         // for(var i=0; i<$scope.product.repayDateList.length; i++){
+//         //   $scope.submitData.repayDateList[i].repayId = $scope.product.repayDateList[i].repayId;
+//         //   $scope.submitData.repayDateList[i].repayDate = $scope.product.repayDateList[i].repayDate;
+//         // }
+//       });
+
+//     $scope.getPeriodShow = function (period) {
+//       return Product.getPeriodShow(period);
+//     };
+
+//     $scope.submit = function () {
+//       Product.productEstablishUpt($scope.submitData)
+//         .then(function () {
+//           $uibModalInstance.close(true);
+//         })
+//         .catch(function (res) {
+//           // toaster.pop('error', '提交失败');
+//           toaster.pop('error', res.data.message);
+//         });
+//     };
+
+//     $scope.cancel = function () {
+//       $uibModalInstance.dismiss('cancel');
+//     };
+
+//     $scope.addRepayDate = function () {
+//       $scope.submitData.repayDateList.push({typeShow: '收益'});
+//     };
+
+//     $scope.deleteRepayDate = function (index) {
+//       $scope.submitData.repayDateList.splice(index,1);
+//     };
+// }]);
 
 app.controller('ProductNetworthSettingCtrl', ['$scope', '$uibModal', 'toaster', 'Product', function($scope, $uibModal, toaster, Product){
   $scope.query = {
@@ -936,168 +960,50 @@ app.controller('ProductNetworthHistoryModalCtrl', ['$scope', '$uibModalInstance'
       });
  }]);
 
-// old: using calendar
-// app.controller('ProductDistributionCtrl', ['$scope', 'toaster', 'Product', '$uibModal', function($scope, toaster, Product, $uibModal) {
-
-//   $scope.model = {};
-//   $scope.model.productType = 0; // default：固定类
-//   $scope.model.date = '';
-
-//   // var date = new Date();
-//   // var d = date.getDate();
-//   // var m = date.getMonth();  // TODO: 1为1月
-//   // var y = date.getFullYear();
-
-//   $scope.events = [];
-//   $scope.eventSources = [$scope.events];
-//   $scope.init = function (month, year) {
-//     Product.distributionPlan(month,year).then(function(response){
-//       $scope.events.splice(0, $scope.events.length); // clean $scope.events
-//       response.data.forEach(function(e){
-//         $scope.events.push({
-//           title: e.toDistributeNumber + "/" + e.totalNumber + "个待分配",
-//           start: new Date(e.date)
-//         });
-//       });
-//     });
-//     $scope.eventSources = [$scope.events];
-//   };
-
-//   // $scope.init(); // called in viewRender
-
-//   $scope.get = function () {
-//     var query = {
-//       date: $scope.model.date,
-//       productType: $scope.model.productType
-//     };
-
-//     Product.incomeDistribution(query).then(function(response) {
-//       $scope.model.incomeDistributionList = [];
-//       $scope.model.incomeDistributionList = response.data;
-//     });
-//   };
-
-//   $scope.switchTab = function (productType) {
-//     $scope.model.productType = productType;
-//     $scope.get();
-//   };
-
-//   $scope.onEventClick = function (calEvent) {
-//     $scope.model.date = calEvent.start.format('YYYY-MM-DD');
-//     $scope.get();
-//   };
-
-//   $scope.getPeriodShow = function (period) {
-//     return Product.getPeriodShow(period);
-//   };
-
-//   $scope.openFixedIncomeDistributionCrt = function (distribution) {
-//       var modalInstance = $uibModal.open({
-//         templateUrl: 'tpl/modal/modal_fixedIncomeDistributionCrt.html',
-//         controller: 'FixedIncomeDistributionCrtModalCtrl',
-//         resolve: {
-//           item: function () {
-//             return distribution;
-//           }
-//         }
-//       });
-
-//       modalInstance.result.then(function (result) {
-//         if (result === true) {
-//           toaster.pop('success', '创建成功');
-//         }
-//       });
-//     };
-
-//     $scope.openFloatingIncomeDistributionCrt = function (distribution) {
-//       var modalInstance = $uibModal.open({
-//         templateUrl: 'tpl/modal/modal_floatingIncomeDistributionCrt.html',
-//         controller: 'FloatingIncomeDistributionCrtModalCtrl',
-//         resolve: {
-//           item: function () {
-//             return distribution;
-//           }
-//         }
-//       });
-
-//       modalInstance.result.then(function (result) {
-//         if (result === true) {
-//           toaster.pop('success', '创建成功');
-//         }
-//       });
-//     };
-
-//   /* config object */
-//   $scope.uiConfig = {
-//     calendar:{
-//       height: 450,
-//       editable: true,
-//       header:{
-//         left: 'prev',
-//         center: 'title',
-//         right: 'next'
-//       },
-//       eventClick: $scope.onEventClick,
-//       // dayClick: $scope.alertOnEventClick,
-//       // eventDrop: $scope.alertOnDrop,
-//       // eventResize: $scope.alertOnResize,
-//       // eventMouseover: $scope.alertOnMouseOver
-//       viewRender: function(view, element) {
-//         $scope.init(view.intervalStart.get('month'), view.intervalStart.get('year'));
-//          // $log.debug("View Changed: ", view.visStart, view.visEnd, view.start, view.end); }
-//       }
-//     }
-//   };
-
-//   $scope.today = function(calendar) {
-//     $('.calendar').fullCalendar('today');
-//   };
-
-//   $scope.model.incomeDistributionList = [];
-
-// }]);
-
 app.controller('ProductDistributionCtrl', ['$scope', 'toaster', 'Product', '$uibModal', 'Util', function($scope, toaster, Product, $uibModal, Util) {
   $scope.query = {
-    name: '',
-    status: '',
-  };
+        keyword: '',
+        status: '',
+        productTypes: '0,1',
+        startEstablishDate: '',
+        endEstablishDate: '',
+        page: 1,
+        size: 10
+    };
   $scope.model = {};
 
-  $scope.onChangePeriod = function (flag) {
-    if (flag === 'nextMonth') {
-      $scope.query.startDate = Util.getDate(moment().startOf('month').add(1,'months'));
-      $scope.query.endDate = Util.getDate(moment().endOf('month').add(1,'months'));
-    } else if (flag === 'thisWeek') {
-      $scope.query.startDate = Util.getDate(moment().startOf('week'));
-      $scope.query.endDate = Util.getDate(moment().endOf('week'));
-    } else if (flag === 'nextWeek') {
-      $scope.query.startDate = Util.getDate(moment().startOf('week').add(1,'weeks'));
-      $scope.query.endDate = Util.getDate(moment().endOf('week').add(1,'weeks'));
-    } else  { //  默认显示本月 (flag === 'thisMonth')
-      $scope.query.startDate = Util.getDate(moment().startOf('month'));
-      $scope.query.endDate = Util.getDate(moment().endOf('month'));
-    }
-
-    $scope.get();
-  };
-
   $scope.get = function() {
-    Product.incomeDistribution($scope.query).then(function(response) {
-      $scope.model.incomeDistributionList = response.data;
-    });
+    if ($scope.query.status === -1) {
+        delete $scope.query.status;
+      }
+
+      Product.products($scope.query)
+          .then(function (response) {
+              $scope.model.productList = response.data.data;
+              $scope.totalItems = response.data.pageBean.totalCount;
+
+          });
   };
 
-  $scope.onChangePeriod();
+  $scope.get();
 
-  $scope.openIncomeDistributionCrt = function (distribution) {
+  $scope.productListSearch = function () {
+        $scope.query.page = 1;
+        $scope.get();
+    };
+
+    $scope.pageChanged = function () {
+        $scope.get();
+    };
+
+  $scope.openIncomeDistributionCrt = function (product) {
     var modalInstance = $uibModal.open({
       templateUrl: 'tpl/modal/modal_incomeDistributionCrt.html',
       controller: 'IncomeDistributionCrtModalCtrl',
       size: 'lg',
       resolve: {
         item: function () {
-          return distribution;
+          return product;
         }
       }
     });
@@ -1110,88 +1016,92 @@ app.controller('ProductDistributionCtrl', ['$scope', 'toaster', 'Product', '$uib
     });
   };
 
-  $scope.openIncomeDistributionView = function (distribution) {
+  // $scope.openIncomeDistributionView = function (distribution) {
 
-    var modalInstance = $uibModal.open({
-        templateUrl: 'tpl/modal/modal_reportSubscribeDetail.html',
-        controller: 'ReportSubscribeDetailModalCtrl',
-        size: 'lg',
-        resolve: {
-          item: function () {
-            // return distribution; // ReportSubscribeDetailModalCtrl needs id be productId, not distribution id
-            return {
-              id: distribution.productId,
-              name: distribution.name
-            };
-          }
-        }
-      });
-      modalInstance.result.then();
+  //   var modalInstance = $uibModal.open({
+  //     // templateUrl: 'tpl/modal/modal_incomeDistributionView.html',
+  //     // controller: 'IncomeDistributionViewModalCtrl',
+  //     resolve: {
+  //       item: function () {
+  //         return distribution;
+  //       }
+  //     }
+  //   });
+  // };
 
-    // var modalInstance = $uibModal.open({
-    //   // templateUrl: 'tpl/modal/modal_incomeDistributionView.html',
-    //   // controller: 'IncomeDistributionViewModalCtrl',
-    //   resolve: {
-    //     item: function () {
-    //       return distribution;
-    //     }
-    //   }
-    // });
+  // $scope.getDitributionDate = function (distribution) {
+  //   return distribution.distributeTime ? distribution.distributeTime : distribution.date;
+  // };
+
+  $scope.getPeriodShow = function (period) {
+    return Product.getPeriodShow(period);
   };
 
-  $scope.getDitributionDate = function (distribution) {
-    return distribution.distributeTime ? distribution.distributeTime : distribution.date;
+  $scope.getDistributionTypeShow = function (type) {
+    return Product.getDistributionTypeShow(type);
   };
 
 }]);
 
-app.controller('IncomeDistributionCrtModalCtrl', ['$scope', '$uibModalInstance', 'item', 'Util', 'Product', 'toaster', function($scope, $uibModalInstance, item, Util, Product, toaster) {
-    $scope.distribution = item;
+app.controller('IncomeDistributionCrtModalCtrl', ['$scope', '$uibModalInstance', 'item', 'Util', 'Product', 'Report', 'toaster', function($scope, $uibModalInstance, item, Util, Product, Report, toaster) {
+    // $scope.distribution = item;
+    $scope.product = item;
     $scope.model = {};
 
-    $scope.model.totalPurchaseAmount = 0;
+    var today = new Date();
+    $scope.submitData = {
+      distributeDate: Util.getDate(today),
+      data: []
+    }
+
+    // $scope.model.totalPurchaseAmount = 0;
     $scope.model.totalToDistributeIncomeAmount = 0;
     $scope.model.totalToDistributeCapitalAmount = 0;  // 万元
 
+    // Product.incomeDistributionUserList(item.id).then(function(response) {
+    //   $scope.model.incomeDistributionUserList = response.data;
 
-    Product.incomeDistributionUserList(item.id).then(function(response) {
-      $scope.model.incomeDistributionUserList = response.data;
+    //   // 计算总的认购金额
+    //   $scope.model.incomeDistributionUserList.forEach(function(user) {
+    //     $scope.model.totalPurchaseAmount += user.purchaseAmount;
+    //     user.captialAmount = Util.toRmbTT(user.distributeCaptialAmount);
+    //     user.incomeAmount = 0; // TODO
+    //   });
 
-      // 计算总的认购金额
-      $scope.model.incomeDistributionUserList.forEach(function(user) {
-        $scope.model.totalPurchaseAmount += user.purchaseAmount;
-        user.captialAmount = Util.toRmbTT(user.distributeCaptialAmount);
-        user.incomeAmount = 0; // TODO
-      });
+    //   // 不能修改总的兑付本金，只修改兑付收益
+    //   $scope.$watch('model.totalToDistributeIncomeAmount', function(value) {
+    //     if (typeof value === 'number') {
+    //       redistributeIncome(value);
+    //     }
+    //   });
 
-      // 不能修改总的兑付本金，只修改兑付收益
-      $scope.$watch('model.totalToDistributeIncomeAmount', function(value) {
-        if (typeof value === 'number') {
-          redistributeIncome(value);
-        }
-      });
-
-
+    // Product.incomeDistributionUserList(item.id).then(function(response) {
+    //   $scope.model.incomeDistributionUserList = response.data;
+    // });
+    Report.subscribeReport(item, [2]).then(function(response) {
+      $scope.model.purchaseRecords = response.data.data;
     });
-
-    // TODO: watch $scope.totalIncomeAmount
 
     $scope.cancel = function () {
       $uibModalInstance.dismiss('cancel');
     };
 
-    $scope.submit = function () {
-      var submitData = [];
+    $scope.getSubscribeLevelShow = function (level) {
+      return Util.getSubscribeLevelShow(level);
+    }
 
-      $scope.model.incomeDistributionUserList.forEach(function(user) {
+    $scope.submit = function () {
+      $scope.submitData.distributeDate = Util.getDate($scope.submitData.distributeDate);
+      $scope.model.purchaseRecords.forEach(function(user) {
         var values = {};
         values.id = user.id;
-        values.captialAmount = Util.toRmbFromTT(user.captialAmount);
+        values.captialAmount = user.captialAmount; //Util.toRmbFromTT(user.captialAmount);
+        values.share = user.share;
         values.incomeAmount = user.incomeAmount;
-        submitData.push(values);
+        $scope.submitData.data.push(values);
       });
 
-      Product.incomeDistributionCrt(submitData)
+      Product.incomeDistributionCrt($scope.submitData)
         .then(function () {
           $uibModalInstance.close(true);
         })
@@ -1201,31 +1111,37 @@ app.controller('IncomeDistributionCrtModalCtrl', ['$scope', '$uibModalInstance',
         });
     };
 
-    function redistributeIncome(totalToDistributeIncomeAmount) {
-      $scope.model.incomeDistributionUserList.forEach(function(user) {
-        if (typeof totalToDistributeIncomeAmount === 'number') {
-          user.incomeAmount = user.purchaseAmount / $scope.model.totalPurchaseAmount * totalToDistributeIncomeAmount;
+    // function redistributeIncome(totalToDistributeIncomeAmount) {
+    //   $scope.model.incomeDistributionUserList.forEach(function(user) {
+    //     if (typeof totalToDistributeIncomeAmount === 'number') {
+    //       user.incomeAmount = user.purchaseAmount / $scope.model.totalPurchaseAmount * totalToDistributeIncomeAmount;
+    //     }
+    //   });
+    // }
+
+
+    $scope.getTotalToDistributeAmount = function() {
+      var total = 0;
+      $scope.model.purchaseRecords.forEach(function(user) {
+        if ($scope.product.productType === 0) {
+          total += user.captialAmount;
+        } else {
+          total += user.share;
         }
       });
-    }
 
-
-    $scope.getTotalToDistributeCapitalAmount = function() {
-      var total = 0;
-      $scope.model.incomeDistributionUserList.forEach(function(user) {
-        total += user.captialAmount;
-      });
-
-      return Math.round(total*1000000.0)/1000000.0; // total;
+      total = Math.round(total*1000000.0)/1000000.0; // total;
+      return isNaN(total) ? '' : total;
     }
 
     $scope.getTotalToDistributeIncomeAmount = function() {
       var total = 0;
-      $scope.model.incomeDistributionUserList.forEach(function(user) {
+      $scope.model.purchaseRecords.forEach(function(user) {
         total += user.incomeAmount;
       });
 
-      return Math.round(total*100.0)/100.0; // total;
+      total = Math.round(total*100.0)/100.0; // total;
+      return isNaN(total) ? '' : total;
     }
 
 }]);
@@ -1292,6 +1208,101 @@ app.controller('IncomeDistributionCrtModalCtrl', ['$scope', '$uibModalInstance',
 //         });
 //     };
 // }]);
+
+
+
+app.controller('ProductDistributeRecordCtrl', ['$scope', '$stateParams', 'toaster', '$uibModal', 'Product', 'Util', function($scope, $stateParams, toaster, $uibModal, Product, Util) {
+    // 收益分配审核页面
+    $scope.approve = $stateParams.approve ? true : false;
+
+    $scope.model = {};
+    $scope.query = {
+        name: '',
+        productType: '',
+        startEstablishDate: '',
+        endEstablishDate: '',
+        page: 1,
+        size: 10
+    };
+    $scope.query.status = $scope.approve ? 0 : 1;
+
+    $scope.get = function () {
+        Product.incomeDistributionRecord($scope.query)
+            .then(function (response) {
+                $scope.model.incomeDistributionRecord = response.data.data;
+                $scope.totalItems = response.data.pageBean.totalCount;
+            });
+    };
+
+    $scope.get();
+
+    $scope.getProductTypeShow = function (record) {
+      return Product.getProductTypeShow(record.productType);
+    };
+
+    $scope.search = function () {
+        $scope.query.page = 1;
+        $scope.get();
+    };
+
+    $scope.pageChanged = function () {
+        $scope.get();
+    };
+
+    $scope.openIncomeDistributionRecordDetail = function (record) {
+        var modalInstance = $uibModal.open({
+            templateUrl: 'tpl/modal/modal_incomeDistributionUserList.html',
+            controller: 'IncomeDistributionUserListModalCtrl',
+            resolve: {
+                item: function () {
+                    return record;
+                },
+                approve: function () {
+                  return $scope.approve;
+                }
+            }
+        });
+
+        modalInstance.result.then(function (result) {
+            if (result === true) {
+                $scope.get();
+                toaster.pop('success', '提交成功');
+            }
+        });
+    };
+}]);
+
+
+app.controller('IncomeDistributionUserListModalCtrl', ['$scope', '$uibModalInstance', 'toaster', 'item', 'approve', 'Product', 'Util', function($scope, $uibModalInstance, toaster, item, approve, Product, Util) {
+    // 收益分配审核对话框
+    $scope.approve = approve;
+    $scope.model = {};
+
+    $scope.record = item;
+    $scope.submitData = { id: item.id };
+
+    Product.incomeDistributionRecordUserList(item.id).then(function(response) {
+      $scope.model.incomeDistributionUserList = response.data;
+    });
+
+    $scope.submit = function () {
+      Product.incomeDistributionRecordApproveUpt($scope.submitData)
+        .then(function () {
+          $uibModalInstance.close(true);
+        })
+        .catch(function (res) {
+          toaster.pop('error', res.data.message);
+        });
+    };
+
+    $scope.cancel = function () {
+      $uibModalInstance.dismiss('cancel');
+    };
+
+    $scope.getSubscribeLevelShow = function (level) {
+      return Util.getSubscribeLevelShow(level);
+    }
+}]);
 
 app.controller('ProductListCtrl', ['$scope', '$uibModal', 'Product', 'toaster', function ($scope, $uibModal, Product, toaster) {
     $scope.query = {
