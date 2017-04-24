@@ -149,6 +149,7 @@ angular.module('app')
         'app.report.mydestribution': false,
         'app.report.sale': false,
         'app.report.sale.depart': false,
+        'app.report.sale.all': false,
         'app.report.commission': false,
         'app.report.subscribe': false,
         'app.report.subscribe.depart': false,

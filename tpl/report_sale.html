@@ -28,7 +28,9 @@
 	                    <div class="form-group">
 	                        <label class="col-lg-3 control-label">理财经理</label>
 	                        <div class="col-lg-8">
-	                            <input type="text" class="form-control" ng-model="query.employeeId">
+	                            <input type="text" class="form-control"
+	                            	ng-model="query.employeeRealName"
+	                            	ng-disabled="diableEmploySearch">
 	                        </div>
 	                    </div>
 	                </div>
@@ -108,13 +110,13 @@
 	                    所属部门
 	                </label>
 	            </div>
-	            <div class="col-lg-2">
+	            <!-- <div class="col-lg-2">
 	                <label class="i-checks">
 	                    <input type="checkbox" ng-model="checked.productTypeShow">
 	                    <i></i>
 	                    项目类型
 	                </label>
-	            </div>
+	            </div> -->
 	            <div class="col-lg-2">
 	                <label class="i-checks">
 	                    <input type="checkbox" ng-model="checked.orgnization" ng-checked="checked.orgnization" ng-init="checked.orgnization = false">
@@ -145,20 +147,20 @@
 	                    付息方式
 	                </label>
 	            </div>
-	            <div class="col-lg-2">
+	            <!-- <div class="col-lg-2">
 	                <label class="i-checks">
 	                    <input type="checkbox" ng-model="checked.companyAccomplish" ng-checked="checked.companyAccomplish" ng-init="checked.companyAccomplish = false">
 	                    <i></i>
 	                    公司业绩量
 	                </label>
-	            </div>
-	            <div class="col-lg-2">
+	            </div> -->
+	            <!-- <div class="col-lg-2">
 	                <label class="i-checks">
 	                    <input type="checkbox" ng-model="checked.personalAccomplish" ng-checked="checked.personalAccomplish" ng-init="checked.personalAccomplish = false">
 	                    <i></i>
 	                    个人业绩量
 	                </label>
-	            </div>
+	            </div> -->
 	            <div class="col-lg-2">
 	                <label class="i-checks">
 	                    <input type="checkbox" ng-model="checked.homeAddress" ng-checked="checked.homeAddress" ng-init="checked.homeAddress = false">
@@ -226,10 +228,10 @@
     </button>
 
     <div class="panel panel-default">
-    	<div class="form-group">
+    	<div class="form-group" style="padding:20px;">
           <label class="col-lg-2 control-label">总认购金额：</label>
           <div class="col-lg-9">
-              {{model.totalPurchaseAmount}}
+              {{model.totalPurchaseAmount}}&nbsp;元
           </div>
       </div>
     </div>
@@ -242,7 +244,7 @@
 		    <th>项目状态</th>
 		    <th>认购金额</th>
 		    <th>项目期限</th>
-		    <th>年化利率</th>
+		    <th>利率/层级</th>
 		    <th>理财师</th>
 		    <th>客户姓名</th>
 		    <th ng-if="checked.shortName   === true">项目简称</th>
@@ -251,8 +253,8 @@
 		    <th ng-if="checked.establishDate === true">成立日期</th>
 		    <th ng-if="checked.finishDate === true">到期日期</th>
 		    <th ng-if="checked.distributionTypeShow === true">付息方式</th>
-		    <th ng-if="checked.companyAccomplish === true">公司业绩量</th>
-		    <th ng-if="checked.personalAccomplish === true">个人业绩量</th>
+		    <!-- <th ng-if="checked.companyAccomplish === true">公司业绩量</th>
+		    <th ng-if="checked.personalAccomplish === true">个人业绩量</th> -->
 		    <th ng-if="checked.homeAddress === true">家庭住址</th>
 		    <th ng-if="checked.customTypeShow === true">客户类型</th>
 		    <th ng-if="checked.identityId === true">证件号码</th>
@@ -270,7 +272,7 @@
 		    <td>{{report.statusShow}}</td>
 				<td>{{report.purchaseAmount}}</td><!-- <td>{{report.establishAmount}}</td> -->
 		    <td>{{report.anualRatePeriod}}</td>
-		    <td>{{report.rate}}</td>
+		    <td>{{getLevelOrRate(report)}}</td><!-- <td>{{report.rate}}</td> -->
 		    <td>{{report.employeeRealName}}</td>
 		    <td>{{report.userRealName}}</td>
 		    <td ng-if="checked.shortName === true">{{report.shortName}}</td>
@@ -279,8 +281,8 @@
 		    <td ng-if="checked.establishDate === true">{{report.establishDate}}</td>
 		    <td ng-if="checked.finishDate === true">{{report.finishDate}}</td>
 		    <td ng-if="checked.distributionTypeShow === true">{{report.distributionTypeShow}}</td>
-		    <td ng-if="checked.companyAccomplish === true">{{report.companyAccomplish}}</td>
-		    <td ng-if="checked.personalAccomplish === true">{{report.personalAccomplish}}</td>
+		    <!-- <td ng-if="checked.companyAccomplish === true">{{report.companyAccomplish}}</td>
+		    <td ng-if="checked.personalAccomplish === true">{{report.personalAccomplish}}</td> -->
 		    <td ng-if="checked.homeAddress === true">{{report.homeAddress}}</td>
 		    <td ng-if="checked.customTypeShow === true">{{report.customTypeShow}}</td>
 		    <td ng-if="checked.identityId === true">{{report.identityId}}</td>

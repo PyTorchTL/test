@@ -69,11 +69,11 @@
           <tr>
             <th>产品名称</th>
             <th>抵押物类型</th>
-            <th>抵押物估值(万)</th>
+            <th>抵押物估值</th>
             <th>地区分类</th>
-            <th>贷款本金(万)</th>
-            <th>贷款利息(万)</th>
-            <th>转让底价(万)</th>
+            <th>贷款本金</th>
+            <th>贷款利息</th>
+            <th>转让底价</th>
             <th>债务人</th>
             <th>状态</th>
             <th>操作</th>
@@ -83,11 +83,11 @@
           <tr ng-repeat="product in model.productList" st-select-row="row" ng-if="product.productType === 2">
             <td>{{product.name}}</td>
             <td>{{product.mortageTypeShow}}</td>
-            <td>{{product.mortageValue | rmbTT}}</td>
+            <td>{{product.mortageValue}}</td>
             <td>{{product.regionCategory}}</td>
-            <td>{{product.loanAmount | rmbTT}}</td>
-            <td>{{product.loanInterest | rmbTT}}</td>
-            <td>{{product.transferPrice | rmbTT}}</td>
+            <td>{{product.loanAmount}}</td>
+            <td>{{product.loanInterest}}</td>
+            <td>{{product.transferPrice}}</td>
             <td>{{product.debter}}</td>
             <td class="nowrap">{{product.statusShow}}</td>
             <td class="nowrap">

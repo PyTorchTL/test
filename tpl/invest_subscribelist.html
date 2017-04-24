@@ -24,9 +24,9 @@
                 <th>产品名称</th>
                 <th>产品类型</th>
                 <th>成立日期</th>
-                <th>产品规模(万)</th>
-                <th>已预约(万)</th>
-                <th>已打款(万)</th>
+                <th>产品规模</th>
+                <th>已预约</th>
+                <th>已打款</th>
                 <th>操作</th>
               </tr>
               </thead>
@@ -35,9 +35,9 @@
                 <td>{{invest.name}}</td>
                 <td>{{invest.productTypeShow}}</td>
                 <td>{{invest.establishDate}}</td>
-                <td>{{invest.amount | rmbTT}}</td>
-                <td>{{invest.subscribeAmount | rmbTT}}</td>
-                <td>{{invest.establishAmount | rmbTT}}</td><!-- <td>{{invest.purchaseAmount}}</td> -->
+                <td>{{invest.amount}}</td>
+                <td>{{invest.subscribeAmount}}</td>
+                <td>{{invest.establishAmount}}</td><!-- <td>{{invest.purchaseAmount}}</td> -->
                 <td>
                     <button uib-popover="预约" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs btn-icon btn-icon-sm" ng-click="openSubscribe(invest)"><i class="icon icon-clock"></i></button>
                 </td>

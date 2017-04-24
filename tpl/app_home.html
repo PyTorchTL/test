@@ -64,21 +64,21 @@
                         <thead>
                         <tr>
                             <th>产品名称</th>
-                            <th>已预约（万）</th>
-                            <th>已打款（万）</th>
-                            <th>昨日新增预约（万）</th>
-                            <th>昨日新增打款（万）</th>
-                            <th>可打款（万）</th>
+                            <th>已预约</th>
+                            <th>已打款</th>
+                            <th>昨日新增预约</th>
+                            <th>昨日新增打款</th>
+                            <th>可打款</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr ng-repeat="product in model.products" st-select-row="row" ng-class="{'depart': product.departName}">
                             <td>{{product.name || product.departName}}</td>
-                            <td>{{product.subscribeAmount | rmbTT}}</td>
-                            <td>{{product.establishAmount | rmbTT}}</td> <!-- <td>{{product.purchaseAmount | rmbTT}}</td> -->
-                            <td>{{product.lastDaySubscribeAmount | rmbTT}}</td>
-                            <td>{{product.lastDayPurchaseAmount | rmbTT}}</td>
-                            <td>{{product.availablePurchaseAmount | rmbTT}}</td>
+                            <td>{{product.subscribeAmount}}</td>
+                            <td>{{product.establishAmount}}</td> <!-- <td>{{product.purchaseAmount}}</td> -->
+                            <td>{{product.lastDaySubscribeAmount}}</td>
+                            <td>{{product.lastDayPurchaseAmount}}</td>
+                            <td>{{product.availablePurchaseAmount}}</td>
                         </tr>
                         </tbody>
                     </table>

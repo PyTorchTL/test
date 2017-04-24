@@ -104,20 +104,20 @@
                         <th>产品名称</th>
                         <th>产品类型</th>
                         <th>产品状态</th>
-                        <th>项目规模(万)</th>
-                        <th>可打款金额(万)</th>
-                        <th>预约(万)</th>
-                        <th>打款(万)</th>
+                        <th>项目规模</th>
+                        <th>可打款金额</th>
+                        <th>预约</th>
+                        <th>打款</th>
                         <th>操作</th>
                     </tr>
                     <tr ng-repeat="product in model.productList" st-select-row="row">
                         <td>{{product.name}}</td>
                         <td>{{product.productTypeShow}}</td>
                         <td>{{getStatus(product)}}</td>
-                        <td>{{product.amount | rmbTT}}</td>
-                        <td>{{product.availablePurchaseAmount | rmbTT}}</td>
-                        <td>{{product.subscribeAmount | rmbTT}}</td>
-                        <td>{{product.establishAmount | rmbTT}}</td><!-- <td>{{product.purchaseAmount}}</td> -->
+                        <td>{{product.amount}}</td>
+                        <td>{{product.availablePurchaseAmount}}</td>
+                        <td>{{product.subscribeAmount}}</td>
+                        <td>{{product.establishAmount}}</td><!-- <td>{{product.purchaseAmount}}</td> -->
                         <td class="nowrap">
                             <button uib-popover="查看产品" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs btn-icon btn-icon-sm" ng-click="openProductView(product)"><i class="fa fa-briefcase"></i></button>
                             <button uib-popover="编辑" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs btn-icon btn-icon-sm" ng-click="openProductEdit(product)" ><i class="fa fa-pencil"></i></button>
@@ -136,10 +136,10 @@
                         <th>管理机构</th>
                         <th>机构类型</th>
                         <th>项目类型</th>
-                        <th>项目规模(万)</th>
-                        <th>可打款金额(万)</th>
-                        <th>预约(万)</th>
-                        <th>打款(万)</th>
+                        <th>项目规模</th>
+                        <th>可打款金额</th>
+                        <th>预约</th>
+                        <th>打款</th>
                         <th>操作</th>
                     </tr>
                     <tr ng-repeat="product in model.productList" st-select-row="row">
@@ -147,10 +147,10 @@
                         <td>{{product.orgnization}}</td>
                         <td>{{product.orgnizationTypeShow}}</td>
                         <td>{{product.productTypeShow}}</td>
-                        <td>{{product.amount | rmbTT}}</td>
-                        <td>{{product.availablePurchaseAmount | rmbTT}}</td>
-                        <td>{{product.subscribeAmount | rmbTT}}</td>
-                        <td>{{product.establishAmount | rmbTT}}</td><!-- <td>{{product.purchaseAmount}}</td> -->
+                        <td>{{product.amount}}</td>
+                        <td>{{product.availablePurchaseAmount}}</td>
+                        <td>{{product.subscribeAmount}}</td>
+                        <td>{{product.establishAmount}}</td><!-- <td>{{product.purchaseAmount}}</td> -->
                         <td class="nowrap">
                             <button uib-popover="查看产品" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs btn-icon btn-icon-sm" ng-click="openProductView(product)"><i class="fa fa-briefcase"></i></button>
                             <button uib-popover="编辑" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs btn-icon btn-icon-sm" ng-click="openProductEdit(product)" ><i class="fa fa-pencil"></i></button>
@@ -169,14 +169,14 @@
                         <th>管理机构</th>
                         <th>机构类型</th>
                         <th>项目类型</th>
-                        <th>项目规模(万)</th>
+                        <th>项目规模</th>
                     </tr>
                     <tr ng-repeat="product in model.productList" st-select-row="row">
                         <td>{{product.name}}</td>
                         <td>{{product.orgnization}}</td>
                         <td>{{product.orgnizationTypeShow}}</td>
                         <td>{{product.productTypeShow}}</td>
-                        <td>{{product.amount | rmbTT}}</td>
+                        <td>{{product.amount}}</td>
                         <td class="nowrap">
                             <button uib-popover="查看产品" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs btn-icon btn-icon-sm" ng-click="openProductView(product)"><i class="fa fa-briefcase"></i></button>
                             <button uib-popover="编辑" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs btn-icon btn-icon-sm" ng-click="openProductEdit(product)" ><i class="fa fa-pencil"></i></button>
@@ -195,7 +195,7 @@
                         <th>管理机构</th>
                         <th>机构类型</th>
                         <th>项目类型</th>
-                        <th>项目规模(万)</th>
+                        <th>项目规模</th>
                         <th>成立日期</th>
                         <th>操作</th>
                     </tr>
@@ -204,7 +204,7 @@
                         <td>{{product.orgnization}}</td>
                         <td>{{product.orgnizationTypeShow}}</td>
                         <td>{{product.productTypeShow}}</td>
-                        <td>{{product.amount | rmbTT}}</td>
+                        <td>{{product.amount}}</td>
                         <td>{{product.establishDate | getDate}}</td>
                         <td class="nowrap">
                             <button uib-popover="查看产品" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs btn-icon btn-icon-sm" ng-click="openProductView(product)"><i class="fa fa-briefcase"></i></button>
@@ -224,7 +224,7 @@
                         <th>管理机构</th>
                         <th>机构类型</th>
                         <th>项目类型</th>
-                        <th>项目规模(万)</th>
+                        <th>项目规模</th>
                         <th>成立日期</th>
                         <th>操作</th>
                     </tr>
@@ -233,7 +233,7 @@
                         <td>{{product.orgnization}}</td>
                         <td>{{product.orgnizationTypeShow}}</td>
                         <td>{{product.productTypeShow}}</td>
-                        <td>{{product.amount | rmbTT}}</td>
+                        <td>{{product.amount}}</td>
                         <td>{{product.establishDate | getDate}}</td>
                         <td class="nowrap">
                             <button uib-popover="查看产品" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs btn-icon btn-icon-sm" ng-click="openProductView(product)"><i class="fa fa-briefcase"></i></button>
@@ -253,8 +253,8 @@
                         <th>管理机构</th>
                         <th>机构类型</th>
                         <th>项目类型</th>
-                        <th>项目规模(万)</th>
-                        <th>成立规模(万)</th>
+                        <th>项目规模</th>
+                        <th>成立规模</th>
                         <th>成立日期</th>
                         <th>兑付日期</th>
                         <th>操作</th>
@@ -264,8 +264,8 @@
                         <td>{{product.orgnization}}</td>
                         <td>{{product.orgnizationTypeShow}}</td>
                         <td>{{product.productTypeShow}}</td>
-                        <td>{{product.amount | rmbTT}}</td>
-                        <td>{{product.establishAmount | rmbTT}}</td>
+                        <td>{{product.amount}}</td>
+                        <td>{{product.establishAmount}}</td>
                         <td>{{product.establishDate | getDate}}</td>
                         <td>{{product.finishDate}}</td>
                         <td class="nowrap">
@@ -286,14 +286,14 @@
                         <th>管理机构</th>
                         <th>机构类型</th>
                         <th>项目类型</th>
-                        <th>项目规模(万)</th>
+                        <th>项目规模</th>
                     </tr>
                     <tr ng-repeat="product in model.productList" st-select-row="row">
                         <td>{{product.name}}</td>
                         <td>{{product.orgnization}}</td>
                         <td>{{product.orgnizationTypeShow}}</td>
                         <td>{{product.productTypeShow}}</td>
-                        <td>{{product.amount | rmbTT}}</td>
+                        <td>{{product.amount}}</td>
                         <td class="nowrap">
                             <button uib-popover="查看产品" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs btn-icon btn-icon-sm" ng-click="openProductView(product)"><i class="fa fa-briefcase"></i></button>
                             <button uib-popover="编辑" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs btn-icon btn-icon-sm" ng-click="openProductEdit(product)" ><i class="fa fa-pencil"></i></button>
@@ -312,8 +312,8 @@
                         <th>管理机构</th>
                         <th>机构类型</th>
                         <th>项目类型</th>
-                        <th>项目规模(万)</th>
-                        <th>打款金额(万)</th>
+                        <th>项目规模</th>
+                        <th>打款金额</th>
                         <th>退款日期</th>
                         <th>操作</th>
                     </tr>
@@ -322,8 +322,8 @@
                         <td>{{product.orgnization}}</td>
                         <td>{{product.orgnizationTypeShow}}</td>
                         <td>{{product.productTypeShow}}</td>
-                        <td>{{product.amount | rmbTT}}</td>
-                        <td>{{product.establishAmount | rmbTT}}</td><!-- <td>{{product.purchaseAmount}}</td> -->
+                        <td>{{product.amount}}</td>
+                        <td>{{product.establishAmount}}</td><!-- <td>{{product.purchaseAmount}}</td> -->
                         <td>{{product.refundDate}}</td>
                         <td class="nowrap">
                             <button uib-popover="查看产品" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs btn-icon btn-icon-sm" ng-click="openProductView(product)"><i class="fa fa-briefcase"></i></button>
@@ -343,14 +343,14 @@
                         <th>管理机构</th>
                         <th>机构类型</th>
                         <th>项目类型</th>
-                        <th>项目规模(万)</th>
+                        <th>项目规模</th>
                     </tr>
                     <tr ng-repeat="product in model.productList" st-select-row="row">
                         <td>{{product.name}}</td>
                         <td>{{product.orgnization}}</td>
                         <td>{{product.orgnizationTypeShow}}</td>
                         <td>{{product.productTypeShow}}</td>
-                        <td>{{product.amount | rmbTT}}</td>
+                        <td>{{product.amount}}</td>
                         <td class="nowrap">
                             <button uib-popover="查看产品" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs btn-icon btn-icon-sm" ng-click="openProductView(product)"><i class="fa fa-briefcase"></i></button>
                             <button uib-popover="编辑" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs btn-icon btn-icon-sm" ng-click="openProductEdit(product)" ><i class="fa fa-pencil"></i></button>

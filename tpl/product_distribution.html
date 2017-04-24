@@ -85,7 +85,7 @@
                         <th>产品状态</th>
                         <th>成立日期</th>
                         <th>产品期限</th>
-                        <th>募集金额(万)</th>
+                        <th>募集金额</th>
                         <th>收益分配方式</th>
                         <th>操作</th>
                     </tr>
@@ -97,7 +97,7 @@
                         <td>{{product.statusShow}}</td>
                         <td>{{product.establishDate | getDate}}</td>
                         <td>{{getPeriodShow(product.period)}}</td>
-                        <td>{{product.establishAmount | rmbTT}}</td>
+                        <td>{{product.establishAmount}}</td>
                         <td>{{getDistributionTypeShow(product.distributionType)}}</td>
                         <td class="nowrap">
                             <!-- <button uib-popover="查看产品" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs btn-icon btn-icon-sm" ng-click="openProductView(product)"><i class="fa fa-briefcase"></i></button> -->

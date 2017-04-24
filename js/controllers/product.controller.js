@@ -54,9 +54,10 @@ app.controller('ProductFloatingCrtCtrl', ['$scope', '$stateParams', '$uibModal',
         // $scope.product = $stateParams.toCopy;
         Product.productOne($stateParams.toCopy.id)
           .then(function (response) {
-            $scope.product = Product.setGetData(response.data);
+            $scope.product = response.data; // Product.setGetData(response.data);
             delete $scope.product.attachment;
             delete $scope.product.recommendMaterial;
+            delete $scope.product.disclourse;
             delete $scope.product.id;
 
             delete $stateParams.toCopy;  // prevent duplicated submit
@@ -82,6 +83,7 @@ app.controller('ProductFloatingCrtCtrl', ['$scope', '$stateParams', '$uibModal',
           toaster.pop('success', '添加成功');
         })
         .catch(function (res) {
+          $scope.isSubmitting = false;
           // toaster.pop('error', '添加失败');
           toaster.pop('error', res.data.message);
         });
@@ -98,10 +100,11 @@ app.controller('ProductFixedCrtCtrl', ['$scope', '$stateParams', '$uibModal', 't
       if ($stateParams.toCopy) {
         Product.productOne($stateParams.toCopy.id)
           .then(function (response) {
-            $scope.product = Product.setGetData(response.data);
+            $scope.product = response.data; // $scope.product = Product.setGetData(response.data);
             $scope.selectedPeriod = 1;
             delete $scope.product.attachment;
             delete $scope.product.recommendMaterial;
+            delete $scope.product.disclourse;
             delete $scope.product.id;
 
             delete $stateParams.toCopy;  // prevent duplicated submit
@@ -145,6 +148,7 @@ app.controller('ProductFixedCrtCtrl', ['$scope', '$stateParams', '$uibModal', 't
           toaster.pop('success', '添加成功');
         })
         .catch(function (res) {
+          $scope.isSubmitting = false;
           // toaster.pop('error', '添加失败');
           toaster.pop('error', res.data.message);
         });
@@ -197,9 +201,10 @@ app.controller('ProductBadassetCrtCtrl', ['$scope', '$stateParams', '$uibModal',
       if ($stateParams.toCopy) {
         Product.productOne($stateParams.toCopy.id)
           .then(function (response) {
-            $scope.product = Product.setGetData(response.data);
+            $scope.product = response.data; // $scope.product = Product.setGetData(response.data);
             delete $scope.product.attachment;
             delete $scope.product.recommendMaterial;
+            delete $scope.product.disclourse;
             delete $scope.product.id;
 
             delete $stateParams.toCopy;  // prevent duplicated submit
@@ -223,6 +228,7 @@ app.controller('ProductBadassetCrtCtrl', ['$scope', '$stateParams', '$uibModal',
           toaster.pop('success', '添加成功');
         })
         .catch(function (res) {
+          $scope.isSubmitting = false;
           // toaster.pop('error', '添加失败');
           toaster.pop('error', res.data.message);
         });
@@ -477,7 +483,7 @@ app.controller('FixedEditProductOpenModalCtrl', ['$scope', '$uibModalInstance', 
     var original = {};
     Product.productOne($scope.item.id)
       .then(function (response) {
-        $scope.product = Product.setGetData(response.data);
+        $scope.product = response.data; // $scope.product = Product.setGetData(response.data);
         $scope.selectedPeriod = 1;
         angular.copy($scope.product, original);
       });
@@ -555,7 +561,7 @@ app.controller('FloatingEditProductOpenModalCtrl', ['$scope', '$uibModalInstance
     var original = {};
     Product.productOne($scope.item.id)
       .then(function (response) {
-        $scope.product = Product.setGetData(response.data);
+        $scope.product = response.data; // $scope.product = Product.setGetData(response.data);
         angular.copy($scope.product, original);
       });
 
@@ -590,7 +596,7 @@ app.controller('BadAssetEditProductOpenModalCtrl', ['$scope', '$uibModalInstance
     var original = {};
     Product.productOne($scope.item.id)
       .then(function (response) {
-        $scope.product = Product.setGetData(response.data);
+        $scope.product = response.data; // $scope.product = Product.setGetData(response.data);
         angular.copy($scope.product, original);
       });
 
@@ -951,13 +957,25 @@ app.controller('ProductAddNetworthModalCtrl', ['$scope', '$uibModalInstance', 't
 
 app.controller('ProductNetworthHistoryModalCtrl', ['$scope', '$uibModalInstance', 'toaster', 'item', 'Product', function($scope, $uibModalInstance, toaster, item, Product) {
     $scope.item = item;
-    $scope.query = {};
+    $scope.query = {
+      page: 1,
+      size: 10
+    };
     $scope.model = {};
 
-    Product.networthHistory($scope.item, $scope.query)
-      .then(function (response) {
-        $scope.model.productNetworthHistoryListOne = response.data.data;
-      });
+    $scope.get = function () {
+      Product.networthHistory($scope.item, $scope.query)
+        .then(function (response) {
+          $scope.model.productNetworthHistoryListOne = response.data.data;
+          $scope.totalItems = response.data.pageBean.totalCount;
+        });
+    };
+
+    $scope.get();
+
+    $scope.pageChanged = function () {
+        $scope.get();
+    };
  }]);
 
 app.controller('ProductDistributionCtrl', ['$scope', 'toaster', 'Product', '$uibModal', 'Util', function($scope, toaster, Product, $uibModal, Util) {
@@ -1056,7 +1074,7 @@ app.controller('IncomeDistributionCrtModalCtrl', ['$scope', '$uibModalInstance',
 
     // $scope.model.totalPurchaseAmount = 0;
     $scope.model.totalToDistributeIncomeAmount = 0;
-    $scope.model.totalToDistributeCapitalAmount = 0;  // 万元
+    $scope.model.totalToDistributeCapitalAmount = 0;
 
     // Product.incomeDistributionUserList(item.id).then(function(response) {
     //   $scope.model.incomeDistributionUserList = response.data;
@@ -1091,6 +1109,7 @@ app.controller('IncomeDistributionCrtModalCtrl', ['$scope', '$uibModalInstance',
     }
 
     $scope.submit = function () {
+      $scope.submitData.data = [];
       $scope.submitData.distributeDate = Util.getDate($scope.submitData.distributeDate);
       $scope.model.purchaseRecords.forEach(function(user) {
         var values = {};

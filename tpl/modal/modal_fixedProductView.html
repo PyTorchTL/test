@@ -16,7 +16,7 @@
                     </div>
                     <div class="form-group">
                         <label class="col-lg-4 control-label myform-label">起购金额 :</label>
-                        <span class="col-lg-8 padding-sm">{{model.product.minPurchaseAmount  | rmbTT}}万元</span>
+                        <span class="col-lg-8 padding-sm">{{model.product.minPurchaseAmount}}元</span>
                     </div>
                 </div>
                 <div class="col-lg-3">
@@ -40,7 +40,7 @@
                 <div class="col-lg-3">
                     <div class="form-group">
                         <label class="col-lg-4 control-label myform-label">产品规模 :</label>
-                        <span class="col-lg-8 padding-sm">{{model.product.amount | rmbTT}}万元</span>
+                        <span class="col-lg-8 padding-sm">{{model.product.amount}}元</span>
                     </div>
                     <div class="form-group">
                         <label class="col-lg-4 control-label myform-label">托管机构 :</label>
@@ -197,10 +197,10 @@
                                             <div class="col-lg-8 no-padder">
                                                 <label class="mydang">
                                                     认购金额
-                                                    <span class="control-label myform-label">{{rate.subscribeAmount[0] | rmbTT}}</span>
+                                                    <span class="control-label myform-label">{{rate.subscribeAmount[0]}}</span>
                                                     &nbsp;-&nbsp;
-                                                    <span class="control-label myform-label">{{rate.subscribeAmount[1] | rmbTT}}</span>
-                                                    万元，年化收益
+                                                    <span class="control-label myform-label">{{rate.subscribeAmount[1]}}</span>
+                                                    元，年化收益
                                                     <span class="control-label myform-label">{{rate.rate}}</span>
                                                     %
                                                 </label>
@@ -224,6 +224,14 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label myform-label">推荐材料 :</label>
                         <my-file-viewer class="col-lg-9 text-left" files="model.product.recommendMaterial"></my-file-viewer>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label myform-label">信息披露 :</label>
+                        <my-file-viewer class="col-lg-9 text-left" files="model.product.disclourse"></my-file-viewer>
                     </div>
                 </div>
             </div>

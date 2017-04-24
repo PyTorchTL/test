@@ -58,7 +58,7 @@
             <td>{{redeem.name}}</td>
             <td>{{redeem.userRealName}}</td>
             <td>
-                <span ng-if="redeem.productType === 0">{{redeem.redeemAmount | rmbTT}}</span>
+                <span ng-if="redeem.productType === 0">{{redeem.redeemAmount}}</span>
                 <span ng-if="redeem.productType === 1">{{redeem.redeemShare}}</span>
             </td>
             <td><span ng-if="redeem.productType === 0">{{redeem.anualRatePeriod}}</span></td>

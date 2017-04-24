@@ -59,8 +59,8 @@
               <thead>
               <tr>
                 <th>产品名称</th>
-                <th>产品规模(万)</th>
-                <th>已打款(万)</th>
+                <th>产品规模</th>
+                <th>已打款</th>
                 <th>期限</th>
                 <th>收益分配方式</th>
                 <th>操作</th>
@@ -69,8 +69,8 @@
               <tbody>
               <tr ng-repeat="product in model.establishList" st-select-row="row" ng-if="product.productType===0">
                 <td>{{product.name}}</td>
-                <td>{{product.amount | rmbTT}}</td>
-                <td>{{product.purchaseAmount | rmbTT}}</td> <!-- <td>{{product.establishAmount | rmbTT}}</td> -->
+                <td>{{product.amount}}</td>
+                <td>{{product.purchaseAmount}}</td> <!-- <td>{{product.establishAmount}}</td> -->
                 <td>{{getPeriodShow(product.period)}}</td>
                 <td>{{product.distributionTypeShow}}</td>
                 <td>
@@ -90,8 +90,8 @@
               <thead>
               <tr>
                 <th>产品名称</th>
-                <th>产品规模(万)</th>
-                <th>已打款(万)</th>
+                <th>产品规模</th>
+                <th>已打款</th>
                 <th>期限</th>
                 <th>净值</th>
                 <th>操作</th>
@@ -100,8 +100,8 @@
               <tbody>
               <tr ng-repeat="product in model.establishList" st-select-row="row" ng-if="product.productType===1">
                 <td>{{product.name}}</td>
-                <td>{{product.amount | rmbTT}}</td>
-                <td>{{product.purchaseAmount | rmbTT}}</td> <!-- <td>{{product.establishAmount | rmbTT}}</td> -->
+                <td>{{product.amount}}</td>
+                <td>{{product.purchaseAmount}}</td> <!-- <td>{{product.establishAmount}}</td> -->
                 <td>{{getPeriodShow(product.period)}}</td>
                 <td>{{product.networth}}</td>
                 <td>

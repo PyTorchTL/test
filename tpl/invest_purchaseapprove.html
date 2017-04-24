@@ -113,7 +113,7 @@
             <th>产品名称</th>
             <th>产品类型</th>
             <th>客户姓名</th>
-            <th>购买金额(万)</th>
+            <th>购买金额</th>
             <th>购买期限</th>
             <th>利率/层级</th>
             <th>理财经理</th>
@@ -127,7 +127,7 @@
             <td>{{purchaseRecord.name}}</td>
             <td>{{purchaseRecord.productTypeShow}}</td>
             <td>{{purchaseRecord.userRealName}}</td>
-            <td>{{purchaseRecord.myPurchaseAmount | rmbTT}}</td>
+            <td>{{purchaseRecord.myPurchaseAmount}}</td>
             <td><span ng-if="purchaseRecord.incomeSetting.anualRatePeriod">{{purchaseRecord.incomeSetting.anualRatePeriod}}{{getPeriodTypeShow(purchaseRecord)}}</span></td>
             <!-- <td>{{getSubscribeLevelShow(purchaseRecord.subscribeLevel)}}</td> -->
             <td>

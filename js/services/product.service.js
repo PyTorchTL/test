@@ -17,44 +17,44 @@
           });
         }
 
-        product.minPurchaseAmount = Util.toRmbFromTT(product.minPurchaseAmount);
-        product.amount = Util.toRmbFromTT(product.amount);
-        if (product.incomeSetting) {
-          product.incomeSetting.forEach(function(setting){
-            setting.rates.forEach(function(rate){
-              rate.subscribeAmount[0] = Util.toRmbFromTT(rate.subscribeAmount[0]);
-              rate.subscribeAmount[1] = Util.toRmbFromTT(rate.subscribeAmount[1]);
-            });
-          });
-        }
-        product.loanAmount = Util.toRmbFromTT(product.loanAmount);
-        product.recievedCapital = Util.toRmbFromTT(product.recievedCapital);
-        product.loanInterest = Util.toRmbFromTT(product.loanInterest);
-        product.mortageValue = Util.toRmbFromTT(product.mortageValue);
-        product.transferPrice = Util.toRmbFromTT(product.transferPrice);
+        // product.minPurchaseAmount = Util.toRmbFromTT(product.minPurchaseAmount);
+        // product.amount = Util.toRmbFromTT(product.amount);
+        // if (product.incomeSetting) {
+        //   product.incomeSetting.forEach(function(setting){
+        //     setting.rates.forEach(function(rate){
+        //       rate.subscribeAmount[0] = Util.toRmbFromTT(rate.subscribeAmount[0]);
+        //       rate.subscribeAmount[1] = Util.toRmbFromTT(rate.subscribeAmount[1]);
+        //     });
+        //   });
+        // }
+        // product.loanAmount = Util.toRmbFromTT(product.loanAmount);
+        // product.recievedCapital = Util.toRmbFromTT(product.recievedCapital);
+        // product.loanInterest = Util.toRmbFromTT(product.loanInterest);
+        // product.mortageValue = Util.toRmbFromTT(product.mortageValue);
+        // product.transferPrice = Util.toRmbFromTT(product.transferPrice);
 
         return product;
       };
 
-      service.setGetData = function (product) {
-        product.minPurchaseAmount = product.minPurchaseAmount && Util.toRmbTT(product.minPurchaseAmount);
-        product.amount = product.amount && Util.toRmbTT(product.amount);
-        if (product.incomeSetting) {
-          product.incomeSetting.forEach(function(setting){
-            setting.rates.forEach(function(rate){
-              rate.subscribeAmount[0] = rate.subscribeAmount[0] && Util.toRmbTT(rate.subscribeAmount[0]);
-              rate.subscribeAmount[1] = rate.subscribeAmount[1] && Util.toRmbTT(rate.subscribeAmount[1]);
-            });
-          });
-        }
-        product.loanAmount = product.loanAmount && Util.toRmbTT(product.loanAmount);
-        product.recievedCapital = product.recievedCapital && Util.toRmbTT(product.recievedCapital);
-        product.loanInterest = product.loanInterest && Util.toRmbTT(product.loanInterest);
-        product.mortageValue = product.mortageValue && Util.toRmbTT(product.mortageValue);
-        product.transferPrice = product.transferPrice && Util.toRmbTT(product.transferPrice);
+      // service.setGetData = function (product) {
+      //   product.minPurchaseAmount = product.minPurchaseAmount && Util.toRmbTT(product.minPurchaseAmount);
+      //   product.amount = product.amount && Util.toRmbTT(product.amount);
+      //   if (product.incomeSetting) {
+      //     product.incomeSetting.forEach(function(setting){
+      //       setting.rates.forEach(function(rate){
+      //         rate.subscribeAmount[0] = rate.subscribeAmount[0] && Util.toRmbTT(rate.subscribeAmount[0]);
+      //         rate.subscribeAmount[1] = rate.subscribeAmount[1] && Util.toRmbTT(rate.subscribeAmount[1]);
+      //       });
+      //     });
+      //   }
+      //   product.loanAmount = product.loanAmount && Util.toRmbTT(product.loanAmount);
+      //   product.recievedCapital = product.recievedCapital && Util.toRmbTT(product.recievedCapital);
+      //   product.loanInterest = product.loanInterest && Util.toRmbTT(product.loanInterest);
+      //   product.mortageValue = product.mortageValue && Util.toRmbTT(product.mortageValue);
+      //   product.transferPrice = product.transferPrice && Util.toRmbTT(product.transferPrice);
 
-        return product;
-      };
+      //   return product;
+      // };
 
       service.addProduct = function (prod) {
         var product = setPostData(prod);

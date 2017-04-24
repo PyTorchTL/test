@@ -29,7 +29,7 @@ app
             var data = {};
             angular.copy(invest, data);
 
-            data.mySubscribeAmount = Util.toRmbFromTT(data.mySubscribeAmount);
+            // data.mySubscribeAmount = Util.toRmbFromTT(data.mySubscribeAmount);
 
             return $http.post('/api/v1/productSubscribeCrt', data);
         };
@@ -76,7 +76,7 @@ app
             var data = {};
             angular.copy(invest, data);
 
-            data.myPurchaseAmount = Util.toRmbFromTT(data.myPurchaseAmount);
+            // data.myPurchaseAmount = Util.toRmbFromTT(data.myPurchaseAmount);
 
             return $http.post('/api/v1/productBuyCrt', data);
         };
@@ -158,9 +158,9 @@ app
             var data = {};
             angular.copy(redeem, data);
 
-            if (data.redeemAmount) {
-                data.redeemAmount = Util.toRmbFromTT(data.redeemAmount);
-            }
+            // if (data.redeemAmount) {
+            //     data.redeemAmount = Util.toRmbFromTT(data.redeemAmount);
+            // }
 
             return $http.post('/api/v1/productRedeemCrt', data);
         }

@@ -57,10 +57,10 @@
           <thead>
           <tr>
             <th>产品名称</th>
-            <th>基金总份额(万份)</th>
-            <th>基金总资产(万元)</th>
-            <th>目前复权净值(元)</th>
-            <th>目前净值(元)</th>
+            <th>基金总份额</th>
+            <th>基金总资产</th>
+            <th>目前复权净值</th>
+            <th>目前净值</th>
             <th>净值日期</th>
             <th>操作</th>
           </tr>
@@ -68,8 +68,8 @@
           <tbody>
           <tr ng-repeat="product in model.networthSettingList" st-select-row="row">
             <td>{{product.name}}</td>
-            <td>{{product.share | rmbTT}}</td>
-            <td>{{product.networth * product.share | rmbTT}}</td>
+            <td>{{product.share}}</td>
+            <td>{{product.networth * product.share}}</td>
             <td>{{product.adjustedNetworth}}</td>
             <td>{{product.networth}}</td>
             <td>{{product.networthDate}}</td>

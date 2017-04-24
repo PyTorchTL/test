@@ -9,13 +9,19 @@ app.controller('ReportSalesDetailCtrl', ['$scope', 'toaster', '$state', '$uibMod
         size: 10
     };
     $scope.checked = {};
+    if ($state.current.name.endsWith('depart') || $state.current.name.endsWith('all')) {
+        $scope.diableEmploySearch = false;
+    } else {
+        $scope.diableEmploySearch = true;
+    }
 
     $scope.get = function () {
         buildColumnsQuery();
         Report.salesDetailReport($scope.query, $state.current.name)
             .then(function (response) {
                 // $scope.model.reportList = response.data.data;
-                $scope.model = response.data.data;
+                $scope.model = response.data;
+                $scope.totalItems = response.data.pageBean.totalCount;
             });
     };
 
@@ -45,6 +51,10 @@ app.controller('ReportSalesDetailCtrl', ['$scope', 'toaster', '$state', '$uibMod
     $scope.exportReportBtn = function () {
         buildColumnsQuery();
         Report.salesDetailReportDownload($scope.query, $state.current.name);
+    };
+
+    $scope.getLevelOrRate = function(report) {
+        return Report.getLevelOrRate(report);
     };
 }]);
 
@@ -183,11 +193,11 @@ app.controller('ReportSubscribeSumCtrl', ['$scope', '$state', 'toaster', '$uibMo
 //     };
 // }]);
 
-app.controller('ReportSubscribeDetailModalCtrl', ['$scope', '$uibModalInstance', 'Report', 'item', 'Util', function($scope, $uibModalInstance, Report, item, Util) {
+app.controller('ReportSubscribeDetailModalCtrl', ['$scope', '$state', '$uibModalInstance', 'Report', 'item', 'Util', function($scope, $state, $uibModalInstance, Report, item, Util) {
     $scope.item = item;
     $scope.model = {};
 
-    Report.subscribeReport($scope.item)
+    Report.subscribeReport($scope.item, undefined, $state.current.name)
         .then(function(response){
             $scope.model.subscribeReportList = response.data.data;
         });
@@ -205,19 +215,7 @@ app.controller('ReportSubscribeDetailModalCtrl', ['$scope', '$uibModalInstance',
     }
 
     $scope.getLevelOrRate = function(report) {
-        if (report.purchaseAnualRatePeriod) {
-            if (report.purchaseRate) {
-                return report.purchaseRate;
-            } else {
-                return Util.getSubscribeLevelShow(report.purchaseLevel);
-            }
-        } else {
-            if (report.subscribeRate) {
-                return report.subscribeRate;
-            } else {
-                return Util.getSubscribeLevelShow(report.subscribeLevel);
-            }
-        }
+        return Report.getLevelOrRate(report);
     };
 
 }]);
@@ -295,6 +293,16 @@ app.controller('ReportBillModalCtrl', ['$scope', '$uibModalInstance', 'Report', 
             .then(function(response){
                 // $scope.model.billReportList = response.data.data;
                 $scope.model = response.data;
+
+                // $scope.model.products.forEach(function(product) {
+                //     product.redeemShare = parseFloat(product.subscribeAmount);
+                //     product.redeemShare = parseFloat(product.redeemAmount);
+                //     product.subscribeAmount = parseFloat(product.subscribeAmount);
+                //     product.totalAmount = parseFloat(product.totalAmount);
+                //     product.redeemShare = parseFloat(product.redeemShare);
+                //     product.bill = parseFloat(product.bill);
+                //     product.share = parseFloat(product.share);
+                // });
             });
     };
 
@@ -311,7 +319,7 @@ app.controller('ReportBillModalCtrl', ['$scope', '$uibModalInstance', 'Report', 
     };
 
     $scope.getTotalAmount = function (bill) {
-        return (bill.share * bill.networth).toFixed(2);
+        return parseFloat((bill.share * bill.networth).toFixed(2));  // NOTE: toFixed returns string
     }
 
     // $scope.getProfit = function (bill) {

@@ -143,7 +143,8 @@ app.controller('InvestFixedSubscribeListModalCtrl', ['$scope', '$uibModalInstanc
         } else {
           for (var i = 0; i < anualRate.rates.length; i ++) {
             var rate = anualRate.rates[i];
-            show = show + ' ' + Util.toRmbTT(rate.subscribeAmount[0]) + '-' + Util.toRmbTT(rate.subscribeAmount[1]) + '万(' + rate.rate + '%)';
+            // show = show + ' ' + Util.toRmbTT(rate.subscribeAmount[0]) + '-' + Util.toRmbTT(rate.subscribeAmount[1]) + '万(' + rate.rate + '%)';
+            show = show + ' ' + (rate.subscribeAmount[0]) + '-' + (rate.subscribeAmount[1]) + '元(' + rate.rate + '%)';
           }
         }
       }
@@ -381,7 +382,7 @@ app.controller('FixedPurchaseModalCtrl', ['$scope', '$uibModalInstance', 'toaste
       // proof: ''
       proof: []
     };
-    $scope.submitData.myPurchaseAmount = Util.toRmbTT(item.mySubscribeAmount);
+    $scope.submitData.myPurchaseAmount = item.mySubscribeAmount; // $scope.submitData.myPurchaseAmount = Util.toRmbTT(item.mySubscribeAmount);
     // console.log($scope.submitData.myPurchaseAmount)
     // console.log(item.mySubscribeAmount)
     // console.log(Math.round($scope.submitData.myPurchaseAmount * 10000))  // Note: $scope.submitData.myPurchaseAmount * 10000 may give 1294.000006
@@ -424,10 +425,12 @@ app.controller('FloatingPurchaseModalCtrl', ['$scope', '$uibModalInstance', 'toa
       // proof: ''
       proof: []
     };
-    $scope.submitData.myPurchaseAmount = Util.toRmbTT(item.mySubscribeAmount);
+
+    $scope.submitData.myPurchaseAmount = item.mySubscribeAmount; //Util.toRmbTT(item.mySubscribeAmount);
+
     if (item.identityId) {
       $scope.submitData.identityId = item.identityId;
-    };
+    }
 
     $scope.submit = function () {
       // if ($scope.submitData.proofArray.length > 0) {
@@ -664,6 +667,14 @@ app.controller('FloatingPurchaseApproveModalCtrl', ['$scope', '$uibModalInstance
       id: item.id
     };
 
+    $scope.getShare = function (record) {
+      if (record.networth) {
+        return (record.mySubscribeAmount/record.networth*1.0).toFixed(2);
+      } else {
+        return '该购买日期无净值';
+      }
+    };
+
     $scope.submit = function () {
       Invest.productPurchaseApproveUpt($scope.submitData)
         .then(function () {
@@ -767,7 +778,7 @@ app.controller('FixedRedeemAddModalCtrl', ['$scope', '$uibModalInstance', 'toast
     $scope.submitData = {
       id: $scope.item.id
     };
-    $scope.submitData.redeemAmount = Util.toRmbTT(item.purchaseAmount);
+    $scope.submitData.redeemAmount = item.purchaseAmount;//Util.toRmbTT(item.purchaseAmount);
     var today = new Date();
     $scope.submitData.redeemTime = Util.getDate(today);
 

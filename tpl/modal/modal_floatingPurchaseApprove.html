@@ -27,23 +27,23 @@
     <div class="form-group">
         <label class="col-sm-2 col-sm-offset-1 control-label">可投金额</label>
         <div class="col-sm-6 padding-sm">
-            <p>{{item.availablePurchaseAmount | rmbTT}}</p>
+            <p>{{item.availablePurchaseAmount}}</p>
         </div>
-        <div class="col-sm-1 control-label text-left"><p>万元</p></div>
+        <div class="col-sm-1 control-label text-left"><p>元</p></div>
     </div>
     <div class="form-group">
         <label class="col-sm-2 col-sm-offset-1 control-label">购买金额</label>
         <div class="col-sm-6 padding-sm">
-            <p>{{item.myPurchaseAmount | rmbTT}}</p>
+            <p>{{item.myPurchaseAmount}}</p>
         </div>
-        <div class="col-sm-1 control-label text-left"><p>万元</p></div>
+        <div class="col-sm-1 control-label text-left"><p>元</p></div>
     </div>
     <div class="form-group">
         <label class="col-lg-2 col-sm-offset-1 control-label">购买份额</label>
         <div class="col-lg-6">
-            <label class="control-label">{{item.mySubscribeAmount/item.networth*1.0 | rmbTT}}</label>
+            <label class="control-label">{{getShare(item)}}</label>
         </div>
-        <div class="col-sm-1 control-label text-left"><p>万份</p></div>
+        <div class="col-sm-1 control-label text-left"><p>份</p></div>
     </div>
     <div class="form-group">
         <label class="col-lg-2 col-sm-offset-1 control-label">购买层级</label>

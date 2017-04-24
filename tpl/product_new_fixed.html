@@ -26,9 +26,9 @@
                     <div class="form-group">
                         <label class="col-lg-4 col-md-4 control-label">起购金额</label>
                         <div class="col-lg-6 col-md-6">
-                            <input type="number" class="form-control" ng-model="product.minPurchaseAmount" placeholder="数字">
+                            <input step="0.01" type="number" class="form-control" ng-model="product.minPurchaseAmount" placeholder="数字">
                         </div>
-                        <span class="col-lg-2 col-md-2 control-label" >万元</span>
+                        <span class="col-lg-2 col-md-2 control-label">元</span>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
@@ -73,9 +73,9 @@
                     <div class="form-group">
                         <label class="col-lg-4 col-md-4 control-label">产品规模</label>
                         <div class="col-lg-6 col-md-6">
-                            <input type="number" class="form-control" ng-model="product.amount" ng-required="true" placeholder="数字、必填">
+                            <input step="0.01" type="number" class="form-control" ng-model="product.amount" ng-required="true" placeholder="数字、必填">
                         </div>
-                        <span class="col-lg-2 col-md-2 control-label" >万元</span>
+                        <span class="col-lg-2 col-md-2 control-label" >元</span>
                     </div>
                     <div class="form-group">
                         <label class="col-lg-4 col-md-4 control-label">托管机构</label>
@@ -263,7 +263,7 @@
                                         <div class="form-group">
                                             <label class="col-lg-4 col-md-4 control-label m-n-md">购买期限</label>
                                             <div class="col-lg-5 col-md-5">
-                                                <input type="text" class="form-control w-sm" ng-model="setting.anualRatePeriod">
+                                                <input type="text" class="form-control w-sm" ng-model="setting.anualRatePeriod" ng-required="true">
                                             </div>
                                             <p class="m-t-sm">月/天</p>
                                         </div>
@@ -274,17 +274,17 @@
                                     <button uib-popover="删除" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs btn-icon btn-icon-sm" ng-click="deleteIncomeSetting(setting)"><i class="fa fa-times"></i></button>
                                 </div>
                                 <div class="row rate-list">
-                                    <div class="col-lg-6 col-md-12" ng-repeat="rate in setting.rates">
+                                    <div class="col-lg-12 col-md-12" ng-repeat="rate in setting.rates">
                                         <div class="form-group">
                                             <label class="col-lg-2 col-md-2 control-label m-n-xs">第{{$index+1}}档</label>
                                             <div class="col-lg-9 col-md-9">
                                                 <label  class="m-l-n-sm">
                                                     认购金额
-                                                    <input type="number" class="form-control input-sm w-xxs inline " ng-model="rate.subscribeAmount[0]">
+                                                    <input step="0.01" type="number" class="form-control input-sm w-sm inline " ng-model="rate.subscribeAmount[0]" ng-required="true">
                                                     &nbsp;-&nbsp;
-                                                    <input type="number" class="form-control input-sm w-xxs inline" ng-model="rate.subscribeAmount[1]" ng-init="rate.subscribeAmount[1] = product.amount">
-                                                    万元，年化收益
-                                                    <input type="number" class="form-control input-sm yw-w-xxxs inline" ng-model="rate.rate">
+                                                    <input step="0.01" type="number" class="form-control input-sm w-sm inline" ng-model="rate.subscribeAmount[1]" ng-init="rate.subscribeAmount[1] = product.amount" ng-required="true">
+                                                    元，年化收益
+                                                    <input step="0.01" type="number" class="form-control input-sm w-xs inline" ng-model="rate.rate" ng-required="true">
                                                     %
                                                 </label>
                                             </div>
@@ -316,10 +316,18 @@
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-lg-6 col-md-12 m-b-sm">
+                        <label class="col-md-2 control-label">信息披露</label>
+                        <div class="col-md-10">
+                            <my-file-upload files="product.disclourse"></my-file-upload>
+                        </div>
+                </div>
+            </div>
             <div class="form-group" style="padding-top:20px;">
                 <div class="col-lg-offset-10 col-lg-2 col-sm-offset-10">
                     <!-- <button type="submit" class="btn m-b-xs m-r-md w-xs btn-primary" ng-click="onAdd()" value="保存" ng-disabled="!newFixedForm.$valid && isSubmitting">保存 -->
-                    <button type="submit" class="btn m-b-xs m-r-md w-xs btn-primary" ng-click="onAdd()" value="保存" ng-class="{'disabled': !newFixedForm.$valid && isSubmitting}">保存
+                    <button type="submit" class="btn m-b-xs m-r-md w-xs btn-primary" ng-click="onAdd()" value="保存" ng-class="{'disabled': !newFixedForm.$valid || isSubmitting}">保存
                     </button>
                    <!-- <button type="submit" class="btn m-b-xs w-xs btn-default" value="取消" tabindex="0" ng-click="cancel()">取消</button> -->
                 </div>

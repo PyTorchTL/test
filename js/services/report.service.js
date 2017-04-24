@@ -16,8 +16,8 @@ app
           if ((query.productType === '') || (query.productType === '-1')) {  // Note: not -1, but '-1'
             delete query.productType;
           }
-          if (query.employeeId === '') {
-            delete query.employeeId;
+          if (query.employeeRealName === '') {
+            delete query.employeeRealName;
           }
           if (query.purchaseStartTime === '') {
             delete query.purchaseStartTime;
@@ -96,9 +96,9 @@ app
             query = setQuerySalesDetailReport(query);
 
             if (stateName && stateName.endsWith('depart')) {
-              return $http.get('/api/v1/salesDetailDepartReport', {params: query});
+              return $http.get('/api/v1/salesDetailReportDepart', {params: query});
             } else if (stateName && stateName.endsWith('all')) {
-              return $http.get('/api/v1/salesDetailDepartAll', {params: query});
+              return $http.get('/api/v1/salesDetailReportAll', {params: query});
             } else {
               return $http.get('/api/v1/salesDetailReport', {params: query});
             }
@@ -110,7 +110,7 @@ app
           if (stateName && stateName.endsWith('depart')) {
             download('salesDetailReportDepartDown', query);
           } else if (stateName && stateName.endsWith('all')) {
-            download('salesDetailDepartAllDown', query);
+            download('salesDetailReportAllDown', query);
           } else {
             download('salesDetailReportDown', query);
           }
@@ -168,17 +168,30 @@ app
         };
 
         // types is array, e.g., [1], [1,2]
-        service.subscribeReport = function (product, types) {
-          var url = '/api/v1/subscribeReport/' + product.id;  // NOTE: shoud be product.id
+        service.subscribeReport = function (product, types, stateName) {
+
+          if (stateName && stateName.endsWith('depart')) {
+            var url = '/api/v1/subscribeReportDepart/' + product.id;  // NOTE: shoud be product.id
+          // } else if (stateName && stateName.endsWith('all')) {
+          //   var url = '/api/v1/subscribeReportAll/' + product.id;
+          } else {
+            var url = '/api/v1/subscribeReport/' + product.id;
+          }
           if (types !== undefined) {
             url += '?type=' + types.join(',');
           }
           return $http.get(url);
         };
 
-        service.subscribeReportDownload = function (product) {
+        service.subscribeReportDownload = function (product, stateName) {
           // return $http.get('/api/v1/subscribeReportDown/' + subscribe.id);
-          download('subscribeReportDown/' + product.id, {});
+          if (stateName && stateName.endsWith('depart')) {
+            download('subscribeReportDownDepart/' + product.id, {});
+          // } else if (stateName && stateName.endsWith('all')) {
+          //   download('subscribeReportDownAll/' + product.id, {});
+          } else {
+            download('subscribeReportDown/' + product.id, {});
+          }
         };
 
         // service.billReport = function (query) {
@@ -207,6 +220,22 @@ app
         // };
         service.billReportDownload = function (userId) {
           download('billReportDown/' + userId);
+        };
+
+        service.getLevelOrRate = function(report) {
+          if (report.purchaseAnualRatePeriod) {
+              if (report.purchaseRate !== null && report.purchaseRate !== undefined) {
+                  return report.purchaseRate;
+              } else {
+                  return Util.getSubscribeLevelShow(report.purchaseLevel);
+              }
+          } else {
+              if (report.subscribeRate) {
+                  return report.subscribeRate;
+              } else {
+                  return Util.getSubscribeLevelShow(report.subscribeLevel);
+              }
+          }
         };
 
 

@@ -28,23 +28,27 @@
     <div class="form-group">
         <label class="col-sm-2 col-sm-offset-1 control-label">可投金额</label>
         <div class="col-sm-6 padding-sm">
-            <p>{{item.availablePurchaseAmount | rmbTT}}</p>
+            <p>{{item.availablePurchaseAmount}}</p>
         </div>
-        <div class="col-sm-1 control-label text-left"><p>万元</p></div>
+        <div class="col-sm-1 control-label text-left"><p>元</p></div>
     </div>
     <div class="form-group">
         <label class="col-sm-2 col-sm-offset-1 control-label">预约金额</label>
         <div class="col-sm-6 padding-sm">
-            <p>{{item.mySubscribeAmount | rmbTT}}</p>
+            <p>{{item.mySubscribeAmount}}</p>
         </div>
-        <div class="col-sm-1 control-label text-left"><p>万元</p></div>
+        <div class="col-sm-1 control-label text-left"><p>元</p></div>
     </div>
     <div class="form-group">
         <label class="col-sm-2 col-sm-offset-1 control-label">购买金额</label>
         <div class="col-sm-6">
-            <input type="number" class="form-control" ng-model="submitData.myPurchaseAmount" ui-validate="{a:'$value >= 0', b: '$value * 10000 - 1 <= {{item.mySubscribeAmount}}' }" placeholder="不可超过预约金额" ng-required="true">
+            <input type="number" class="form-control"
+                ng-model="submitData.myPurchaseAmount"
+                ui-validate="{a:'$value >= 0', b: '$value - 1 <= {{item.mySubscribeAmount}}' }"
+                placeholder="不可超过预约金额"
+                ng-required="true">
         </div>
-        <div class="col-sm-1 control-label text-left"><p>万元</p></div>
+        <div class="col-sm-1 control-label text-left"><p>元</p></div>
     </div>
     <div class="form-group">
         <label class="col-lg-2 col-sm-offset-1 control-label">购买期限</label>
@@ -58,7 +62,7 @@
         <div class="radio">
             <input type="radio" name="result" ng-value="rate.id" ng-required="true" ng-model="submitData.ratesId">
             <span>
-                {{rate.subscribeAmount[0] | rmbTT}} - {{rate.subscribeAmount[1] | rmbTT}}万元，年化收益{{rate.rate}}%
+                {{rate.subscribeAmount[0]}} - {{rate.subscribeAmount[1]}}元，年化收益{{rate.rate}}%
             </span>
         </div>
         </div>

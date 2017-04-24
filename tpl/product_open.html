@@ -58,7 +58,7 @@
       <tr>
         <th>产品名称</th>
         <th>产品类型</th>
-        <th>产品规模(万)</th>
+        <th>产品规模</th>
         <th>产品期限</th>
         <th>过会时间</th>
         <th>操作</th>
@@ -68,7 +68,7 @@
       <tr ng-repeat="product in model.openList" st-select-row="row">
         <td>{{product.name}}</td>
         <td>{{getProductType(product.productType)}}</td>
-        <td>{{product.amount | rmbTT}}</td>
+        <td>{{product.amount}}</td>
         <td>{{getPeriodShow(product.period)}}</td>
         <td>{{product.dicussPassTime}}</td>
         <td>

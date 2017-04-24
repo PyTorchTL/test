@@ -46,11 +46,11 @@
           <tr>
             <th>产品名称</th>
             <th>客户姓名</th>
-            <th>购买金额(万)</th>
+            <th>购买金额</th>
             <th>购买期限</th>
             <th>利率/层级</th>
             <th>购买时间</th>
-            <th>已赎回金额(万)</th>
+            <th>已赎回金额</th>
             <th>操作</th>
           </tr>
           </thead>
@@ -58,7 +58,7 @@
           <tr ng-repeat="purchaseRecord in model.purchaseRecordList" st-select-row="row">
             <td>{{purchaseRecord.name}}</td>
             <td>{{purchaseRecord.userRealName}}</td>
-            <td>{{purchaseRecord.purchaseAmount | rmbTT}}</td>
+            <td>{{purchaseRecord.purchaseAmount}}</td>
             <td><span ng-if="purchaseRecord.productType === 0">{{purchaseRecord.anualRatePeriod}}</span></td>
             <!-- <td>{{getSubscribeLevelShow(purchaseRecord.subscribeLevel)}}</td> -->
             <td>
@@ -66,7 +66,7 @@
                 <span ng-if="purchaseRecord.productType===1">{{getSubscribeLevelShow(purchaseRecord.purchaseLevel)}}</span>
             </td>
             <td>{{purchaseRecord.purchaseTime}}</td>
-            <td>{{purchaseRecord.redeemAmount | rmbTT}}</td>
+            <td>{{purchaseRecord.redeemAmount}}</td>
             <td>
               <div ng-if="purchaseRecord.availableRedeemAmount > 0">
                   <button uib-popover="赎回" popover-trigger="mouseenter" class="btn btn-xs btn-info m-xs btn-icon btn-icon-sm" ng-click="openFixedRedeemAdd(purchaseRecord)" ng-if="purchaseRecord.productType === 0"><i class="fa fa-check"></i></button>

@@ -9,8 +9,8 @@
       <tr>
         <th rowspan="3">营业部</th>
         <th rowspan="3">理财师</th>
-        <th rowspan="3">认购金额（万）</th>
-        <th rowspan="3">业绩量（万）</th>
+        <th rowspan="3">认购金额</th>
+        <th rowspan="3">业绩量</th>
         <th colspan="3">基础佣金费用明细</th>
         <th>渠道发放</th>
         <th rowspan="3">项目佣金（元）</th>
@@ -32,8 +32,8 @@
        <tr ng-repeat="report in model.commissionReportList" st-select-row="row">
         <td>{{report.departName}}</td>
         <td>{{report.employeeRealName}}</td>
-        <td>{{report.subscribeAmount/10000}}</td>
-        <td>{{report.totalAmount/10000}}</td>
+        <td>{{report.subscribeAmount}}</td>
+        <td>{{report.totalAmount}}</td>
         <td>{{report.salary}}</td>
         <td>{{report.reimburse}}</td>
         <td>{{report.yearEndBonus}}</td>

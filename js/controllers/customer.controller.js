@@ -163,9 +163,7 @@ app.controller('UserListCtrl', ['$scope', '$state', 'toaster', '$uibModal', 'Cus
         resolve: {
           item: function () {
             return {
-                user: {
-                  id: user.id
-                }
+                user: user
             };
           }
         }

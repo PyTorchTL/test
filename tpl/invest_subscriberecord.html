@@ -107,7 +107,7 @@
                         <th>产品名称</th>
                         <th>产品类型</th>
                         <th>预约客户</th>
-                        <th>预约金额(万)</th>
+                        <th>预约金额</th>
                         <th>预约期限</th>
                         <th>利率/层级</th>
                         <th>理财经理</th>
@@ -121,7 +121,7 @@
                         <td>{{invest.name}}</td>
                         <td>{{invest.productTypeShow}}</td>
                         <td>{{invest.userRealName}}</td>
-                        <td>{{invest.mySubscribeAmount | rmbTT}}</td>
+                        <td>{{invest.mySubscribeAmount}}</td>
                         <td><span ng-if="invest.incomeSetting.anualRatePeriod">{{invest.incomeSetting.anualRatePeriod}}{{getPeriodTypeShow(invest)}}</span></td>
                         <!-- <td>{{getSubscribeLevelShow(invest.subscribeLevel)}}</td> -->
                         <td>
