@@ -12,7 +12,7 @@
                 <label class="col-lg-4 control-label wrapper-xs">客户来源</label>
 
                 <div class="col-lg-8 padder-xs">
-                    <select class="form-control wrapper-xs" ng-model="user.customSource">
+                    <select class="form-control wrapper-xs" ng-model="user.customSource" convert-to-number>
                         <!-- <option value="" default>必填</option> -->
                         <option value="1">公司资源</option>
                         <option value="2">陌生电话</option>
@@ -26,7 +26,7 @@
                 <label class="col-lg-4 control-label wrapper-xs">风险等级</label>
 
                 <div class="col-lg-8">
-                    <select class="form-control wrapper-xs" ng-model="user.customRisk">
+                    <select class="form-control wrapper-xs" ng-model="user.customRisk" convert-to-number>
                         <!-- <option value="">未知</option> -->
                         <option value="1">保守</option>
                         <option value="2">稳健</option>
@@ -65,8 +65,7 @@
                 <label class="col-lg-4 control-label wrapper-xs">客户类型</label>
 
                 <div class="col-lg-8 m-r-n">
-                    <select class="form-control wrapper-xs" ng-model="user.customType"
-                            >
+                    <select class="form-control wrapper-xs" ng-model="user.customType" convert-to-number>
                         <option value="1">钻石</option>
                         <option value="2">黄金</option>
                         <option value="3">白银</option>
@@ -80,7 +79,7 @@
                 <label class="col-lg-4 control-label">婚姻状况</label>
 
                 <div class="col-lg-8">
-                    <select class="form-control" ng-model="user.marriage">
+                    <select class="form-control" ng-model="user.marriage" convert-to-number>
                         <option value="1">已婚</option>
                         <option value="2">未婚</option>
                     </select>
@@ -100,7 +99,7 @@
                 <label class="col-lg-3 control-label wrapper-xs">性别</label>
 
                 <div class="col-lg-9">
-                    <select class="form-control" ng-model="user.gender">
+                    <select class="form-control" ng-model="user.gender" convert-to-number>
                         <!-- <option value="" default>必填</option> -->
                         <option value="1">男</option>
                         <option value="2">女</option>
