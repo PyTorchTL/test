@@ -97,6 +97,14 @@ app.controller('ProductFloatingCrtCtrl', ['$scope', '$stateParams', '$uibModal',
 app.controller('ProductFixedCrtCtrl', ['$scope', '$stateParams', '$uibModal', 'toaster', 'Product', function($scope, $stateParams, $uibModal, toaster, Product){
 
     var init = function () {
+      // // test Product.checkRateValidatity()
+      // var valid = Product.checkRateValidatity([{
+      //   subscribeAmount: [10,20]
+      // }, {
+      //   subscribeAmount: [11, 30]
+      // }]);
+      // console.log(valid)
+
       if ($stateParams.toCopy) {
         Product.productOne($stateParams.toCopy.id)
           .then(function (response) {
@@ -141,6 +149,17 @@ app.controller('ProductFixedCrtCtrl', ['$scope', '$stateParams', '$uibModal', 't
 
     $scope.onAdd = function () {
       $scope.isSubmitting = true;
+
+      var valid = true;
+      $scope.product.incomeSetting.forEach(function(setting) {
+        if (!Product.checkRateValidatity(setting.rates)) {
+          valid = false;
+        }
+      });
+      if (!valid) {
+        toaster.pop('error', '阶梯利益设置不正确');
+        return;
+      }
 
       Product.addProduct($scope.product)
         .then(function () {
@@ -490,6 +509,18 @@ app.controller('FixedEditProductOpenModalCtrl', ['$scope', '$uibModalInstance', 
 
     $scope.submit = function () {
       Util.setRemovedValues($scope.product, original);
+
+      var valid = true;
+      $scope.product.incomeSetting.forEach(function(setting) {
+        if (!Product.checkRateValidatity(setting.rates)) {
+          valid = false;
+        }
+      });
+      if (!valid) {
+        toaster.pop('error', '阶梯利益设置不正确');
+        return;
+      }
+
       Product.productUpt($scope.product)
         .then(function () {
           $uibModalInstance.close(true);

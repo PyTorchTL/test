@@ -493,6 +493,55 @@
         }
       };
 
+      // check if 重叠
+      service.checkRateValidatity = function (rates) {
+        for (var i = 0; i < rates.length; i++) {
+          var subscribeAmount = rates[i].subscribeAmount;
+          if (subscribeAmount[0] >= subscribeAmount[1]) {
+            return false;
+          }
+
+          if (i > 0) {
+            if (subscribeAmount[0] < rates[i-1].subscribeAmount[1] ) {
+              return false;
+            }
+          }
+        }
+
+        return true;
+
+        // var startRates = _.map(rates, function (rate) {
+        //   return rate.subscribeAmount[0];
+        // });
+
+        // var endRates = _.map(rates, function (rate) {
+        //   return rate.subscribeAmount[1];
+        // });
+
+        // var uniqArray = _.uniq(startRates);
+        // if (uniqArray.length !== startRates.length) {
+        //   return false;
+        // }
+        // uniqArray = _.uniq(endRates);
+        // if (uniqArray.length !== endRates.length) {
+        //   return false;
+        // }
+
+        // var len = startRates.length;
+        // var startRatesIndices = new Array(len);
+        // for (var i = 0; i < len; ++i) startRatesIndices[i] = i;
+        // startRatesIndices.sort(function (a, b) { return startRates[a] < startRates[b] ? -1 : startRates[a] > startRates[b] ? 1 : 0; });
+        // console.log(startRatesIndices);
+
+        // len = endRates.length;
+        // var endRatesIndices = new Array(len);
+        // for (var i = 0; i < len; ++i) endRatesIndices[i] = i;
+        // endRatesIndices.sort(function (a, b) { return endRates[a] < endRates[b] ? -1 : endRates[a] > endRates[b] ? 1 : 0; });
+        // console.log(endRatesIndices);
+
+        // return _.isEqual(startRatesIndices, endRatesIndices);
+      };
+
       return service;
 
     }]);

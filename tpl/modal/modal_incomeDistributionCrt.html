@@ -41,13 +41,13 @@
               {{user.residualShare}}
             </td>
             <td ng-if="::product.productType === 0">
-              <input type="number" step="0.01" placeholder="数字" class="form-control" ng-model="user.captialAmount" ng-required="true">
+              <input type="number" step="0.01" placeholder="数字" class="form-control" ng-init="user.captialAmount=0" ng-model="user.captialAmount" ng-required="true">
             </td>
             <td ng-if="::product.productType === 1">
-              <input type="number" step="0.01" placeholder="数字" class="form-control" ng-model="user.share" ng-required="true">
+              <input type="number" step="0.01" placeholder="数字" class="form-control" ng-init="user.share=0" ng-model="user.share" ng-required="true">
             </td>
             <td>
-              <input type="number" step="0.01" placeholder="数字" class="form-control" ng-model="user.incomeAmount" ng-required="true">
+              <input type="number" step="0.01" placeholder="数字" class="form-control" ng-init="user.incomeAmount=0" ng-model="user.incomeAmount" ng-required="true">
             </td>
            </tr>
            <tr ng-if="model.purchaseRecords.length > 0">

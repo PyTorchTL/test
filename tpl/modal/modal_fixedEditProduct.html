@@ -275,11 +275,11 @@
                                     <div class="col-lg-9 no-padder">
                                         <label>
                                             认购金额
-                                            <input type="number" class="form-control input-sm w-sm inline no-padder" ng-model="rate.subscribeAmount[0]">
+                                            <input step="0.01" type="number" class="form-control input-sm w-sm inline no-padder" ng-model="rate.subscribeAmount[0]" ng-required="true">
                                             &nbsp;-&nbsp;
-                                            <input type="number" class="form-control input-sm w-sm inline no-padder" ng-model="rate.subscribeAmount[1]">
+                                            <input step="0.01" type="number" class="form-control input-sm w-sm inline no-padder" ng-model="rate.subscribeAmount[1]" ng-required="true">
                                             元，年化收益
-                                            <input type="number" class="form-control input-sm w-xs inline no-padder" ng-model="rate.rate"> %
+                                            <input step="0.01" type="number" class="form-control input-sm w-xs inline no-padder" ng-model="rate.rate" ng-required="true"> %
                                         </label>
                                     </div>
                                     <div class="col-lg-1 no-padder">
