@@ -203,7 +203,7 @@ app.controller('ReportSubscribeDetailModalCtrl', ['$scope', '$state', '$uibModal
         });
 
     $scope.exportReportBtn = function () {
-        Report.subscribeReportDownload($scope.item);
+        Report.subscribeReportDownload($scope.item, $state.current.name);
     };
 
     // $scope.getPeriodTypeShow = function(period) {

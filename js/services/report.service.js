@@ -186,7 +186,7 @@ app
         service.subscribeReportDownload = function (product, stateName) {
           // return $http.get('/api/v1/subscribeReportDown/' + subscribe.id);
           if (stateName && stateName.endsWith('depart')) {
-            download('subscribeReportDownDepart/' + product.id, {});
+            download('subscribeReportDepartDown/' + product.id, {});
           // } else if (stateName && stateName.endsWith('all')) {
           //   download('subscribeReportDownAll/' + product.id, {});
           } else {
