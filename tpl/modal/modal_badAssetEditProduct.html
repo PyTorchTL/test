@@ -174,8 +174,8 @@
                         </div>
                         <div class="col-sm-2">
                             <button class="btn btn-default w-xs">上传</button> -->
-                            <my-file-upload ng-if="isAttachmentEditable()" files="product.attachment"></my-file-upload>
-                            <my-file-viewer ng-if="!isAttachmentEditable()" class="text-left" files="product.attachment"></my-file-viewer>
+                            <my-file-upload ng-if="isPartialEditable()" files="product.attachment"></my-file-upload>
+                            <my-file-viewer ng-if="!isPartialEditable()" class="text-left" files="product.attachment"></my-file-viewer>
                         </div>
                     </div>
                 </div>
@@ -196,7 +196,7 @@
             </div>
             <div class="form-group">
                 <div class="col-lg-offset-1">
-                    <button type="submit" class="btn m-b-xs m-r-md w-xs btn-primary" ng-click="submit()" value="保存" ng-disabled="!changeBadassetForm.$valid">保存
+                    <button type="submit" class="btn m-b-xs m-r-md w-xs btn-primary" ng-click="submit()" value="保存" ng-disabled="!changeBadassetForm.$valid || isSubmitting">保存
                     </button>
                     <button type="button" class="btn m-b-xs w-xs btn-default" value="取消" tabindex="0" ng-click="cancel()">取消</button>
                 </div>

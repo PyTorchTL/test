@@ -499,6 +499,8 @@ app.controller('ProductOpenCtrl', ['$scope', '$uibModal', 'toaster', 'Product', 
 app.controller('FixedEditProductOpenModalCtrl', ['$scope', '$uibModalInstance', 'toaster', 'item', 'Product', 'Util', function($scope, $uibModalInstance, toaster, item, Product, Util) {
     $scope.item = item;
     $scope.product = {};
+    $scope.isSubmitting = false;
+
     var original = {};
     Product.productOne($scope.item.id)
       .then(function (response) {
@@ -508,6 +510,8 @@ app.controller('FixedEditProductOpenModalCtrl', ['$scope', '$uibModalInstance', 
       });
 
     $scope.submit = function () {
+      $scope.isSubmitting = true;
+
       Util.setRemovedValues($scope.product, original);
 
       var valid = true;
@@ -526,6 +530,7 @@ app.controller('FixedEditProductOpenModalCtrl', ['$scope', '$uibModalInstance', 
           $uibModalInstance.close(true);
         })
         .catch(function (res) {
+          $scope.isSubmitting = false;
           // toaster.pop('error', '提交失败');
           toaster.pop('error', res.data.message);
         });
@@ -575,12 +580,8 @@ app.controller('FixedEditProductOpenModalCtrl', ['$scope', '$uibModalInstance', 
       }
     };
 
-    $scope.isAttachmentEditable = function () {
-      if ($scope.product.status === 0) { // TODO: 11 过会失败也editable？
-         return true;
-      } else {
-        return false;
-      }
+    $scope.isPartialEditable = function () {
+      return Product.isPartialEditable($scope.product);
     }
 }]);
 
@@ -589,6 +590,8 @@ app.controller('FloatingEditProductOpenModalCtrl', ['$scope', '$uibModalInstance
     // $scope.submitData = {};
     // $scope.submitData.id = item.id;
     $scope.product = {};
+    $scope.isSubmitting = false;
+
     var original = {};
     Product.productOne($scope.item.id)
       .then(function (response) {
@@ -597,12 +600,15 @@ app.controller('FloatingEditProductOpenModalCtrl', ['$scope', '$uibModalInstance
       });
 
     $scope.submit = function () {
+      $scope.isSubmitting = true;
+
       Util.setRemovedValues($scope.product, original);
       Product.productUpt($scope.product)
         .then(function () {
           $uibModalInstance.close(true);
         })
         .catch(function (res) {
+          $scope.isSubmitting = false;
           // toaster.pop('error', '提交失败');
           toaster.pop('error', res.data.message);
         });
@@ -612,18 +618,16 @@ app.controller('FloatingEditProductOpenModalCtrl', ['$scope', '$uibModalInstance
       $uibModalInstance.dismiss('cancel');
     };
 
-    $scope.isAttachmentEditable = function () {
-      if ($scope.product.status === 0) { // TODO: 11 过会失败也editable？
-         return true;
-      } else {
-        return false;
-      }
+    $scope.isPartialEditable = function () {
+      return Product.isPartialEditable($scope.product);
     }
 }]);
 
 app.controller('BadAssetEditProductOpenModalCtrl', ['$scope', '$uibModalInstance', 'toaster', 'item', 'Product', 'Util', function($scope, $uibModalInstance, toaster, item, Product, Util) {
     $scope.item = item;
     $scope.product = {};
+    $scope.isSubmitting = false;
+
     var original = {};
     Product.productOne($scope.item.id)
       .then(function (response) {
@@ -632,12 +636,15 @@ app.controller('BadAssetEditProductOpenModalCtrl', ['$scope', '$uibModalInstance
       });
 
     $scope.submit = function () {
+      $scope.isSubmitting = true;
+
       Util.setRemovedValues($scope.product, original);
       Product.productUpt($scope.product)
         .then(function () {
           $uibModalInstance.close(true);
         })
         .catch(function (res) {
+          $scope.isSubmitting = false;
           // toaster.pop('error', '提交失败');
           toaster.pop('error', res.data.message);
         });
@@ -647,12 +654,8 @@ app.controller('BadAssetEditProductOpenModalCtrl', ['$scope', '$uibModalInstance
       $uibModalInstance.dismiss('cancel');
     };
 
-    $scope.isAttachmentEditable = function () {
-      if ($scope.product.status === 0) { // TODO: 11 过会失败也editable？
-         return true;
-      } else {
-        return false;
-      }
+    $scope.isPartialEditable = function () {
+      return Product.isPartialEditable($scope.product);
     }
 }]);
 

@@ -542,6 +542,11 @@
         // return _.isEqual(startRatesIndices, endRatesIndices);
       };
 
+      // 上线后(product.status >= 2)，收益设置（固定类）、产品附件不可修改
+      service.isPartialEditable = function (product) {
+        return product.status < 2;
+      };
+
       return service;
 
     }]);

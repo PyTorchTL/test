@@ -229,7 +229,7 @@
             </div>
         </div>
         <!--产品上线后不得修改收益设置-->
-        <div class="row" ng-if="product.status === 0">
+        <div class="row" ng-if="isPartialEditable()">
             <div class="col-lg-6">
                 <div class="form-group">
                     <label class="col-lg-2 control-label">收益设置</label>
@@ -247,7 +247,7 @@
             </div>
         </div>
         <!-- 未解决 start -->
-        <div class="row" ng-if="product.status === 0" ng-repeat="setting in product.incomeSetting">
+        <div class="row" ng-if="isPartialEditable()" ng-repeat="setting in product.incomeSetting">
             <div class="pannel panel-default b-a m-b-md m-l-sm m-r-sm">
                 <div class="panel-body">
                     <form class="bs-example form-horizontal">
@@ -256,7 +256,7 @@
                                 <div class="form-group">
                                     <label class="col-lg-3 control-label">购买期限</label>
                                     <div class="col-lg-4">
-                                        <input type="text" class="form-control" ng-model="setting.anualRatePeriod">
+                                        <input type="text" class="form-control" ng-model="setting.anualRatePeriod" ng-required="true">
                                     </div>
                                     <div class="col-lg-1">
                                         <p class="control-label">月/天</p>
@@ -292,12 +292,12 @@
                 </div>
             </div>
         </div>
-        <div class="row" class="col-lg-12" ng-if="product.status !== 0">
+        <div class="row" class="col-lg-12" ng-if="!isPartialEditable()">
             <div class="form-group">
                 <label class="col-lg-1 control-label myform-label">收益设置 :</label>
             </div>
         </div>
-        <div class="row" ng-if="product.status !== 0" ng-repeat="setting in product.incomeSetting">
+        <div class="row" ng-if="!isPartialEditable()" ng-repeat="setting in product.incomeSetting">
             <div class="pannel panel-default b-a m-b-md m-l-sm m-r-sm">
                 <div class="panel-body">
                     <form class="bs-example form-horizontal">
@@ -341,8 +341,8 @@
                 <div class="form-group">
                     <label class="col-lg-2 control-label">产品附件</label>
                     <div class="col-lg-10">
-                        <my-file-upload ng-if="isAttachmentEditable()" files="product.attachment"></my-file-upload>
-                        <my-file-viewer ng-if="!isAttachmentEditable()" class="text-left" files="product.attachment"></my-file-viewer>
+                        <my-file-upload ng-if="isPartialEditable()" files="product.attachment"></my-file-upload>
+                        <my-file-viewer ng-if="!isPartialEditable()" class="text-left" files="product.attachment"></my-file-viewer>
                     </div>
                 </div>
             </div>
@@ -367,7 +367,7 @@
         </div>
         <div class="row">
             <div class="col-lg-offset-4 col-lg-4">
-                <button type="submit" class="btn m-t-md m-r-md w-xs btn-primary" ng-click="submit()" value="保存" ng-disabled="!newFixedForm.$valid">保存
+                <button type="submit" class="btn m-t-md m-r-md w-xs btn-primary" ng-click="submit()" value="保存" ng-disabled="!newFixedForm.$valid || isSubmitting">保存
                 </button>
                 <button type="button" class="btn m-t-md w-xs btn-default" value="取消" tabindex="0" ng-click="cancel()">取消</button>
             </div>
